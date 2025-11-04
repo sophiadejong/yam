@@ -1,0 +1,319 @@
+/* ---- Import SuisseIntl Fonts ---- */
+@font-face {
+  font-family: "SuisseIntl";
+  src: url("fonts/SuisseIntl-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SuisseIntlMedium";
+  src: url("fonts/SuisseIntl-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* ---- Apply globally ---- */
+body {
+  font-family: "SuisseIntl";
+  margin: 0;
+  padding: 0;
+  background-color: #E0E0E0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #E0E0E0;
+}
+
+header {
+  /* background-color: #333; */
+  color: white;
+  text-align: center;
+  padding: 1% 0 0 0;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+}
+
+nav {
+  background: #ffffffa6;
+  display: flex;
+  justify-content: center;
+  /* gap: 20px; */
+  border-radius: 5px;
+}
+
+nav a {
+  color: #3C3C3C;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 7px;
+  width: 5vw;
+}
+
+.header-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+#yam {
+  opacity: 100% !important;
+  background-color: #CEFF2D;
+  color: #3C3C3C;
+  text-decoration: none;
+  /* padding: 10px 20px; */
+  border-radius: 5px;
+}
+
+#about,
+#contact {
+  opacity: 50% !important;
+  text-decoration: none;
+  /* padding: 10px 20px; */
+}
+
+section {
+  /* background: white; */
+  margin-bottom: 20px;
+}
+
+/* Home section takes full height */
+#home {
+  padding-top: 2%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* background: #CEFF2D; */
+  color: #3C3C3C;
+  text-align: center;
+}
+
+#home-text {
+  position: absolute;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+      color: #838383;
+  font-family: "SuisseIntl";
+  }
+
+/* Projects Section */
+#projects {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.project {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.project img {
+  width: 30%;
+  height: auto;
+  filter: blur(30px);
+  transform: scale(1.1);
+  transition: all 0.8s ease;
+  position: sticky;
+  top: 20vh;
+  /* creates the "sticky" feel */
+}
+
+/* Fade & unblur when centered */
+.project.in-view img {
+  filter: blur(0);
+  transform: scale(1);
+}
+
+/* PROJECTS */
+/* PROJECT WRAPPER */
+.project {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: none;
+}
+
+/* CAROUSEL */
+.carousel {
+  width: 30%;
+  /* image width constraint */
+  height: 77vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* TRACK */
+.carousel-track {
+  display: flex;
+  transition: transform 0.6s ease-in-out;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-track img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* ARROWS ON SIDES OF PROJECT */
+
+.arrow {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.arrow:hover {
+  background-color: #CEFF2D;
+  color: #3C3C3C;
+}
+
+.project .arrow.prev {
+  left: 3%;
+}
+
+.project .arrow.next {
+  right: 3%;
+}
+
+/* INFO BUTTON BELOW */
+
+/* Fix info-toggle at bottom center of viewport */
+#info-toggle {
+  position: absolute;
+  bottom: 1%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out;
+}
+
+#info-toggle.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+#info-toggle.sticky {
+  position: fixed;
+  /* sticks at bottom of viewport while inside #projects */
+  bottom: 20px;
+}
+
+.info-toggle {
+  margin-top: 30px;
+  padding: 10px;
+  background-color: #FFFFFF;
+  color: #3C3C3C;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  z-index: 500;
+}
+
+.info-toggle:hover {
+  background-color: #3C3C3C;
+  color: white;
+}
+
+/* INFO OVERLAY */
+.project-info {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #e0e0e0bf;
+  color: #3C3C3C;
+  /* padding: 20% 40px 0 40px ; */
+  text-align: center;
+  max-width: 500px;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+
+.project-info p {
+  margin-top: 25%;
+}
+
+/* BLUR WHEN SHOW INFO */
+/* --- Make carousel blur when info is shown --- */
+.project.show-info .carousel {
+  filter: blur(10px) !important;
+  transform: scale(1.05);
+}
+
+
+/* Blur carousel when out of view */
+.project .carousel {
+  filter: blur(10px);
+  transform: scale(1.05);
+  transition: all 0.8s ease;
+}
+
+/* Unblur and scale back when in view */
+.project.in-view .carousel {
+  filter: blur(0);
+  transform: scale(1);
+}
+
+.project.show-info .project-info {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Green style when info is shown */
+.info-toggle.hide-mode {
+  background-color: #CEFF2D;
+  color: #000;
+  transition: all 0.3s ease;
+}
+
+/* --- Carousel Dots --- */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background-color: #3C3C3C;
+  opacity: 0.2;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  background-color: #3C3C3C;
+  opacity: 1;
+  /* transform: scale(1.2); */
+}

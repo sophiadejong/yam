@@ -1,0 +1,187 @@
+hr {
+    margin: 0% 1%;
+}
+
+#about-about {
+    opacity: 100% !important;
+    background-color: #CEFF2D;
+    color: #3C3C3C;
+    text-decoration: none;
+    /* padding: 10px 20px; */
+    border-radius: 5px;
+}
+
+#yam-about, #contact-about {
+    opacity: 50% !important;
+    text-decoration: none;
+    /* padding: 10px 20px; */
+}
+
+#about-section {
+    font-family: "SuisseIntl";
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background: #CEFF2D; */
+    color: #838383;
+    text-align: center;
+}
+
+#yam-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 60%;
+    opacity: 1;
+    z-index: 0;
+}
+
+
+.div-text {
+    font-size: 0.9rem;
+    color: #838383;
+    margin-left: 1%;
+}
+
+/* ALFONSO YORDI SECTION */
+#alfonso-yordi {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 5% 0 2% 0;
+    text-align: center;
+}
+
+.alfonso-container {
+    color: #838383;;
+}
+
+.alfonso-photo {
+    width: 25vw;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+.alfonso-text {
+    color: #838383;;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.social-links-alfonso {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.social-item-alfonso {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+}
+
+.social-item-alfonso img {
+    height: 3%;
+}
+
+/* SERVICES SECTION */
+#services {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* padding: 100px 40px; */
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1%;
+    width: 100%;
+    max-width: 98%;
+}
+
+.service {
+    text-align: center;
+}
+
+.service img {
+    width: 100%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.service h3 {
+    font-family: "SuisseIntl";
+    font-size: 1.8rem;
+    color: #838383;
+    margin-bottom: 10px;
+}
+
+.service p {
+    color: #838383;
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+/* CLIENTS SECTION */
+#clients {
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.clients-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    flex-wrap: wrap;
+}
+
+.clients-container img {
+    width: 120px;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+
+.clients-container img:hover {
+    opacity: 1;
+}
+
+/* ALFONSO YORDI SECTION */
+#our-office {
+  font-family: "SuisseIntl";
+    color: #838383;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 5% 0 2% 0;
+    text-align: center;
+}
+
+.office-photo {
+    width: 25vw;
+    object-fit: cover;
+    margin-bottom: 3%;
+}
+
+.office-text {
+    color: #838383;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+#yam-footer {
+    margin-left: 1%;
+}

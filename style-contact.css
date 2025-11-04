@@ -1,0 +1,106 @@
+#contact-section {
+    font-family: "SuisseIntl";
+    height: 92.75vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background: #CEFF2D; */
+    color: #838383;
+    text-align: center;
+    margin: 0;
+}
+
+#contact-section h1 {
+    font-size: 2.4rem;
+}
+
+#contact-section h4 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+#h4-text {
+    margin-top: 3%;
+}
+
+#email {
+  cursor: pointer;
+  transition: opacity 0.3s ease, color 0.4s ease;
+  display: inline-block;
+  position: relative;
+  color: #838383;
+}
+
+/* Fade-out when changing text */
+#email.fade-out {
+  opacity: 0;
+}
+
+/* Hover color animation */
+#email:hover {
+  color: #CEFF2D;
+}
+
+/* When copied */
+#email.copied {
+  color: #CEFF2D;
+  font-weight: 500;
+}
+
+#contact-contact {
+    opacity: 100% !important;
+    background-color: #CEFF2D;
+    color: #3C3C3C;
+    text-decoration: none;
+    /* padding: 10px 20px; */
+    border-radius: 5px;
+}
+
+#yam-contact,
+#about-contact {
+    opacity: 50% !important;
+    text-decoration: none;
+    /* padding: 10px 20px; */
+}
+
+.social-links {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.social-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+}
+
+.social-item img {
+    height: 3%;
+}
+
+.divider {
+  height: 30px;
+  width: 0.08rem;
+}
+
+#yam-footer {
+    margin-left: 1%;
+    color: #838383;
+    bottom: 0;
+}
+
+#yam-footer-contact {
+    margin-left: 1%;
+    color: #838383;
+    bottom: 0;
+    position: absolute;
+}
+
+.faded-year {
+    opacity: 0.4;
+}

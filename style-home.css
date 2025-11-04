@@ -12,7 +12,7 @@
 /* --- Image styling --- */
 .oval-container img {
   position: absolute;
-  width: 11%;
+  width: 12%;
   /* filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15)); */
   transition: transform 0.3s ease, z-index 0.3s ease;
   /* small overlap */
@@ -39,18 +39,18 @@
 
 /* But since CSS can’t loop with math directly, we manually define the positions */
 .oval-container img:nth-child(1)  { left: 50%; top: 5%;  transform: translate(-50%, 0); z-index: 5; }
-.oval-container img:nth-child(2)  { left: 63%; top: 10%; transform: translate(-50%, 0); z-index: 6; }
-.oval-container img:nth-child(3)  { left: 74%; top: 20%; transform: translate(-50%, 0); z-index: 7; }
-.oval-container img:nth-child(4)  { left: 83%; top: 33%; transform: translate(-50%, -25%); z-index: 8; }
+.oval-container img:nth-child(2)  { left: 61%; top: 10%; transform: translate(-50%, 0); z-index: 6; }
+.oval-container img:nth-child(3)  { left: 71%; top: 16%; transform: translate(-50%, 0); z-index: 7; }
+.oval-container img:nth-child(4)  { left: 81%; top: 28%; transform: translate(-50%, -25%); z-index: 8; }
 .oval-container img:nth-child(5)  { left: 88%; top: 50%; transform: translate(-50%, -50%); z-index: 9; }
-.oval-container img:nth-child(6)  { left: 83%; top: 67%; transform: translate(-50%, -75%); z-index: 8; }
-.oval-container img:nth-child(7)  { left: 74%; top: 80%; transform: translate(-50%, -100%); z-index: 7; }
-.oval-container img:nth-child(8)  { left: 63%; top: 90%; transform: translate(-50%, -100%); z-index: 6; }
+.oval-container img:nth-child(6)  { left: 81%; top: 72%; transform: translate(-50%, -75%); z-index: 8; }
+.oval-container img:nth-child(7)  { left: 71%; top: 84%; transform: translate(-50%, -100%); z-index: 7; }
+.oval-container img:nth-child(8)  { left: 61%; top: 90%; transform: translate(-50%, -100%); z-index: 6; }
 .oval-container img:nth-child(9)  { left: 50%; top: 95%; transform: translate(-50%, -100%); z-index: 5; }
-.oval-container img:nth-child(10) { left: 37%; top: 90%; transform: translate(-50%, -100%); z-index: 6; }
-.oval-container img:nth-child(11) { left: 26%; top: 80%; transform: translate(-50%, -100%); z-index: 7; }
-.oval-container img:nth-child(12) { left: 17%; top: 67%; transform: translate(-50%, -75%); z-index: 8; }
+.oval-container img:nth-child(10) { left: 39%; top: 90%; transform: translate(-50%, -100%); z-index: 6; }
+.oval-container img:nth-child(11) { left: 29%; top: 84%; transform: translate(-50%, -100%); z-index: 7; }
+.oval-container img:nth-child(12) { left: 19%; top: 72%; transform: translate(-50%, -75%); z-index: 8; }
 .oval-container img:nth-child(13) { left: 12%; top: 50%; transform: translate(-50%, -50%); z-index: 9; }
-.oval-container img:nth-child(14) { left: 17%; top: 33%; transform: translate(-50%, -25%); z-index: 8; }
-.oval-container img:nth-child(15) { left: 26%; top: 20%; transform: translate(-50%, 0); z-index: 7; }
-.oval-container img:nth-child(16) { left: 37%; top: 10%; transform: translate(-50%, 0); z-index: 6; }
+.oval-container img:nth-child(14) { left: 19%; top: 28%; transform: translate(-50%, -25%); z-index: 8; }
+.oval-container img:nth-child(15) { left: 29%; top: 16%; transform: translate(-50%, 0); z-index: 7; }
+.oval-container img:nth-child(16) { left: 39%; top: 10%; transform: translate(-50%, 0); z-index: 6; }

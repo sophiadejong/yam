@@ -52,10 +52,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const x = e.clientX - rect.left;
       const direction = x > rect.width / 2 ? "→" : "←";
 
+      // ✅ FIXED: Centered SVG cursor
       const svgCursor = `
         <svg xmlns='http://www.w3.org/2000/svg' width='64' height='64'>
           <circle cx='32' cy='32' r='28' fill='white' fill-opacity='0.7'/>
-          <text x='${direction === "→" ? 22 : 18}' y='43'
+          <text x='32' y='43' text-anchor='middle'
                 font-size='32' font-family='Arial' fill='#3C3C3C'>${direction}</text>
         </svg>
       `.trim();

@@ -1,184 +1,223 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const projects = document.querySelectorAll(".project");
+  const projects = Array.from(document.querySelectorAll(".project"));
   const infoToggle = document.getElementById("info-toggle");
-  const projectsSection = document.getElementById("projects");
+  const infoName = document.getElementById("info-name");
+  const infoText = infoName?.querySelector(".info-text");
+  const infoContainer = document.querySelector(".info-container");
+  const homeText = document.getElementById("home-text");
+  const homeSection = document.getElementById("home");
+  let currentProject = null;
 
-  /* ---- Scroll-in blur effect ---- */
-  const observer = new IntersectionObserver(
-    entries => entries.forEach(entry => entry.target.classList.toggle("in-view", entry.isIntersecting)),
-    { threshold: 0.5 }
-  );
-  projects.forEach(project => observer.observe(project));
+  // Global mouse X – updated on any mousemove
+  let globalMouseX = 0;
+  document.addEventListener("mousemove", (e) => {
+    globalMouseX = e.clientX;
+  });
 
-  /* ---- Carousel + Cursor + Dots logic ---- */
+  /* ---------- IntersectionObserver for projects ---------- */
+  const projectObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const el = entry.target;
+      if (entry.intersectionRatio >= 0.55) {
+        currentProject = el;
+        el.classList.add("in-view");
+        if (!infoContainer.classList.contains("visible")) infoContainer.classList.add("visible");
+
+        switch (el.id) {
+          case "project1": infoText.textContent = "Animario"; break;
+          case "project2": infoText.textContent = "Higher"; break;
+          case "project3": infoText.textContent = "Animario"; break;
+        }
+      } else {
+        el.classList.remove("in-view");
+        if (currentProject === el) currentProject = null;
+        const anyVisible = projects.some(p => p.classList.contains("in-view"));
+        if (!anyVisible) infoContainer.classList.remove("visible");
+      }
+    });
+  }, { root: null, threshold: [0, 0.25, 0.5, 0.55, 0.75, 1] });
+
+  projects.forEach(p => projectObserver.observe(p));
+
+  /* ---------- Carousel arrows + dots ---------- */
   projects.forEach(project => {
     const track = project.querySelector(".carousel-track");
+    if (!track) return;
     const images = Array.from(track.children);
     let currentIndex = 0;
+    const carouselEl = project.querySelector(".carousel");
 
-    /* ---- Create Dots ---- */
+    // ---- Create dots ----
     const dotsContainer = document.createElement("div");
-    dotsContainer.classList.add("carousel-dots");
+    dotsContainer.className = "carousel-dots";
     images.forEach((_, i) => {
       const dot = document.createElement("span");
-      dot.classList.add("dot");
-      if (i === 0) dot.classList.add("active");
-      dotsContainer.appendChild(dot);
-
-      dot.addEventListener("click", e => {
+      dot.className = "dot" + (i === 0 ? " active" : "");
+      dot.addEventListener("click", (e) => {
         e.stopPropagation();
         currentIndex = i;
         updateSlide();
       });
+      dotsContainer.appendChild(dot);
     });
-    project.querySelector(".carousel").after(dotsContainer);
+    if (carouselEl) carouselEl.after(dotsContainer);
 
+    // ---- Update slide function ----
     function updateSlide() {
-      const slideWidth = project.querySelector(".carousel").clientWidth;
+      const slideWidth = carouselEl.clientWidth;
       track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-      updateDots();
-    }
-
-    function updateDots() {
       const dots = dotsContainer.querySelectorAll(".dot");
-      dots.forEach((dot, index) => {
-        dot.classList.toggle("active", index === currentIndex);
-      });
+      dots.forEach((d, idx) => d.classList.toggle("active", idx === currentIndex));
     }
 
-    /* ---- Dynamic Cursor ---- */
-    project.addEventListener("mousemove", e => {
+    // ---- Helper: generate arrow cursor based on position ----
+    const generateCursor = (isRight) => {
+      const arrowSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#3C3C3C" width="48" height="48"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>`.trim();
+      const transform = isRight ? '' : 'rotate(180 32 32)';
+      const svgCursor = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"><g transform="${transform}">${arrowSvg}</g></svg>`.trim();
+      return `url("data:image/svg+xml;utf8,${encodeURIComponent(svgCursor)}") 32 32, auto`;
+    };
+
+    // ---- State tracking ----
+    let lastCursor = null;
+    let rafId = null;
+
+    const updateCursor = () => {
+      if (project.classList.contains("show-info")) {
+        if (lastCursor !== "default") {
+          project.style.cursor = "default";
+          lastCursor = "default";
+        }
+        return;
+      }
+
       const rect = project.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const direction = x > rect.width / 2 ? "→" : "←";
+      const x = globalMouseX - rect.left;
+      const isRight = x > rect.width / 2;
+      const newCursor = generateCursor(isRight);
 
-      // ✅ FIXED: Centered SVG cursor
-      const svgCursor = `
-        <svg xmlns='http://www.w3.org/2000/svg' width='64' height='64'>
-          <circle cx='32' cy='32' r='28' fill='white' fill-opacity='0.7'/>
-          <text x='32' y='43' text-anchor='middle'
-                font-size='32' font-family='Arial' fill='#3C3C3C'>${direction}</text>
-        </svg>
-      `.trim();
+      if (lastCursor !== newCursor) {
+        project.style.cursor = newCursor;
+        lastCursor = newCursor;
+      }
+    };
 
-      project.style.cursor = `url("data:image/svg+xml;utf8,${encodeURIComponent(svgCursor)}") 32 32, auto`;
+    const startCursorLoop = () => {
+      if (rafId) return;
+      const loop = () => {
+        updateCursor();
+        rafId = requestAnimationFrame(loop);
+      };
+      rafId = requestAnimationFrame(loop);
+    };
+
+    const stopCursorLoop = () => {
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+      lastCursor = null;
+    };
+
+    // ---- Events ----
+    project.addEventListener("mouseenter", () => {
+      if (!project.classList.contains("show-info")) {
+        startCursorLoop();
+      }
     });
 
-    /* ---- Click Navigation ---- */
-    project.addEventListener("click", e => {
+    project.addEventListener("mouseleave", () => {
+      stopCursorLoop();
+      project.style.cursor = "auto";
+    });
+
+    // Immediate update on mousemove for responsiveness
+    project.addEventListener("mousemove", () => {
+      if (!project.classList.contains("show-info") && !rafId) {
+        updateCursor();
+      }
+    });
+
+    // ---- Click arrows (DISABLED when info is open) ----
+    project.addEventListener("click", (e) => {
+      if (project.classList.contains("show-info")) return;
+
       const rect = project.getBoundingClientRect();
       const x = e.clientX - rect.left;
-
-      if (x > rect.width / 2) {
-        currentIndex = (currentIndex + 1) % images.length;
-      } else {
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
-      }
+      if (x > rect.width / 2) currentIndex = (currentIndex + 1) % images.length;
+      else currentIndex = (currentIndex - 1 + images.length) % images.length;
       updateSlide();
     });
 
+    // ---- Handle resize ----
     window.addEventListener("resize", updateSlide);
+
+    // ---- Preload images ----
+    let loaded = 0;
+    if (images.length === 0) updateSlide();
+    images.forEach(img => {
+      if (img.complete) {
+        loaded++;
+        if (loaded === images.length) updateSlide();
+      } else {
+        img.addEventListener("load", () => {
+          loaded++;
+          if (loaded === images.length) updateSlide();
+        });
+      }
+    });
   });
 
-  /* ---- Info Toggle ---- */
-  if (infoToggle) {
+  /* ---------- Info toggle behavior ---------- */
+  if (infoToggle && infoName && infoText) {
     infoToggle.addEventListener("click", () => {
-      const currentProject = Array.from(projects).find(project => {
-        const rect = project.getBoundingClientRect();
-        return rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2;
-      });
       if (!currentProject) return;
+      const isOpen = currentProject.classList.toggle("show-info");
+      infoToggle.classList.toggle("hide-mode", isOpen);
+      infoName.classList.toggle("open", isOpen);
+      document.body.style.overflowY = isOpen ? "hidden" : "scroll";
 
-      currentProject.classList.toggle("show-info");
-
-      if (currentProject.classList.contains("show-info")) {
-        infoToggle.textContent = "Info X";
-        infoToggle.classList.add("hide-mode");
+      if (isOpen) {
+        currentProject.style.cursor = "default";
+        infoName.classList.remove("hovered");
       } else {
-        infoToggle.classList.remove("hide-mode");
-        switch (currentProject.id) {
-          case "project1": infoToggle.textContent = "Animario +"; break;
-          case "project2": infoToggle.textContent = "Higher +"; break;
-          case "project3": infoToggle.textContent = "Animario +"; break;
-        }
+        // Force immediate correct cursor on close
+        const rect = currentProject.getBoundingClientRect();
+        const x = globalMouseX - rect.left;
+        const isRight = x > rect.width / 2;
+        const cursor = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"><g transform="${isRight ? '' : 'rotate(180 32 32)'}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#3C3C3C" width="48" height="48"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></g></svg>`;
+        currentProject.style.cursor = `url("data:image/svg+xml;utf8,${encodeURIComponent(cursor)}") 32 32, auto`;
       }
+    });
+
+    infoToggle.addEventListener("mouseenter", () => {
+      if (!infoName.classList.contains("open")) infoName.classList.add("hovered");
+    });
+    infoToggle.addEventListener("mouseleave", () => {
+      if (!infoName.classList.contains("open")) infoName.classList.remove("hovered");
+    });
+    infoName.addEventListener("mouseenter", () => {
+      if (infoName.classList.contains("open")) infoName.classList.remove("hovered");
     });
   }
 
-  /* ---- Update info-toggle text based on visible project ---- */
-  const projectObserver = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !entry.target.classList.contains("show-info")) {
-          switch (entry.target.id) {
-            case "project1": infoToggle.textContent = "Animario +"; break;
-            case "project2": infoToggle.textContent = "Higher +"; break;
-            case "project3": infoToggle.textContent = "Animario +"; break;
-          }
-        }
-      });
-    },
-    { threshold: 0.5 }
-  );
-  projects.forEach(project => projectObserver.observe(project));
+  /* ---------- Smooth home-text fade + scale behind first project ---------- */
+  if (homeText && homeSection) {
+    const fadeHomeText = () => {
+      const rect = homeSection.getBoundingClientRect();
+      const scrollPast = Math.max(-rect.top, 0);
+      const homeHeight = rect.height;
 
-  /* ---- Show info-toggle after scrolling into projects section ---- */
-  if (projectsSection && infoToggle) {
-    window.addEventListener("scroll", () => {
-      const rect = projectsSection.getBoundingClientRect();
-      const sectionHeight = projectsSection.offsetHeight;
-      const scrollY = window.innerHeight - rect.top;
+      const progress = 1 - scrollPast / homeHeight;
+      const opacity = Math.max(progress, 0);
+      const scale = 0.2 + 0.8 * opacity;
 
-      if (scrollY >= sectionHeight * 0.3) {
-        infoToggle.classList.add("visible");
-        infoToggle.style.position = "fixed";
-        infoToggle.style.bottom = "2%";
-        infoToggle.style.left = "50%";
-        infoToggle.style.transform = "translateX(-50%)";
-      } else {
-        infoToggle.classList.remove("visible");
-        infoToggle.style.position = "absolute";
-        infoToggle.style.bottom = "20px";
-        infoToggle.style.left = "50%";
-        infoToggle.style.transform = "translateX(-50%)";
-      }
-    });
+      homeText.style.opacity = opacity;
+      homeText.style.transform = `scale(${scale})`;
+      homeText.style.zIndex = opacity < 1 ? 0 : 1000;
 
-    infoToggle.classList.remove("visible");
-  }
-
-  /* ---- Email Copy + Fade + Hover Color Animation ---- */
-  const emailElement = document.getElementById("email");
-
-  if (emailElement) {
-    const originalEmail = emailElement.textContent.trim();
-    emailElement.style.cursor = "pointer";
-
-    emailElement.addEventListener("click", async () => {
-      try {
-        await navigator.clipboard.writeText(originalEmail);
-
-        // Fade out
-        emailElement.classList.add("fade-out");
-
-        // After fade-out, show "Copied!"
-        setTimeout(() => {
-          emailElement.textContent = "Copied!";
-          emailElement.classList.remove("fade-out");
-          emailElement.classList.add("copied");
-        }, 300);
-
-        // Restore original email after 1.5s
-        setTimeout(() => {
-          emailElement.classList.add("fade-out");
-          setTimeout(() => {
-            emailElement.textContent = originalEmail;
-            emailElement.classList.remove("fade-out", "copied");
-          }, 300);
-        }, 1500);
-      } catch (err) {
-        console.error("Failed to copy email:", err);
-      }
-    });
+      requestAnimationFrame(fadeHomeText);
+    };
+    requestAnimationFrame(fadeHomeText);
   }
 });

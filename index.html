@@ -3,20 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="style-home.css">
-  <link rel="stylesheet" href="style-about.css">
-  <link rel="stylesheet" href="style-contact.css">
-  <script src="script.js" defer></script>
   <title>YAM STUDIO</title>
 </head>
 <body>
   <header>
     <div class="header-div">
-      <nav>
-        <a id="yam" href="index.html">YAM</a>
-        <a id="about" href="about.html">About</a>
-        <a id="contact" href="contact.html">Contact</a>
+      <nav id="nav-yam">
+        <a id="yam" href="index.html"><span>YAM</span></a>
+        <a id="about" href="about.html"><span>About</span></a>
+        <a id="contact" href="contact.html"><span>Contact</span></a>
       </nav>
     </div>
   </header>
@@ -41,18 +39,17 @@
         <img src="images/home/15.png" alt="15">
         <img src="images/home/16.png" alt="16">
       </div>
-
       <h2 id="home-text">
         YAM works across the disciplines of design, <br>
         art direction and typography for clients in<br>
         culture and commerce.
       </h2>
     </section>
-    
-    <section id="projects">
 
+    <section id="projects">
+      <!-- Project 1 -->
       <div class="project" id="project1">
-        <button class="arrow prev">&#10094;</button>
+        <button class="arrow prev">Left Arrow</button>
         <div class="carousel">
           <div class="carousel-track">
             <img src="projects/animario/animario.png" alt="Project 1 Image 1">
@@ -60,12 +57,11 @@
             <img src="projects/animario/animario.png" alt="Project 1 Image 3">
           </div>
         </div>
-        <button class="arrow next">&#10095;</button>
-
+        <button class="arrow next">Right Arrow</button>
         <div class="project-info">
           <p>
             Animario is Madrid’s international contemporary animation film festival, with Poland as the guest country for its 2024 edition.<br><br>
-            This year’s identity draws on wycinanki—the 19th-century Polish art of paper cutting used to depict daily life and decorate homes. From this research, the visual identity translates a traditional craft into a contemporary language, blending the rural with the fantastic, history with modernity.<br><br>
+            This year’s identity draws on wycinanki—the 19th-century Polish art of paper cutting used to depict daily life and decorate homes.<br><br>
             Credits:<br>
             Alfonso Yordi<br>
             Victor Clemente<br>
@@ -75,8 +71,9 @@
         </div>
       </div>
 
+      <!-- Project 2 -->
       <div class="project" id="project2">
-        <button class="arrow prev">&#10094;</button>
+        <button class="arrow prev">Left Arrow</button>
         <div class="carousel">
           <div class="carousel-track">
             <img src="projects/higher/higher.png" alt="Project 2 Image 1">
@@ -84,15 +81,15 @@
             <img src="projects/higher/higher.png" alt="Project 2 Image 3">
           </div>
         </div>
-        <button class="arrow next">&#10095;</button>
-
+        <button class="arrow next">Right Arrow</button>
         <div class="project-info">
           <p>Branding and visual identity for a modern tech startup focused on innovation.</p>
         </div>
       </div>
 
+      <!-- Project 3 -->
       <div class="project" id="project3">
-        <button class="arrow prev">&#10094;</button>
+        <button class="arrow prev">Left Arrow</button>
         <div class="carousel">
           <div class="carousel-track">
             <img src="projects/animario/animario.png" alt="Project 3 Image 1">
@@ -100,12 +97,10 @@
             <img src="projects/animario/animario.png" alt="Project 3 Image 3">
           </div>
         </div>
-        <button class="arrow next">&#10095;</button>
-
+        <button class="arrow next">Right Arrow</button>
         <div class="project-info">
           <p>
-            Animario is Madrid’s international contemporary animation film festival, with Poland as the guest country for its 2024 edition.<br><br>
-            This year’s identity draws on wycinanki—the 19th-century Polish art of paper cutting used to depict daily life and decorate homes. From this research, the visual identity translates a traditional craft into a contemporary language, blending the rural with the fantastic, history with modernity.<br><br>
+            Animario is Madrid’s international contemporary animation film festival.<br><br>
             Credits:<br>
             Alfonso Yordi<br>
             Victor Clemente<br>
@@ -114,14 +109,24 @@
           </p>
         </div>
       </div>
-
-      <button id="info-toggle" class="info-toggle">Animario +</button>
     </section>
   </main>
 
-<footer>
-  <p id="yam-footer">YAM©<span class="faded-year">2025</span></p>
-</footer>
+  <!-- Fixed project name + toggle -->
+  <div class="info-container">
+    <div id="info-name" class="info-name">
+      <div class="info-fill"></div>
+      <span class="info-text">Animario</span>
+    </div>
+    <button id="info-toggle" class="info-toggle">
+      <span class="plus">+</span>
+    </button>
+  </div>
 
+  <footer>
+    <p id="yam-footer">YAM©<span class="faded-year">2025</span></p>
+  </footer>
+
+  <script src="script.js" defer></script>
 </body>
 </html>

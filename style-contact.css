@@ -1,3 +1,7 @@
+#nav-contact {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.70) 66%, rgba(206, 255, 45, 1) 69%, rgba(206, 255, 45, 1) 100%);
+}
+
 #contact-section {
     font-family: "SuisseIntl";
     height: 92.75vh;
@@ -50,7 +54,6 @@
 
 #contact-contact {
     opacity: 100% !important;
-    background-color: #CEFF2D;
     color: #3C3C3C;
     text-decoration: none;
     /* padding: 10px 20px; */

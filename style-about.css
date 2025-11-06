@@ -1,10 +1,18 @@
+#nav-about {
+    background: linear-gradient(90deg,  rgba(255, 255, 255, 0.70) 0%, rgba(255, 255, 255, 0.70) 33%, rgba(206, 255, 45, 1) 36%, rgba(206, 255, 45, 1) 63%, rgba(255, 255, 255, 0.70) 66%);
+}
+
 hr {
     margin: 0% 1%;
+    border: none;          /* remove default border */
+    border-top: 1px solid #838383; /* add a simple line */
+    height: 1px;            /* ensure thin line */       /* spacing above and below */
+    box-shadow: none;       /* remove any shadow */
+    background: none; 
 }
 
 #about-about {
     opacity: 100% !important;
-    background-color: #CEFF2D;
     color: #3C3C3C;
     text-decoration: none;
     /* padding: 10px 20px; */
@@ -19,27 +27,33 @@ hr {
 
 #about-section {
     font-family: "SuisseIntl";
-    height: 100vh;
+    position: relative;       /* make it the reference for absolute children */
+    width: 100%;
+    min-height: 100vh;        /* full viewport height */
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* background: #CEFF2D; */
-    color: #838383;
     text-align: center;
+    color: #838383;
 }
 
 #yam-logo {
-    position: absolute;
+    position: absolute;       /* let it sit behind the text */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 80%;
     max-width: 60%;
-    opacity: 1;
-    z-index: 0;
+    opacity: 1;             /* fade it so text is readable */
+    z-index: 0;               /* behind the text */
 }
 
+#about-section h1 {
+    position: relative;       /* text above the logo */
+    z-index: 1;
+    max-width: 80%;
+    color: #838383;         /* darker color for readability */
+}
 
 .div-text {
     font-size: 0.9rem;
@@ -158,20 +172,31 @@ hr {
     opacity: 1;
 }
 
-/* ALFONSO YORDI SECTION */
+/* OUR OFFICE SECTION */
 #our-office {
-  font-family: "SuisseIntl";
+    font-family: "SuisseIntl";
     color: #838383;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 5% 0 2% 0;
+    justify-content: center;   /* center the container horizontally */
+    align-items: center;       /* center the container vertically */
+    height: 100vh;             /* full viewport height */
+    padding: 0 20px;           /* optional horizontal padding */
+    box-sizing: border-box;
     text-align: center;
 }
 
+.office-container {
+    display: flex;             /* make the content flex */
+    flex-direction: column;    /* stack vertically */
+    justify-content: center;   /* center vertically inside container */
+    align-items: center;       /* center horizontally inside container */
+    text-align: center;
+    margin-top: 7%;
+}
+
 .office-photo {
-    width: 25vw;
+    width: 45vh;             /* keeps it proportional */
+    /* max-width: 80%; ensures it doesn’t overflow on small screens */
     object-fit: cover;
     margin-bottom: 3%;
 }
@@ -180,6 +205,7 @@ hr {
     color: #838383;
     font-size: 1rem;
     line-height: 1.6;
+    max-width: 600px;        /* prevents long lines on large screens */
 }
 
 #yam-footer {

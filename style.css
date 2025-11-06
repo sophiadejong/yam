@@ -1,4 +1,4 @@
-/* ---- Import SuisseIntl Fonts ---- */
+/* style.css */
 @font-face {
   font-family: "SuisseIntl";
   src: url("fonts/SuisseIntl-Regular.otf") format("opentype");
@@ -13,45 +13,43 @@
   font-style: normal;
 }
 
-/* ---- Apply globally ---- */
-body {
-  font-family: "SuisseIntl";
+html, body {
+  height: 100%;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  overflow-y: scroll;
+  background-color: #E0E0E0;
   margin: 0;
   padding: 0;
-  background-color: #E0E0E0;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #E0E0E0;
+  font-family: "SuisseIntl", sans-serif;
 }
 
 header {
-  /* background-color: #333; */
   color: white;
   text-align: center;
-  padding: 1% 0 0 0;
+  padding: 1.75% 0 0 0;
   position: fixed;
   width: 100%;
   z-index: 1000;
 }
 
 nav {
-  background: #ffffffa6;
   display: flex;
   justify-content: center;
-  /* gap: 20px; */
-  border-radius: 5px;
+  border-radius: 2px;
+  backdrop-filter: blur(20px);
+}
+
+#nav-yam {
+  background: linear-gradient(90deg, rgba(206, 255, 45, 1) 0%, rgba(206, 255, 45, 1) 28%, rgba(255, 255, 255, 0.70) 33%);
 }
 
 nav a {
   color: #3C3C3C;
   text-decoration: none;
-  font-weight: bold;
-  padding: 7px;
+  padding: 5px 7px;
   width: 5vw;
+  transition: transform 0.3s ease;
 }
 
 .header-div {
@@ -61,31 +59,19 @@ nav a {
 }
 
 nav a:hover {
-  text-decoration: underline;
+  transform: scale(1.2);
 }
 
 #yam {
   opacity: 100% !important;
-  background-color: #CEFF2D;
   color: #3C3C3C;
-  text-decoration: none;
-  /* padding: 10px 20px; */
-  border-radius: 5px;
+  border-radius: 2px;
 }
 
-#about,
-#contact {
+#about, #contact {
   opacity: 50% !important;
-  text-decoration: none;
-  /* padding: 10px 20px; */
 }
 
-section {
-  /* background: white; */
-  margin-bottom: 20px;
-}
-
-/* Home section takes full height */
 #home {
   padding-top: 2%;
   height: 100vh;
@@ -93,69 +79,53 @@ section {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* background: #CEFF2D; */
   color: #3C3C3C;
   text-align: center;
+  scroll-snap-align: center;
 }
 
 #home-text {
   position: absolute;
-    font-size: 1rem;
-    margin-bottom: 20px;
-      color: #838383;
-  font-family: "SuisseIntl";
-  }
+  font-size: 1rem;
+  color: #838383;
+  font-family: "SuisseIntl", sans-serif;
+  opacity: 1;
+  z-index: 1000;
+  transition: opacity 0.3s ease;
+}
 
-/* Projects Section */
 #projects {
   position: relative;
   width: 100%;
-  overflow: hidden;
 }
 
 .project {
   position: relative;
   height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.project img {
-  width: 30%;
-  height: auto;
+  scroll-snap-align: center;
+  transform: scale(0.6);
+  opacity: 0.5;
   filter: blur(30px);
-  transform: scale(1.1);
-  transition: all 0.8s ease;
-  position: sticky;
-  top: 20vh;
-  /* creates the "sticky" feel */
+  transition: transform 0.8s ease, opacity 0.8s ease, filter 0.8s ease;
+  z-index: 0;
 }
 
-/* Fade & unblur when centered */
-.project.in-view img {
-  filter: blur(0);
+
+.project.in-view {
   transform: scale(1);
+  opacity: 1;
+  filter: blur(0);
+  z-index: 2;
 }
 
-/* PROJECTS */
-/* PROJECT WRAPPER */
-.project {
-  position: relative;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  cursor: none;
-}
-
-/* CAROUSEL */
 .carousel {
-  width: 35%;
-  /* image width constraint */
-  height: 77vh;
+  width: 58vh;
+  height: auto;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -163,7 +133,6 @@ section {
   position: relative;
 }
 
-/* TRACK */
 .carousel-track {
   display: flex;
   transition: transform 0.6s ease-in-out;
@@ -178,133 +147,17 @@ section {
   flex-shrink: 0;
 }
 
-/* ARROWS ON SIDES OF PROJECT */
-
-.arrow {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.arrow:hover {
-  background-color: #CEFF2D;
-  color: #3C3C3C;
-}
-
-.project .arrow.prev {
-  left: 3%;
-}
-
-.project .arrow.next {
-  right: 3%;
-}
-
-/* INFO BUTTON BELOW */
-
-/* Fix info-toggle at bottom center of viewport */
-#info-toggle {
-  position: absolute;
-  bottom: 1%;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease-in-out;
-}
-
-#info-toggle.visible {
-  opacity: 1;
-  visibility: visible;
-}
-
-#info-toggle.sticky {
-  position: fixed;
-  /* sticks at bottom of viewport while inside #projects */
-  bottom: 20px;
-}
-
-.info-toggle {
-  margin-top: 30px;
-  padding: 10px;
-  background-color: #FFFFFF;
-  color: #3C3C3C;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-  z-index: 500;
-}
-
-.info-toggle:hover {
-  background-color: #3C3C3C;
-  color: white;
-}
-
-/* INFO OVERLAY */
-.project-info {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #e0e0e0bf;
-  color: #3C3C3C;
-  /* padding: 20% 40px 0 40px ; */
-  text-align: center;
-  max-width: 500px;
-  height: 100%;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.6s ease;
-}
-
-.project-info p {
-  margin-top: 25%;
-}
-
-/* BLUR WHEN SHOW INFO */
-/* --- Make carousel blur when info is shown --- */
-.project.show-info .carousel {
-  filter: blur(10px) !important;
-  transform: scale(1.05);
-}
-
-
-/* Blur carousel when out of view */
-.project .carousel {
-  filter: blur(10px);
-  transform: scale(1.05);
-  transition: all 0.8s ease;
-}
-
-/* Unblur and scale back when in view */
-.project.in-view .carousel {
-  filter: blur(0);
-  transform: scale(1);
-}
-
-.project.show-info .project-info {
-  opacity: 1;
-  pointer-events: all;
-}
-
-/* Green style when info is shown */
-.info-toggle.hide-mode {
-  background-color: #CEFF2D;
-  color: #000;
-  transition: all 0.3s ease;
-}
-
-/* --- Carousel Dots --- */
 .carousel-dots {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 10px;
-  margin-top: 15px;
+  margin-top: 20px;
 }
 
 .dot {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   background-color: #3C3C3C;
   opacity: 0.2;
   border-radius: 50%;
@@ -315,5 +168,192 @@ section {
 .dot.active {
   background-color: #3C3C3C;
   opacity: 1;
-  /* transform: scale(1.2); */
+}
+
+.arrow {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.project-info {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e0e0e0d9;
+  color: #3C3C3C;
+  text-align: center;
+  padding: 5%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+  /* backdrop-filter: blur(10px); */
+}
+
+/* ---- Add this rule (anywhere after .project) ---- */
+.project.show-info .carousel {
+  filter: blur(10px);
+  transition: filter 0.6s ease;
+}
+
+/* Ensure cursor persists on project hover when not in show-info state */
+.project:not(.show-info) {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64'><g><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%233C3C3C' width='48' height='48'><path d='M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z'/></svg></g></svg>") 32 32, auto;
+}
+
+.project-info p {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 0;
+  max-width: 600px;
+}
+
+.project.show-info .project-info {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.info-container {
+  position: fixed;
+  bottom: 3%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+  z-index: 1000;
+  isolation: isolate;
+}
+
+.info-container.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ---- INFO NAME ---- */
+.info-name {
+  position: relative;
+  overflow: hidden;
+  font-family: "SuisseIntl", sans-serif;
+  font-size: 1rem;
+  color: #3C3C3C;
+  background: #ffffffa6;
+  padding: 5px 16px;
+  border-radius: 2px;
+  backdrop-filter: blur(20px);
+  display: inline-block;
+  line-height: 1;
+  transform: translateZ(0);
+}
+
+/* Animated fill – hidden by default */
+.info-fill {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: #CEFF2D;
+  border-radius: 2px;
+  transition: left 0.5s ease;
+  z-index: 1;
+}
+
+/* Text – always on top */
+.info-text {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  font-weight: 400;
+  transition: none;
+}
+
+/* HOVER CLASS FROM JS */
+.info-name.hovered .info-fill {
+  left: 0 !important;
+}
+.info-name.hovered .info-text {
+  color: #000 !important;
+}
+
+/* OPEN STATE: LOCK FILL & TEXT */
+.info-name.open .info-fill {
+  left: 0 !important;
+}
+.info-name.open .info-text {
+  color: #000 !important;
+}
+
+/* BLOCK FILL ON .info-name HOVER */
+.info-name:hover .info-fill {
+  left: -100% !important;
+}
+.info-name:hover .info-text {
+  color: #3C3C3C !important;
+  font-weight: 400 !important;
+}
+
+/* ---- Info toggle button ---- */
+#info-toggle {
+  background: #ffffffa6;
+  border: none;
+  border-radius: 2px;
+  padding: 2px 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, color 0.3s ease, backdrop-filter 0.3s ease;
+  backdrop-filter: blur(20px);
+}
+
+#info-toggle.hide-mode {
+  background-color: #CEFF2D;
+  color: #000;
+  backdrop-filter: blur(6px);
+}
+
+#info-toggle .plus {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+#info-toggle.hide-mode .plus {
+  transform: rotate(45deg);
+}
+
+.plus {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.plus:hover {
+  transform: scale(1.3);
+}
+
+#info-toggle.hide-mode .plus:hover {
+  transform: rotate(45deg) scale(1.3);
+}
+
+#info-toggle:hover .plus,
+#info-toggle.hide-mode:hover .plus {
+  transform: scale(1.3);
+}
+#info-toggle.hide-mode:hover .plus {
+  transform: rotate(45deg) scale(1.3);
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.copied {
+  color: #CEFF2D;
+  transition: color 0.3s ease;
 }

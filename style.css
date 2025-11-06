@@ -61,6 +61,7 @@ nav a {
 nav a:hover {
   transform: scale(1.1);
   font-weight: 600;
+    font-family: "SuisseIntlMedium";
 }
 
 #yam {
@@ -341,7 +342,7 @@ nav a:hover {
 }
 
 .plus:hover {
-  transform: scale(1.3);
+  transform: scale(1.4);
 }
 
 #info-toggle.hide-mode .plus:hover {

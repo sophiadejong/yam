@@ -62,10 +62,16 @@
 
 #yam-contact,
 #about-contact {
-    opacity: 50% !important;
-    text-decoration: none;
-    /* padding: 10px 20px; */
+  opacity: 0.5; /* 50% = 0.5 */
+  transition: opacity 0.3s ease;
+  transition: transform 0.3s ease;
 }
+
+#yam-contact:hover, #about-contact:hover {
+  opacity: 1; /* 100% = 1 */
+  transform: scale(1.1);
+}
+
 
 .social-links {
   margin-top: 20px;

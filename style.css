@@ -9,7 +9,7 @@
 @font-face {
   font-family: "SuisseIntlMedium";
   src: url("fonts/SuisseIntl-Medium.otf") format("opentype");
-  font-weight: 500;
+  font-weight: 600;
   font-style: normal;
 }
 
@@ -59,7 +59,8 @@ nav a {
 }
 
 nav a:hover {
-  transform: scale(1.2);
+  transform: scale(1.1);
+  font-weight: 600;
 }
 
 #yam {
@@ -69,7 +70,14 @@ nav a:hover {
 }
 
 #about, #contact {
-  opacity: 50% !important;
+  opacity: 0.5; /* 50% = 0.5 */
+  transition: opacity 0.3s ease;
+  transition: transform 0.3s ease;
+}
+
+#about:hover, #contact:hover {
+  opacity: 1; /* 100% = 1 */
+  transform: scale(1.1);
 }
 
 #home {
@@ -285,7 +293,7 @@ nav a:hover {
   left: 0 !important;
 }
 .info-name.open .info-text {
-  color: #000 !important;
+  color: #3C3C3C !important;
 }
 
 /* BLOCK FILL ON .info-name HOVER */

@@ -153,6 +153,7 @@ span {
 .service p {
     color: #838383;
     font-size: 1rem;
+    line-height: 1.4;
     text-align: left;
     margin: 0 0 10px 0;
 }

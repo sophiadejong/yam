@@ -61,7 +61,7 @@ nav a {
 nav a:hover {
   transform: scale(1.1);
   font-weight: 600;
-    font-family: "SuisseIntlMedium";
+  font-family: "SuisseIntlMedium";
 }
 
 #yam {
@@ -72,8 +72,7 @@ nav a:hover {
 
 #about, #contact {
   opacity: 0.5; /* 50% = 0.5 */
-  transition: opacity 0.3s ease;
-  transition: transform 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 #about:hover, #contact:hover {

@@ -3,7 +3,7 @@
 }
 
 hr {
-    margin: 0% 1% 1% 1%;
+    margin: 0% 2% 1% 2%;
     border: none;          /* remove default border */
     border-top: 1px solid #838383; /* add a simple line */
     height: 1px;            /* ensure thin line */       /* spacing above and below */
@@ -46,7 +46,7 @@ hr {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80%;
+    width: 82%;
     max-width: 60%;
     opacity: 1;             /* fade it so text is readable */
     z-index: 0;               /* behind the text */
@@ -60,18 +60,23 @@ hr {
 }
 
 .div-text {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: #838383;
-    margin: 0 1% 1%;
+    margin: 0 2% 0.75%;
 }
 
 /* ALFONSO YORDI SECTION */
+
+span {
+    font-size: 0.8rem;
+}
+
 #alfonso-yordi {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 5% 0 2% 0;
+    padding: 5% 0 3% 0;
     text-align: center;
 }
 
@@ -88,11 +93,10 @@ hr {
 .alfonso-text {
     color: #838383;;
     font-size: 1rem;
-    line-height: 1.6;
+    line-height: 1.4;
 }
 
 .social-links-alfonso {
-  margin-top: 20px;
   display: flex;
   gap: 20px;
   justify-content: center;
@@ -122,9 +126,9 @@ hr {
 .services-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1%;
+    gap: 0.75%;
     width: 100%;
-    max-width: 98%;
+    max-width: 96%;
 }
 
 .service {
@@ -139,15 +143,16 @@ hr {
 
 .service h3 {
     font-family: "SuisseIntl";
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     color: #838383;
-    margin-bottom: 10px;
+    margin-bottom: 14px;
 }
 
 .service p {
     color: #838383;
-    font-size: 0.9rem;
+    font-size: 1rem;
     text-align: left;
+    margin: 0 0 10px 0;
 }
 
 /* CLIENTS SECTION */

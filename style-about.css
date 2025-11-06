@@ -129,6 +129,7 @@ span {
     gap: 0.75%;
     width: 100%;
     max-width: 96%;
+    margin-bottom: 5%;
 }
 
 .service {

@@ -100,6 +100,7 @@ nav a:hover {
   color: #838383;
   font-family: "SuisseIntl", sans-serif;
   opacity: 1;
+  /* margin: 0 0% 1% 0; */
   z-index: 1000;
   transition: opacity 0.01s ease, transform 0.01s ease;
   /* Add this anywhere in style.css */

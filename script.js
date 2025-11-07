@@ -210,7 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const progress = 1 - scrollPast / homeHeight;
       const opacity = Math.max(progress, 0);
-      const scale = 0.1 + 0.8 * opacity;
+      const scale = 0.05 + 0.95 * opacity;
 
       homeText.style.opacity = opacity;
       homeText.style.transform = `scale(${scale})`;

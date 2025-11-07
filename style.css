@@ -14,6 +14,7 @@
 }
 
 html, body {
+  font-family: "SuisseIntl";
   height: 100%;
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
@@ -95,11 +96,12 @@ nav a:hover {
 #home-text {
   position: absolute;
   font-size: 1rem;
+  line-height: 1.4;
   color: #838383;
   font-family: "SuisseIntl", sans-serif;
   opacity: 1;
   z-index: 1000;
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  transition: opacity 0.01s ease, transform 0.01s ease;
   /* Add this anywhere in style.css */
 }
 

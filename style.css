@@ -72,12 +72,12 @@ nav a:hover {
 }
 
 #about, #contact {
-  opacity: 0.5; /* 50% = 0.5 */
+  opacity: 0.5;
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 #about:hover, #contact:hover {
-  opacity: 1; /* 100% = 1 */
+  opacity: 1;
   transform: scale(1.1);
 }
 
@@ -100,10 +100,8 @@ nav a:hover {
   color: #838383;
   font-family: "SuisseIntl", sans-serif;
   opacity: 1;
-  /* margin: 0 0% 1% 0; */
   z-index: 1000;
   transition: opacity 0.01s ease, transform 0.01s ease;
-  /* Add this anywhere in style.css */
 }
 
 #projects {
@@ -126,7 +124,6 @@ nav a:hover {
   transition: transform 0.8s ease, opacity 0.8s ease, filter 0.8s ease;
   z-index: 0;
 }
-
 
 .project.in-view {
   transform: scale(1);
@@ -201,16 +198,13 @@ nav a:hover {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.6s ease;
-  /* backdrop-filter: blur(10px); */
 }
 
-/* ---- Add this rule (anywhere after .project) ---- */
 .project.show-info .carousel {
   filter: blur(10px);
   transition: filter 0.6s ease;
 }
 
-/* Ensure cursor persists on project hover when not in show-info state */
 .project:not(.show-info) {
   cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64'><g><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%233C3C3C' width='48' height='48'><path d='M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z'/></svg></g></svg>") 32 32, auto;
 }
@@ -285,7 +279,7 @@ nav a:hover {
   transition: none;
 }
 
-/* HOVER CLASS FROM JS */
+/* HOVER CLASS FROM JS (for toggle hover) */
 .info-name.hovered .info-fill {
   left: 0 !important;
 }
@@ -301,13 +295,24 @@ nav a:hover {
   color: #3C3C3C !important;
 }
 
-/* BLOCK FILL ON .info-name HOVER */
-.info-name:hover .info-fill {
+/* === HOVER BEHAVIOR: ONLY WHEN NOT OPEN === */
+.info-container:not(.info-open) .info-name:hover .info-fill {
   left: -100% !important;
 }
-.info-name:hover .info-text {
+.info-container:not(.info-open) .info-name:hover .info-text {
   color: #3C3C3C !important;
   font-weight: 400 !important;
+}
+
+/* === WHEN OPEN: NO HOVER ANIMATION AT ALL === */
+.info-container.info-open .info-name .info-fill {
+  left: 0 !important;
+}
+.info-container.info-open .info-name .info-text {
+  color: #3C3C3C !important;
+}
+.info-container.info-open .info-name:hover {
+  cursor: default;
 }
 
 /* ---- Info toggle button ---- */

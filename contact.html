@@ -27,9 +27,10 @@
   <main>
     <section id="contact-section">
       <h4>Say hi!</h4>
-      <h1 id="email">hello@yamstudio.xyz</h1>
+      <!-- Email with data attribute for reliability -->
+      <h1 id="email" data-email="hello@yamstudio.xyz">hello@yamstudio.xyz</h1>
 
-      <!-- Added social links -->
+      <!-- Social links -->
       <div class="social-links">
         <div class="social-item">
           <img src="images/arena.png" alt="Arena icon">
@@ -55,9 +56,56 @@
     </section>
 
     <footer>
-      <p id="yam-footer-contact">YAM©<span class="faded-year">2025</span></p>
+      <p id="yam-footer-contact">YAM<span class="faded-year">2025</span></p>
     </footer>
+  </main>
 
+  <!-- Email copy script (inline for contact page only) -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const emailElement = document.getElementById("email");
+    if (!emailElement) return;
+
+    const originalEmail = emailElement.dataset.email || emailElement.textContent.trim();
+    emailElement.style.cursor = "pointer";
+
+    emailElement.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(originalEmail);
+
+        // 1. Fade out current text
+        emailElement.classList.add("fade-out");
+
+        // 2. After fade-out → show "Copied!"
+        setTimeout(() => {
+          emailElement.textContent = "Copied!";
+          emailElement.classList.remove("fade-out");
+          emailElement.classList.add("copied");
+          // Trigger reflow to restart animation
+          void emailElement.offsetWidth;
+          emailElement.classList.add("fade-in");
+        }, 300);
+
+        // 3. After 1.5s total → fade out "Copied!"
+        setTimeout(() => {
+          emailElement.classList.remove("fade-in");
+          emailElement.classList.add("fade-out");
+
+          // 4. After fade-out → restore email
+          setTimeout(() => {
+            emailElement.textContent = originalEmail;
+            emailElement.classList.remove("fade-out", "copied");
+            void emailElement.offsetWidth;
+            emailElement.classList.add("fade-in");
+          }, 300);
+        }, 1500);
+
+      } catch (err) {
+        console.error("Failed to copy email:", err);
+      }
+    });
+  });
+</script>
 </body>
 
 </html>

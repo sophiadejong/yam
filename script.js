@@ -131,7 +131,6 @@ document.addEventListener("DOMContentLoaded", () => {
       project.style.cursor = "auto";
     });
 
-    // Immediate update on mousemove for responsiveness
     project.addEventListener("mousemove", () => {
       if (!project.classList.contains("show-info") && !rafId) {
         updateCursor();
@@ -176,6 +175,9 @@ document.addEventListener("DOMContentLoaded", () => {
       infoToggle.classList.toggle("hide-mode", isOpen);
       infoName.classList.toggle("open", isOpen);
       document.body.style.overflowY = isOpen ? "hidden" : "scroll";
+
+      // ADD CLASS TO CONTAINER TO CONTROL HOVER BEHAVIOR
+      infoContainer.classList.toggle("info-open", isOpen);
 
       if (isOpen) {
         currentProject.style.cursor = "default";

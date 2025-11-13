@@ -9,7 +9,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* background: #CEFF2D; */
     color: #838383;
     text-align: center;
     margin: 0;
@@ -31,47 +30,47 @@
 
 #email {
   cursor: pointer;
-  transition: opacity 0.3s ease, color 0.4s ease;
   display: inline-block;
   position: relative;
   color: #838383;
+  opacity: 1;
+  transition: opacity 0.3s ease;
 }
 
-/* Fade-out when changing text */
 #email.fade-out {
   opacity: 0;
 }
 
-/* Hover color animation */
-#email:hover {
-  color: #CEFF2D;
+#email.fade-in {
+  opacity: 1;
 }
 
-/* When copied */
 #email.copied {
   color: #CEFF2D;
   font-weight: 500;
+}
+
+#email:hover {
+  color: #CEFF2D;
 }
 
 #contact-contact {
     opacity: 100% !important;
     color: #3C3C3C;
     text-decoration: none;
-    /* padding: 10px 20px; */
     border-radius: 5px;
 }
 
 #yam-contact,
 #about-contact {
-  opacity: 0.5; /* 50% = 0.5 */
+  opacity: 0.5;
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 #yam-contact:hover, #about-contact:hover {
-  opacity: 1; /* 100% = 1 */
+  opacity: 1;
   transform: scale(1.1);
 }
-
 
 .social-links {
   margin-top: 20px;
@@ -95,12 +94,6 @@
 .divider {
   height: 30px;
   width: 0.08rem;
-}
-
-#yam-footer {
-    margin-left: 1%;
-    color: #838383;
-    bottom: 0;
 }
 
 #yam-footer-contact {

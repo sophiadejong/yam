@@ -70,12 +70,12 @@ document.addEventListener("DOMContentLoaded", () => {
       dots.forEach((d, idx) => d.classList.toggle("active", idx === currentIndex));
     }
 
-    // ---- Helper: generate arrow cursor based on position ----
+    // ---- Helper: generate SMALLER arrow cursor based on position ----
     const generateCursor = (isRight) => {
-      const arrowSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#3C3C3C" width="48" height="48"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>`.trim();
-      const transform = isRight ? '' : 'rotate(180 32 32)';
-      const svgCursor = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"><g transform="${transform}">${arrowSvg}</g></svg>`.trim();
-      return `url("data:image/svg+xml;utf8,${encodeURIComponent(svgCursor)}") 32 32, auto`;
+      const arrowSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#3C3C3C" width="32" height="32"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>`.trim();
+      const transform = isRight ? '' : 'rotate(180 16 16)';
+      const svgCursor = `<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><g transform="${transform}">${arrowSvg}</g></svg>`.trim();
+      return `url("data:image/svg+xml;utf8,${encodeURIComponent(svgCursor)}") 20 20, auto`;
     };
 
     // ---- State tracking ----
@@ -183,12 +183,14 @@ document.addEventListener("DOMContentLoaded", () => {
         currentProject.style.cursor = "default";
         infoName.classList.remove("hovered");
       } else {
-        // Force immediate correct cursor on close
+        // Force immediate correct SMALLER cursor on close
         const rect = currentProject.getBoundingClientRect();
         const x = globalMouseX - rect.left;
         const isRight = x > rect.width / 2;
-        const cursor = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"><g transform="${isRight ? '' : 'rotate(180 32 32)'}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#3C3C3C" width="48" height="48"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></g></svg>`;
-        currentProject.style.cursor = `url("data:image/svg+xml;utf8,${encodeURIComponent(cursor)}") 32 32, auto`;
+        const arrowSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#3C3C3C" width="32" height="32"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>`.trim();
+        const transform = isRight ? '' : 'rotate(180 16 16)';
+        const cursorSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><g transform="${transform}">${arrowSvg}</g></svg>`.trim();
+        currentProject.style.cursor = `url("data:image/svg+xml;utf8,${encodeURIComponent(cursorSvg)}") 20 20, auto`;
       }
     });
 

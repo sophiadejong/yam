@@ -14,7 +14,7 @@
 }
 
 html, body {
-  font-family: "SuisseIntl";
+  font-family: "SuisseIntl", sans-serif;
   height: 100%;
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
@@ -22,7 +22,6 @@ html, body {
   background-color: #E0E0E0;
   margin: 0;
   padding: 0;
-  font-family: "SuisseIntl", sans-serif;
 }
 
 header {
@@ -130,11 +129,12 @@ nav a:hover {
   opacity: 1;
   filter: blur(0);
   z-index: 2;
-  padding-top: 0%;
+  padding-top: 1%;
 }
 
 .carousel {
-  width: 58vh;
+  margin-top: -1%;
+  width: 60vh;
   height: auto;
   overflow: hidden;
   display: flex;
@@ -251,7 +251,7 @@ nav a:hover {
   background: #ffffffa6;
   padding: 6px 16px;
   border-radius: 2px;
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(7px);
   display: inline-block;
   line-height: 1;
   transform: translateZ(0);
@@ -327,7 +327,7 @@ nav a:hover {
   align-items: center;
   justify-content: center;
   transition: background-color 0.3s ease, color 0.3s ease, backdrop-filter 0.3s ease;
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(7px);
 }
 
 #info-toggle.hide-mode {
@@ -373,4 +373,12 @@ nav a:hover {
 .copied {
   color: #CEFF2D;
   transition: color 0.3s ease;
+}
+
+#yam-footer-index {
+    margin-left: 1%;
+    color: #838383;
+    bottom: 0;
+    left: 0;
+    position: fixed;
 }

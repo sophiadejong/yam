@@ -55,3 +55,24 @@
 .oval-container img:nth-child(14) { left: 19%; top: 28%; transform: translate(-50%, -25%); z-index: 3; }
 .oval-container img:nth-child(15) { left: 29%; top: 16%; transform: translate(-50%, 0); z-index: 2; }
 .oval-container img:nth-child(16) { left: 39%; top: 10%; transform: translate(-50%, 0); z-index: 1; }
+
+/* =========================================================
+   OVAL SCROLL FX — random drift, scale, fade
+   ========================================================= */
+/* =========================================================
+   OVAL SCROLL FX — Drift / Scale / Fade / Blur
+   ========================================================= */
+.oval-container img {
+  transition:
+    transform 1.6s ease,
+    opacity 1.6s ease,
+    filter 1.6s ease;
+}
+
+.oval-container.scrolled img {
+  opacity: var(--randOpacity);
+  transform:
+    translate(var(--randX), var(--randY))
+    scale(var(--randScale));
+  filter: blur(var(--randBlur));
+}

@@ -99,7 +99,7 @@
 #yam-footer-contact {
     margin-left: 1%;
     color: #838383;
-    bottom: 0;
+    /* bottom: 0; */
     position: absolute;
 }
 

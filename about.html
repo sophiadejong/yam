@@ -16,7 +16,7 @@
 <body>
   <header>
     <div class="header-div">
-      <nav id="nav-about">
+      <nav>
         <a id="yam-about" href="index.html">YAM</a>
         <a id="about-about" href="about.html">About</a>
         <a id="contact-about" href="contact.html">Contact</a>
@@ -24,11 +24,10 @@
     </div>
   </header>
 
-  <main>
+  <main class="page-content">
 
     <!-- INTRO SECTION -->
-    <section id="about-section">
-      <!-- Centered background image added in HTML -->
+    <!-- <section id="about-section">
       <img id="yam-logo" src="services/yam.png" alt="YAM Studio Logo">
       <h1 style="position:relative; z-index:1;">
         YAM Studio creates visual identities and experiences <br>
@@ -42,7 +41,7 @@
     <div class="separate">
     <p class="div-text">Alfonso Yordi</p>
     <hr>
-    </div>
+    </div> -->
 
     <!-- ALFONSO YORDI SECTION -->
 
@@ -173,6 +172,94 @@
   <footer>
     <p id="yam-footer">YAM©<span class="faded-year">2025</span></p>
   </footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const nav = document.querySelector("nav");
+  const content = document.querySelector(".page-content");
+  if (!nav || !content) return;
+
+  // Create lime layer
+  let lime = nav.querySelector(".lime");
+  if (!lime) {
+    lime = document.createElement("div");
+    lime.className = "lime";
+    nav.appendChild(lime);
+  }
+
+  // NAV LINK CLICK → fade out content (1s) + lime (0.55s)
+  nav.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", e => {
+      e.preventDefault();
+      const href = link.href;
+
+      // Fast lime fade-out
+      nav.classList.remove("show");
+
+      // Page content fade-out (1s)
+      content.classList.add("fading");
+
+      // Navigate after longest transition (content = 1s)
+      setTimeout(() => {
+        window.location.href = href;
+      }, 500);
+    });
+  });
+
+  // ON LOAD — correct lime position + fast fade-in
+  const page = location.pathname.includes("about.html") ? "about" :
+               location.pathname.includes("contact.html") ? "contact" : "home";
+
+  nav.className = page;
+  nav.classList.remove("show");
+  void nav.offsetWidth;
+  nav.classList.add("show");  // 0.55s lime fade-in
+
+  // Content fade-in
+  content.style.opacity = "0";
+  requestAnimationFrame(() => content.style.opacity = "1");
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const content = document.querySelector(".page-content");
+  if (!content) return;
+
+  // FADE OUT content when clicking nav links
+  document.querySelectorAll("nav a").forEach(link => {
+    link.addEventListener("click", e => {
+      e.preventDefault();
+      const href = link.href;
+
+      content.classList.add("fading");
+
+      setTimeout(() => {
+        window.location.href = href;
+      }, 2200); // 1 second fade
+    });
+  });
+
+  // FADE IN on new page
+  content.style.opacity = "0";
+  requestAnimationFrame(() => {
+    content.style.opacity = "1";
+  });
+});
+</script>
+
+<script>
+  // Remove the brief flash + trigger the slow fade-in
+  document.addEventListener("DOMContentLoaded", () => {
+    // Force hidden first frame
+    document.body.style.visibility = "hidden";
+    requestAnimationFrame(() => {
+      document.body.classList.add("loaded");
+      document.body.style.visibility = "visible";
+    });
+  });
+</script>
+
 </body>
 
 </html>

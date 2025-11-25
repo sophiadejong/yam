@@ -1,37 +1,33 @@
 document.addEventListener("DOMContentLoaded", () => {
   const nav = document.querySelector("nav");
+  const content = document.querySelector(".page-content");
 
-  /* ========== SMOOTH FADE NAV HIGHLIGHT ========== */
+  /* ========== NAV STATE & LIME HIGHLIGHT ========== */
   const setNavState = (state) => {
     nav.classList.remove("home", "about", "contact");
     if (state) nav.classList.add(state);
   };
 
-  // Determine current page
   const path = location.pathname;
   let currentState = "home";
   if (path.includes("about.html")) currentState = "about";
   else if (path.includes("contact.html")) currentState = "contact";
 
-  // Apply saved state from previous navigation (for perfect fade)
   const saved = sessionStorage.getItem("navState");
-  if (saved && ["home", "about", "contact"].includes(saved)) {
-    currentState = saved;
-  }
-
+  if (saved && ["home", "about", "contact"].includes(saved)) currentState = saved;
   setNavState(currentState);
 
-  // Save next state when clicking any nav link
   document.querySelectorAll("nav a").forEach(link => {
     link.addEventListener("click", () => {
       const href = link.getAttribute("href");
-      if (href.includes("about.html")) sessionStorage.setItem("navState", "about");
-      else if (href.includes("contact.html")) sessionStorage.setItem("navState", "contact");
-      else sessionStorage.setItem("navState", "home");
+      sessionStorage.setItem("navState",
+        href.includes("about.html") ? "about" :
+        href.includes("contact.html") ? "contact" : "home"
+      );
     });
   });
 
-  /* ========== YOUR ORIGINAL CODE (100% UNCHANGED) ========== */
+  /* ========== PROJECTS LOGIC ========== */
   const projects = Array.from(document.querySelectorAll(".project"));
   const infoToggle = document.getElementById("info-toggle");
   const infoName = document.getElementById("info-name");
@@ -44,7 +40,23 @@ document.addEventListener("DOMContentLoaded", () => {
   let globalMouseX = 0;
   document.addEventListener("mousemove", (e) => { globalMouseX = e.clientX; });
 
-  /* ---------- Project in-view detection ---------- */
+  /* ---------- CUSTOM CURSOR (ONLY on slider) ---------- */
+  const cursor = document.createElement("div");
+  cursor.className = "custom-arrow-cursor";
+cursor.innerHTML = `
+  <img src="right-arrow.png" alt="arrow" class="cursor-arrow">
+`;
+
+  document.body.appendChild(cursor);
+
+  const updateCursorPos = (e) => {
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
+  };
+  const showCursor = () => cursor.style.opacity = "1";
+  const hideCursor = () => cursor.style.opacity = "0";
+
+  /* ---------- INTERSECTION OBSERVER ---------- */
   const projectObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       const el = entry.target;
@@ -69,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   projects.forEach(p => projectObserver.observe(p));
 
-  /* ---------- Manual Slider + Dots (NO AUTOPLAY) ---------- */
+  /* ---------- SLIDER + DOTS + CURSOR ---------- */
   projects.forEach(project => {
     const slider = project.querySelector(".slider");
     if (!slider) return;
@@ -77,6 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const slides = Array.from(slider.querySelectorAll(".slide"));
     let currentIndex = 0;
 
+    // Dots
     const dotsContainer = document.createElement("div");
     dotsContainer.className = "carousel-dots";
     slides.forEach((_, i) => {
@@ -100,49 +113,41 @@ document.addEventListener("DOMContentLoaded", () => {
       updateSlide();
     }
 
+    // Click → next slide
     project.addEventListener("click", (e) => {
       if (project.classList.contains("show-info")) return;
       if (e.target.closest(".carousel-dots")) return;
       nextSlide();
     });
 
-    // Custom left/right arrow cursor
-    let lastCursor = null;
-    let rafId = null;
+    /* ---------- CURSOR ONLY ON SLIDER ---------- */
 
-    const generateCursor = (isRight) => {
-      const arrowSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#3C3C3C" width="32" height="32"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>`;
-      const transform = isRight ? '' : 'rotate(180 12 12)';
-      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><g transform="${transform}">${arrowSvg}</g></svg>`;
-      return `url("data:image/svg+xml;utf8,${encodeURIComponent(svg)}") 20 20, auto`;
-    };
+    // Prevent cursor from showing on project background
+    project.addEventListener("mouseenter", hideCursor);
 
-    const updateCursor = () => {
+    slider.addEventListener("mouseenter", (e) => {
+      if (project.classList.contains("show-info")) return;
+      updateCursorPos(e);
+      showCursor();
+    });
+
+    slider.addEventListener("mousemove", (e) => {
       if (project.classList.contains("show-info")) {
-        project.style.cursor = "default";
+        hideCursor();
         return;
       }
-      const rect = project.getBoundingClientRect();
-      const x = globalMouseX - rect.left;
-      const newCursor = generateCursor(x > rect.width / 2);
-      if (lastCursor !== newCursor) {
-        project.style.cursor = newCursor;
-        lastCursor = newCursor;
-      }
-    };
 
-    project.addEventListener("mouseenter", () => {
-      if (!project.classList.contains("show-info")) {
-        const loop = () => { updateCursor(); rafId = requestAnimationFrame(loop); };
-        rafId = requestAnimationFrame(loop);
-      }
+      updateCursorPos(e);
+
+      const rect = slider.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+
+      const isRight = x > rect.width / 2;
+      cursor.classList.toggle("left", !isRight);
+      cursor.classList.toggle("right", isRight);
     });
 
-    project.addEventListener("mouseleave", () => {
-      if (rafId) cancelAnimationFrame(rafId);
-      rafId = null;
-      project.style.cursor = "auto";
-    });
+    slider.addEventListener("mouseleave", () => hideCursor());
 
     updateSlide();
   });
@@ -157,28 +162,19 @@ document.addEventListener("DOMContentLoaded", () => {
       infoName.classList.toggle("open", isOpen);
       document.body.style.overflowY = isOpen ? "hidden" : "scroll";
       infoContainer.classList.toggle("info-open", isOpen);
+      hideCursor(); // always hide cursor when opening info
 
       if (!isOpen) {
         currentProject.classList.add("closing-info");
         setTimeout(() => currentProject.classList.remove("closing-info"), 620);
       }
-
-      if (!isOpen) {
-        const rect = currentProject.getBoundingClientRect();
-        const x = globalMouseX - rect.left;
-        currentProject.style.cursor = generateCursor(x > rect.width / 2);
-      }
     });
 
-    infoToggle.addEventListener("mouseenter", () => {
-      infoName.classList.add("hovered");
-    });
-    infoToggle.addEventListener("mouseleave", () => {
-      infoName.classList.remove("hovered");
-    });
+    infoToggle.addEventListener("mouseenter", () => infoName.classList.add("hovered"));
+    infoToggle.addEventListener("mouseleave", () => infoName.classList.remove("hovered"));
   }
 
-  /* ---------- Home text fade & scale ---------- */
+  /* ---------- HOME TEXT FADE ON SCROLL ---------- */
   if (homeText && homeSection) {
     const fade = () => {
       const rect = homeSection.getBoundingClientRect();

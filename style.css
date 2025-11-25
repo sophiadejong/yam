@@ -119,9 +119,48 @@ nav a:hover { transform: scale(1.1); }
 .project { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; scroll-snap-align: center; transform: scale(0.6); opacity: 0.5; filter: blur(30px); transition: transform .8s, opacity .8s, filter .8s; }
 .project.in-view { transform: scale(1); opacity: 1; filter: blur(0); z-index: 2; }
 
-.slider { width: 59vh; height: 73vh; margin-top: 1%; overflow: hidden; position: relative; }
-.slide { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; filter: blur(20px); transform: scale(1.05); transition: opacity .2s, filter .4s, transform .4s; }
-.slide.active { opacity: 1; filter: blur(0); transform: scale(1); }
+/* === NUEVO CÓDIGO: CROSS-FADE SUAVE Y ELEGANTE === */
+.slider {
+  width: 59vh;
+  height: 73vh;
+  margin-top: 1%;
+  overflow: hidden;
+  position: relative;
+  background: #E0E0E0; /* fallback color por si hay lag */
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.04);
+  filter: blur(8px);
+  transition: 
+    opacity 1.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+    transform 1.6s ease-out,
+    filter 1.6s ease;
+  pointer-events: auto; /* evita interferencias */
+  opacity: 0;
+  transform: scale(1.03);
+  filter: blur(4px);
+  
+}
+
+.slide.active {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
+  pointer-events: all;
+}
+
+/* Suaviza aún más el efecto cuando hay zoom en in-view */
+.project.in-view .slide.active {
+  animation: gentleZoom 14s infinite ease-in-out;
+}
+
 .project.in-view .slide.active { animation: gentleZoom 12s infinite ease-in-out; }
 @keyframes gentleZoom { 0%,100% { transform: scale(1); } 50% { transform: scale(1.04); } }
 
@@ -150,3 +189,35 @@ nav a:hover { transform: scale(1.1); }
 #info-toggle.hide-mode .plus { transform: rotate(45deg); }
 #info-toggle:hover .plus { transform: scale(1.4); }
 #info-toggle.hide-mode:hover .plus { transform: rotate(45deg) scale(1.4); }
+
+.custom-arrow-cursor {
+  position: fixed;
+  pointer-events: none;
+  width: 40px;       /* adjust to your arrow size */
+  height: 40px;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.15s ease-out;
+  z-index: 9999;
+}
+
+.custom-arrow-cursor .cursor-arrow {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Flip arrow for left/right directions */
+.custom-arrow-cursor.left .cursor-arrow {
+  transform: scaleX(-1);
+}
+
+.custom-arrow-cursor.right .cursor-arrow {
+  transform: scaleX(1);
+}
+
+/* Hide system cursor wherever the custom one should appear */
+.slider,
+.custom-arrow-cursor {
+  cursor: none !important;
+}

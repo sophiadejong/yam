@@ -136,15 +136,15 @@ nav a:hover { transform: scale(1.1); }
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  transform: scale(1.04);
+  /* transform: scale(1.04); */
   filter: blur(8px);
   transition: 
-    opacity 1.4s cubic-bezier(0.25, 0.8, 0.25, 1),
-    transform 1.6s ease-out,
-    filter 1.6s ease;
+    opacity 0.6s cubic-bezier(0.25, 0.8, 0.25, 1),
+    transform 0.6s ease-out,
+    filter 0.6s ease;
   pointer-events: auto; /* evita interferencias */
   opacity: 0;
-  transform: scale(1.03);
+  /* transform: scale(1.03); */
   filter: blur(4px);
   
 }

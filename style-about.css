@@ -181,28 +181,30 @@ span {
 }
 
 .marquee-single {
-  --gap: 70px;
-  --speed: 25s;           /* Slower = more elegant with more logos */
+  --gap: 150px;
+  --speed: 25s;           /* ←←← this is your current speed, keep it exactly as you had */
   position: relative;
   width: 100%;
   overflow: hidden;
-  white-space: nowrap;
   height: 120px;
+  min-height: 180px;           
+  display: flex;
+  align-items: center;
 }
 
 .marquee-single .track {
   display: inline-flex;
   align-items: center;
   gap: var(--gap);
+  padding-right: var(--gap);           /* keeps perfect spacing at the loop */
   will-change: transform;
-  animation: marquee-loop var(--speed) linear infinite reverse;
-  padding-right: var(--gap);   /* ←←← ADD THIS */
+  animation: scroll-left var(--speed) linear infinite reverse;
 }
 
-/* Seamless infinite loop */
-@keyframes marquee-loop {
-  from   { transform: translateX(0); }
-  to     { transform: translateX(calc(-50% - var(--gap)/2)); }
+/* THE ONLY KEYFRAME YOU NEED – mathematically perfect */
+@keyframes scroll-left {
+  from { transform: translateX(0%); }
+  to   { transform: translateX(-50%); }
 }
 
 /* Duplicate the track for seamless loop */

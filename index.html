@@ -11,6 +11,14 @@
 <body>
   
   <header>
+
+    <script>
+  // Kill the browser's scroll restoration (the #1 cause of "jump on navigation")
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+</script>
+
     <div class="header-div">
       <nav>
 <a id="yam"         href="index.html">YAM</a>
@@ -123,93 +131,5 @@
 
   <script src="script.js" defer></script>
 
-  <script>
-  // Prevent flash: apply background class immediately on load
-  const bg = sessionStorage.getItem("pageBackground");
-  if (bg === "subpage") {
-    document.body.classList.add("bg-subpage");
-  } else {
-    document.body.classList.add("bg-home");
-  }
-</script>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const nav = document.querySelector("nav");
-  const content = document.querySelector(".page-content");
-  if (!nav || !content) return;
-
-  // Create lime layer
-  let lime = nav.querySelector(".lime");
-  if (!lime) {
-    lime = document.createElement("div");
-    lime.className = "lime";
-    nav.appendChild(lime);
-  }
-
-
-  // ON LOAD — correct lime position + fast fade-in
-  const page = location.pathname.includes("about.html") ? "about" :
-               location.pathname.includes("contact.html") ? "contact" : "home";
-
-  nav.className = page;
-  nav.classList.remove("show");
-  void nav.offsetWidth;
-  nav.classList.add("show");  // 0.55s lime fade-in
-
-  // Content fade-in
-  content.style.opacity = "0";
-  requestAnimationFrame(() => content.style.opacity = "1");
-});
-</script>
-
-
-
-<script>
-  // Remove the brief flash + trigger the slow fade-in
-  document.addEventListener("DOMContentLoaded", () => {
-    // Force hidden first frame
-    document.body.style.visibility = "hidden";
-    requestAnimationFrame(() => {
-      document.body.classList.add("loaded");
-      document.body.style.visibility = "visible";
-    });
-  });
-</script>
-
-<script>
-  /* =========================================================
-   OVAL IMAGE RANDOM MOVEMENT + SCROLL CONTROL (WORKING VERSION)
-   ========================================================= */
-document.addEventListener("DOMContentLoaded", () => {
-  const oval = document.querySelector(".oval-container");
-  const imgs = document.querySelectorAll(".oval-container img");
-  const projects = document.querySelector("#projects");
-
-  if (!oval || !imgs.length || !projects) return;
-
-  // Assign random values to each image
-  imgs.forEach(img => {
-    img.style.setProperty("--randX", (Math.random() * 140 - 70) + "px");
-    img.style.setProperty("--randY", (Math.random() * 140 - 70) + "px");
-    img.style.setProperty("--randScale", (0.6 + Math.random() * 1.2).toFixed(2));
-    img.style.setProperty("--randOpacity", (0.15 + Math.random() * 0.85).toFixed(2));
-    img.style.setProperty("--randBlur", Math.floor(Math.random() * 8) + "px");
-  });
-
-  window.addEventListener("scroll", () => {
-    const rect = projects.getBoundingClientRect();
-
-    if (rect.top < window.innerHeight * 0.8) {
-      // User is leaving home → chaos mode
-      oval.classList.add("scrolled");
-    } else {
-      // User returns up → reset
-      oval.classList.remove("scrolled");
-    }
-  });
-});
-
-</script>
 </body>
 </html>

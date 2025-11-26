@@ -2,8 +2,6 @@
     background: linear-gradient(90deg,  rgba(255, 255, 255, 0.70) 0%, rgba(255, 255, 255, 0.70) 33%, rgba(206, 255, 45, 1) 36%, rgba(206, 255, 45, 1) 63%, rgba(255, 255, 255, 0.70) 66%);
 }
 
-#about-about:hover { transform: scale(1.1); }
-
 hr {
     margin: 0% 2% 1% 2%;
     border: none;          /* remove default border */
@@ -28,7 +26,6 @@ hr {
 
 #yam-about:hover, #contact-about:hover {
   opacity: 1; /* 100% = 1 */
-  transform: scale(1.1);
 }
 
 #about-section {
@@ -173,7 +170,6 @@ span {
     text-align: left;
     margin: 0 0 10px 0;
 }
-
 #clients {
   display: flex;
   flex-direction: column;
@@ -184,48 +180,46 @@ span {
   justify-content: center;
 }
 
-.marquee {
-  --gap: 150px;
-  --speed: 22s;
+.marquee-single {
+  --gap: 70px;
+  --speed: 25s;           /* Slower = more elegant with more logos */
   position: relative;
   width: 100%;
   overflow: hidden;
   white-space: nowrap;
-  height: 120px; /* ensures visibility */
+  height: 120px;
 }
 
-.track {
+.marquee-single .track {
   display: inline-flex;
   align-items: center;
   gap: var(--gap);
-  position: absolute;
-  left: 0;
-  top: 0;
   will-change: transform;
+  animation: marquee-loop var(--speed) linear infinite reverse;
+  padding-right: var(--gap);   /* ←←← ADD THIS */
 }
 
-.marquee-forward .track {
-  animation: marquee-forward var(--speed) linear infinite;
+/* Seamless infinite loop */
+@keyframes marquee-loop {
+  from   { transform: translateX(0); }
+  to     { transform: translateX(calc(-50% - var(--gap)/2)); }
 }
 
-.marquee-reverse .track {
-  animation: marquee-reverse var(--speed) linear infinite;
+/* Duplicate the track for seamless loop */
+.marquee-single::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 100%;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
-/* KEYFRAMES */
-@keyframes marquee-forward {
-  from { transform: translateX(0); }
-  to   { transform: translateX(calc(-1 * var(--track-width))); }
-}
-
-@keyframes marquee-reverse {
-  from { transform: translateX(calc(-1 * var(--track-width))); }
-  to   { transform: translateX(0); }
-}
+/* JS will clone the track and append it */
 
 /* LOGOS */
 .track img {
-  width: 150px;
+  /* width: 150px; */
   opacity: 0.8;
   transition: opacity .3s ease;
 }

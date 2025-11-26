@@ -307,24 +307,18 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".marquee").forEach(marquee => {
+  document.querySelectorAll(".marquee-single").forEach(marquee => {
     const track = marquee.querySelector(".track");
-
     const gap = parseInt(getComputedStyle(marquee).getPropertyValue("--gap")) || 0;
 
-    // real width of the row
+    // Calculate full width of one set of logos
     const trackWidth = track.scrollWidth;
 
-    // pass width to CSS
+    // Set CSS variable for animation
     marquee.style.setProperty("--track-width", (trackWidth + gap) + "px");
 
-    // duplicate
+    // Clone and append for seamless loop
     const clone = track.cloneNode(true);
-    clone.classList.add("clone");
-
-    clone.style.position = "absolute";
-    clone.style.left = (trackWidth + gap) + "px";
-
     marquee.appendChild(clone);
   });
 });

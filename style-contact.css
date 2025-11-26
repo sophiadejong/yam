@@ -2,8 +2,6 @@
   background: linear-gradient(90deg, rgba(255, 255, 255, 0.70) 66%, rgba(206, 255, 45, 1) 69%, rgba(206, 255, 45, 1) 100%);
 }
 
-#contact-contact:hover { transform: scale(1.1); }
-
 #contact-section {
     font-family: "SuisseIntl";
     height: 92.75vh;
@@ -72,7 +70,6 @@
 
 #yam-contact:hover, #about-contact:hover {
   opacity: 1;
-  transform: scale(1.1);
 }
 
 .social-links {

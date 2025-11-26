@@ -17,9 +17,12 @@
   <header>
     <div class="header-div">
       <nav>
-        <a id="yam-about" href="index.html">YAM</a>
-        <a id="about-about" href="about.html">About</a>
-        <a id="contact-about" href="contact.html">Contact</a>
+<a id="yam-about"         href="index.html">YAM</a>
+  <a id="about-about"       href="about.html">About</a>
+  <a id="contact-about"     href="contact.html">Contact</a>
+
+  <!-- the moving lime highlight -->
+  <div class="lime"></div>
       </nav>
     </div>
   </header>
@@ -46,29 +49,37 @@
     <!-- ALFONSO YORDI SECTION -->
 
     <section id="alfonso-yordi">
-      <div class="alfonso-container">
-        <img src="images/alfonso.png" alt="Alfonso Yordi" class="alfonso-photo">
-              <div class="social-links-alfonso">
-        <div class="social-item">
-          <img src="images/arena.png" alt="Arena icon">
-          <span>Arena</span>
-        </div>
-        <img src="images/line.png" alt="vertical line" class="divider">
+  <div class="alfonso-container">
+    <img src="images/alfonso.png" alt="Alfonso Yordi" class="alfonso-photo">
 
-        <div class="social-item">
-          <img src="images/instagram.png" alt="Instagram icon">
-          <span>Instagram</span>
-        </div>
-        </div>
-        <p class="alfonso-text">
-          Alfonso Yordi is a Madrid-based designer working at the intersection<br>of design, art direction, and
-          typography. Through his practice,<br>YAM Studio, he develops bold visual identities and<br>cultural experiences
-          for clients worldwide.<br><br>Having worked across industries for both global brands and
-          cultural,<br>initiatives he has collaborated with renowned studios including<br>Uncommon, Our Polite Society,
-          Smol Studios, Köln Studio,<br>WAKA, Cocota Studio and Perlita-Calvario.
-        </p>
-      </div>
-    </section>
+    <div class="social-links-alfonso">
+
+      <!-- ARE.NA -->
+      <a href="https://www.are.na/yam-studio/channels" target="_blank" class="social-item">
+        <img src="images/arena.png" alt="Arena icon">
+        <span>Are.na</span>
+      </a>
+
+      <img src="images/line.png" alt="vertical line" class="divider">
+
+      <!-- INSTAGRAM -->
+      <a href="https://www.instagram.com/yamstudio.xyz/" target="_blank" class="social-item">
+        <img src="images/instagram.png" alt="Instagram icon">
+        <span>Instagram</span>
+      </a>
+
+    </div>
+
+    <p class="alfonso-text">
+      Alfonso Yordi is a Madrid-based designer working at the intersection<br>of design, art direction, and
+      typography. Through his practice,<br>YAM Studio, he develops bold visual identities and<br>cultural experiences
+      for clients worldwide.<br><br>Having worked across industries for both global brands and
+      cultural,<br>initiatives he has collaborated with renowned studios including<br>Uncommon, Our Polite Society,
+      Smol Studios, Köln Studio,<br>WAKA, Cocota Studio and Perlita-Calvario.
+    </p>
+  </div>
+</section>
+
 
 
 
@@ -139,16 +150,29 @@
     <hr>
     </div>
 
-    <section id="clients">
-      <img src="images/clients.png" alt="" style="mix-blend-mode: darken; width: 90%;">
-      <!-- <div class="clients-container">
-        <img src="images/client1.png" alt="Client 1">
-        <img src="images/client2.png" alt="Client 2">
-        <img src="images/client3.png" alt="Client 3">
-        <img src="images/client4.png" alt="Client 4">
-        <img src="images/client5.png" alt="Client 5">
-      </div> -->
-    </section>
+<section id="clients">
+  <div class="marquee marquee-forward">
+    <div class="track">
+      <img src="images/logos/BASE.svg">
+      <img src="images/logos/BNR.svg">
+      <img src="images/logos/Cademy.svg">
+      <img src="images/logos/COCOTA.svg">
+      <img src="images/logos/GREYGOOSE.svg">
+      <img src="images/logos/Infinity Pools.svg">
+    </div>
+  </div>
+
+  <div class="marquee marquee-reverse">
+    <div class="track">
+      <img src="images/logos/Kabila.svg">
+      <img src="images/logos/Matadero.svg">
+      <img src="images/logos/Signature.svg">
+      <img src="images/logos/Solana.svg">
+      <img src="images/logos/UNCOMMON.svg">
+      <img src="images/logos/Waka.svg">
+    </div>
+  </div>
+</section>
 
     <!-- OUR OFFICE SECTION -->
 
@@ -222,30 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const content = document.querySelector(".page-content");
-  if (!content) return;
 
-  // FADE OUT content when clicking nav links
-  document.querySelectorAll("nav a").forEach(link => {
-    link.addEventListener("click", e => {
-      e.preventDefault();
-      const href = link.href;
-
-      content.classList.add("fading");
-
-      setTimeout(() => {
-        window.location.href = href;
-      }, 2200); // 1 second fade
-    });
-  });
-
-  // FADE IN on new page
-  content.style.opacity = "0";
-  requestAnimationFrame(() => {
-    content.style.opacity = "1";
-  });
-});
 </script>
 
 <script>

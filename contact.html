@@ -17,9 +17,12 @@
   <header>
     <div class="header-div">
       <nav>
-        <a id="yam-contact" href="index.html">YAM</a>
-        <a id="about-contact" href="about.html">About</a>
-        <a id="contact-contact" href="contact.html">Contact</a>
+<a id="yam-contact"         href="index.html">YAM</a>
+  <a id="about-contact"       href="about.html">About</a>
+  <a id="contact-contact"     href="contact.html">Contact</a>
+
+  <!-- the moving lime highlight -->
+  <div class="lime"></div>
       </nav>
     </div>
   </header>
@@ -31,25 +34,33 @@
       <h1 id="email" data-email="hello@yamstudio.xyz">hello@yamstudio.xyz</h1>
 
       <!-- Social links -->
-      <div class="social-links">
-        <div class="social-item">
-          <img src="images/arena.png" alt="Arena icon">
-          <span>Are.na</span>
-        </div>
-        <img src="images/line.png" alt="vertical line" class="divider">
+      <!-- Social links -->
+<div class="social-links">
+  
+  <!-- ARE.NA -->
+  <a href="https://www.are.na/yam-studio/channels" target="_blank" class="social-item">
+    <img src="images/arena.png" alt="Arena icon">
+    <span>Are.na</span>
+  </a>
 
-        <div class="social-item">
-          <img src="images/instagram.png" alt="Instagram icon">
-          <span>Instagram</span>
-        </div>
+  <img src="images/line.png" alt="vertical line" class="divider">
 
-        <img src="images/line.png" alt="vertical line" class="divider">
+  <!-- INSTAGRAM -->
+  <a href="https://www.instagram.com/yamstudio.xyz/" target="_blank" class="social-item">
+    <img src="images/instagram.png" alt="Instagram icon">
+    <span>Instagram</span>
+  </a>
 
-        <div class="social-item">
-          <img src="images/linked-in.png" alt="LinkedIn icon">
-          <span>LinkedIn</span>
-        </div>
-      </div>
+  <img src="images/line.png" alt="vertical line" class="divider">
+
+  <!-- LINKEDIN (KEEP AS IS — add link when you’re ready) -->
+  <div class="social-item">
+    <img src="images/linked-in.png" alt="LinkedIn icon">
+    <span>LinkedIn</span>
+  </div>
+
+</div>
+
       <h4 id="h4-text">We work independently and with studios worldwide, teaming up with<br>a close network of creatives
         to cover
         projects of any scale.<br>Always open to new projects and conversations.</h4>
@@ -155,32 +166,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const content = document.querySelector(".page-content");
-  if (!content) return;
-
-  // FADE OUT content when clicking nav links
-  document.querySelectorAll("nav a").forEach(link => {
-    link.addEventListener("click", e => {
-      e.preventDefault();
-      const href = link.href;
-
-      content.classList.add("fading");
-
-      setTimeout(() => {
-        window.location.href = href;
-      }, 2200); // 1 second fade
-    });
-  });
-
-  // FADE IN on new page
-  content.style.opacity = "0";
-  requestAnimationFrame(() => {
-    content.style.opacity = "1";
-  });
-});
-</script>
 <script>
   // Remove the brief flash + trigger the slow fade-in
   document.addEventListener("DOMContentLoaded", () => {

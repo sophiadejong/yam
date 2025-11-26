@@ -13,9 +13,12 @@
   <header>
     <div class="header-div">
       <nav>
-        <a id="yam" href="index.html"><span>YAM</span></a>
-        <a id="about" href="about.html"><span>About</span></a>
-        <a id="contact" href="contact.html"><span>Contact</span></a>
+<a id="yam"         href="index.html">YAM</a>
+  <a id="about"       href="about.html">About</a>
+  <a id="contact"     href="contact.html">Contact</a>
+
+  <!-- the moving lime highlight -->
+  <div class="lime"></div>
       </nav>
     </div>
   </header>
@@ -144,24 +147,6 @@ document.addEventListener("DOMContentLoaded", () => {
     nav.appendChild(lime);
   }
 
-  // NAV LINK CLICK → fade out content (1s) + lime (0.55s)
-  nav.querySelectorAll("a").forEach(link => {
-    link.addEventListener("click", e => {
-      e.preventDefault();
-      const href = link.href;
-
-      // Fast lime fade-out
-      nav.classList.remove("show");
-
-      // Page content fade-out (1s)
-      content.classList.add("fading");
-
-      // Navigate after longest transition (content = 1s)
-      setTimeout(() => {
-        window.location.href = href;
-      }, 500);
-    });
-  });
 
   // ON LOAD — correct lime position + fast fade-in
   const page = location.pathname.includes("about.html") ? "about" :
@@ -178,32 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const content = document.querySelector(".page-content");
-  if (!content) return;
 
-  // FADE OUT content when clicking nav links
-  document.querySelectorAll("nav a").forEach(link => {
-    link.addEventListener("click", e => {
-      e.preventDefault();
-      const href = link.href;
-
-      content.classList.add("fading");
-
-      setTimeout(() => {
-        window.location.href = href;
-      }, 2200); // 1 second fade
-    });
-  });
-
-  // FADE IN on new page
-  content.style.opacity = "0";
-  requestAnimationFrame(() => {
-    content.style.opacity = "1";
-  });
-});
-</script>
 
 <script>
   // Remove the brief flash + trigger the slow fade-in

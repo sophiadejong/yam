@@ -2,6 +2,8 @@
     background: linear-gradient(90deg,  rgba(255, 255, 255, 0.70) 0%, rgba(255, 255, 255, 0.70) 33%, rgba(206, 255, 45, 1) 36%, rgba(206, 255, 45, 1) 63%, rgba(255, 255, 255, 0.70) 66%);
 }
 
+#about-about:hover { transform: scale(1.1); }
+
 hr {
     margin: 0% 2% 1% 2%;
     border: none;          /* remove default border */
@@ -103,6 +105,20 @@ span {
   align-items: center;
 }
 
+/* Remove all underlines + preserve original color */
+.social-links-alfonso a,
+.social-links-alfonso a:visited,
+.social-links-alfonso a:hover,
+.social-links-alfonso a:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Also ensure spans never get decoration */
+.social-links-alfonso a span {
+  text-decoration: none;
+}
+
 .social-item-alfonso {
   display: flex;
   align-items: center;
@@ -158,31 +174,66 @@ span {
     margin: 0 0 10px 0;
 }
 
-/* CLIENTS SECTION */
 #clients {
-    height: 50vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  padding: 30px 0;
+  overflow: hidden;
+  height: 50vh;
+  justify-content: center;
 }
 
-.clients-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 60px;
-    flex-wrap: wrap;
+.marquee {
+  --gap: 150px;
+  --speed: 22s;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  height: 120px; /* ensures visibility */
 }
 
-.clients-container img {
-    width: 120px;
-    opacity: 0.8;
-    transition: opacity 0.3s;
+.track {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap);
+  position: absolute;
+  left: 0;
+  top: 0;
+  will-change: transform;
 }
 
-.clients-container img:hover {
-    opacity: 1;
+.marquee-forward .track {
+  animation: marquee-forward var(--speed) linear infinite;
 }
+
+.marquee-reverse .track {
+  animation: marquee-reverse var(--speed) linear infinite;
+}
+
+/* KEYFRAMES */
+@keyframes marquee-forward {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-1 * var(--track-width))); }
+}
+
+@keyframes marquee-reverse {
+  from { transform: translateX(calc(-1 * var(--track-width))); }
+  to   { transform: translateX(0); }
+}
+
+/* LOGOS */
+.track img {
+  width: 150px;
+  opacity: 0.8;
+  transition: opacity .3s ease;
+}
+
+.track img:hover {
+  opacity: 1;
+}
+
 
 /* OUR OFFICE SECTION */
 #our-office {

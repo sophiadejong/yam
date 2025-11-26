@@ -1,3 +1,8 @@
+/* Prevent flash on load */
+.page-content {
+  opacity: 0;
+}
+
 @font-face {
   font-family: "SuisseIntl";
   src: url("fonts/SuisseIntl-Regular.otf") format("opentype");
@@ -20,28 +25,6 @@ html, body {
   padding: 0;
 }
 
-/* SAME SPEED IN & OUT → 2.2 seconds (feels slow & luxurious but not sluggish) */
-/* ——— PERFECT SLOW & CONSISTENT FADE IN + OUT (NO FLASH) ——— */
-/* ——— FINAL FIX: NO FLASH, PERFECT SLOW FADE IN + OUT ——— */
-.page-content {
-  opacity: 0;
-  transition: opacity 2.2s ease-out, transform 2.2s ease-out;
-  /* transform: translateY(14px); */
-}
-
-/* On page load – fade in slowly */
-body.loaded .page-content {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* When leaving – fade out slowly */
-.page-content.fading {
-  opacity: 0 !important;
-  /* transform: translateY(14px); */
-  transition: opacity 2.2s ease-out, transform 2.2s ease-out;
-  pointer-events: none;
-}
 
 /* ==================== NAVIGATION – LIME BLOCK FADE ONLY ==================== */
 header {
@@ -58,56 +41,81 @@ header {
   align-items: center;
 }
 
-/* NAV — FINAL WORKING VERSION: GREEN FADE IN/OUT (NO SLIDE) */
+/* ==================== NAVIGATION – FINAL SLIDING LIME (PERFECT) ==================== */
+/* ==================== NAVIGATION – FINAL SLIDING LIME (PERFECT 2025) ==================== */
 nav {
   display: flex;
   justify-content: center;
-  padding: 1px 0;
-  border-radius: 2px;
   position: relative;
   overflow: hidden;
   backdrop-filter: blur(7px);
   background: rgba(255,255,255,0.70);
+  border-radius: 2px;
+  /* padding: 8px 0; */
+  /* width: 100%; */
+  box-sizing: border-box;
 }
 
-/* ==================== NAVIGATION – LIME BLOCK SLOWER & MORE ELEGANT ==================== */
+nav a {
+  flex: 1;
+  color: #3C3C3C;
+  text-decoration: none;
+  text-align: center;
+  padding: 5px 0;
+  transition: transform 0.3s cubic-bezier(0.22,1,0.36,1);
+  position: relative;
+  z-index: 2;
+}
+nav a:hover { transform: scale(1.1); }
+
 nav .lime {
   position: absolute;
-  inset: 0;
+  top: 0; left: 0;
+  width: 33.333333%;
+  height: 100%;
   pointer-events: none;
-  opacity: 0;
-  background: linear-gradient(90deg, #CEFF2D 0%, #CEFF2D 28%, transparent 33%);
-  /* ← 1.2 seconds fade (instead of 0.1s) + much smoother easing */
-  transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-  transform: translateZ(0);
-  will-change: opacity;
-}
-
-nav.show .lime {
   opacity: 1;
+  transition: none;
+  transition: transform 0.65s cubic-bezier(0.22,1,0.36,1);
 }
 
-/* Different gradients per page (unchanged) */
-nav.home    .lime { background: linear-gradient(90deg, #CEFF2D 0%, #CEFF2D 28%, transparent 33%); }
-nav.about   .lime { background: linear-gradient(90deg, transparent 0%, transparent 33%, #CEFF2D 36%, #CEFF2D 63%, transparent 66%); }
-nav.contact .lime { background: linear-gradient(90deg, transparent 0%, transparent 66%, #CEFF2D 69%, #CEFF2D 100%); }
+/* YOUR EXACT DESIRED GRADIENTS – ACTIVE PAGE (ALWAYS VISIBLE) */
+nav.home    .lime { background: linear-gradient(90deg, #CEFF2D 0%, #CEFF2D 90%, transparent 100%); }
+nav.about   .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 90%, transparent 100%); }
+nav.contact .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 100%); }
+
+/* HOVER PREVIEW – ONLY when hovering a DIFFERENT page */
+nav.home    a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 90%, transparent 100%); }
+nav.home    a:nth-child(3):hover ~ .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 100%); }
+
+nav.about   a:nth-child(1):hover ~ .lime { background: linear-gradient(90deg, #CEFF2D 0%, #CEFF2D 90%, transparent 100%); }
+nav.about   a:nth-child(3):hover ~ .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 100%); }
+
+nav.contact a:nth-child(1):hover ~ .lime { background: linear-gradient(90deg, #CEFF2D 0%, #CEFF2D 90%, transparent 100%); }
+nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 90%, transparent 100%); }
+
+nav.show .lime { opacity: 1; }
+
+nav.instant .lime {
+    transition: none !important;
+}
 
 /* Nav links */
 nav a {
   color: #3C3C3C;
   text-decoration: none;
   padding: 5px 7px;
-  width: 72px;
+  width: 75px;
   transition: transform 0.3s;
   position: relative;
   z-index: 2;
 }
 
-nav a:hover { transform: scale(1.1); }
+nav a:hover { transform: scale(1); }
 
 /* Active page link styling */
 #yam, #about-about, #contact-contact { opacity: 1 !important; color: #3C3C3C; }
-#about, #contact, #yam-about, #contact-about, #yam-contact, #about-contact { opacity: 0.5; transition: opacity 0.3s, transform 0.3s; }
+#about, #contact, #yam-about, #contact-about, #yam-contact, #about-contact { opacity: 0.5; transition: transform 0.3s cubic-bezier(0.22,1,0.36,1); } 
 #about:hover, #contact:hover, #yam-about:hover, #contact-about:hover, #yam-contact:hover, #about-contact:hover {
   opacity: 1; transform: scale(1.1);
 }
@@ -220,4 +228,19 @@ nav a:hover { transform: scale(1.1); }
 .slider,
 .custom-arrow-cursor {
   cursor: none !important;
+}
+
+/* ------- PAGE CONTENT FADE SYSTEM (FINAL VERSION) ------- */
+.page-content {
+  transition: opacity 2s ease !important;
+}
+
+/* After JS triggers fade in */
+.page-content.fade-in.show {
+  opacity: 1 !important;
+}
+
+/* Fade out */
+.page-content.fade-out {
+  opacity: 0 !important;
 }

@@ -2,6 +2,8 @@
   background: linear-gradient(90deg, rgba(255, 255, 255, 0.70) 66%, rgba(206, 255, 45, 1) 69%, rgba(206, 255, 45, 1) 100%);
 }
 
+#contact-contact:hover { transform: scale(1.1); }
+
 #contact-section {
     font-family: "SuisseIntl";
     height: 92.75vh;
@@ -34,7 +36,7 @@
   position: relative;
   color: #838383;
   opacity: 1;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, color 0.3s ease;
 }
 
 #email.fade-out {
@@ -52,6 +54,7 @@
 
 #email:hover {
   color: #CEFF2D;
+    opacity: 1;
 }
 
 #contact-contact {
@@ -78,6 +81,14 @@
   gap: 20px;
   justify-content: center;
   align-items: center;
+}
+
+.social-links a,
+.social-links a:visited,
+.social-links a:hover,
+.social-links a:active {
+  text-decoration: none;
+  color: inherit;
 }
 
 .social-item {

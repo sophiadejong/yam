@@ -98,6 +98,14 @@ header {
   align-items: center;
 }
 
+#yam {
+  padding: 5px 10px 5px 7px;
+}
+
+#contact {
+  padding: 5px 7px 5px 10px;
+}
+
 nav {
   display: flex;
   justify-content: center;

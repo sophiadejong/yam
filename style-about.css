@@ -164,7 +164,7 @@ span {
 }
 
 .marquee-single {
-  --gap: 150px;
+  --gap: 130px;
   --speed: 25s;           /* ←←← this is your current speed, keep it exactly as you had */
   position: relative;
   width: 100%;

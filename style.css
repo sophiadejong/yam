@@ -1,8 +1,4 @@
-/* Prevent flash on load */
-.page-content {
-  opacity: 0;
-}
-
+/* ==================== FONTS ==================== */
 @font-face {
   font-family: "SuisseIntl";
   src: url("fonts/SuisseIntl-Regular.otf") format("opentype");
@@ -14,6 +10,12 @@
   font-weight: 600;
 }
 
+/* Prevent flash on load */
+.page-content {
+  opacity: 0;
+}
+
+/* ==================== CORE SCROLL SYSTEM ==================== */
 html {
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
@@ -21,7 +23,6 @@ html {
   background-color: #E0E0E0;
   margin: 0;
   padding: 0;
-  /* Prevent jump on navigation */
   scroll-padding-top: 0;
 }
 
@@ -31,11 +32,12 @@ body {
   background-color: #E0E0E0;
   margin: 0;
   padding: 0;
-  /* Critical: force consistent scroll position on load */
-  overflow-y: overlay; /* or scroll */
+  overflow-y: visible; /* MUST stay visible for scroll-snap to work */
 }
 
-/* Force first section to align to top, not center */
+/* ==================== SECTION SNAPPING ==================== */
+
+/* Home snaps to TOP */
 #home {
   height: 100vh;
   padding-top: 2%;
@@ -43,11 +45,45 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  scroll-snap-align: start;     /* ← THIS IS THE KEY CHANGE */
-  scroll-snap-stop: always;     /* optional: forces stop here */
+  scroll-snap-align: start;  /* ← stays start */
+  scroll-snap-stop: always;
 }
 
-/* ==================== NAVIGATION – LIME BLOCK FADE ONLY ==================== */
+/* Projects snap to PERFECT CENTER */
+.project {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  scroll-snap-align: center; /* ← CENTER SNAP FIX */
+  scroll-snap-stop: always;  
+
+  transform: scale(0.6);
+  opacity: 0.5;
+  filter: blur(30px);
+  transition: transform .8s, opacity .8s, filter .8s;
+}
+
+.project.in-view {
+  transform: scale(1);
+  opacity: 1;
+  filter: blur(0);
+  z-index: 2;
+}
+
+#home-text {
+  position: absolute;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: #838383;
+  z-index: 1000;
+  transition: opacity .01s, transform .01s;
+}
+
+/* ==================== NAVIGATION ==================== */
 header {
   position: fixed;
   width: 100%;
@@ -62,8 +98,6 @@ header {
   align-items: center;
 }
 
-/* ==================== NAVIGATION – FINAL SLIDING LIME (PERFECT) ==================== */
-/* ==================== NAVIGATION – FINAL SLIDING LIME (PERFECT 2025) ==================== */
 nav {
   display: flex;
   justify-content: center;
@@ -72,13 +106,8 @@ nav {
   backdrop-filter: blur(7px);
   background: rgba(255,255,255,0.70);
   border-radius: 2px;
-  /* padding: 8px 0; */
-  /* width: 100%; */
   box-sizing: border-box;
-
 }
-
-
 
 nav a {
   color: #3C3C3C;
@@ -88,17 +117,28 @@ nav a {
   position: relative;
   z-index: 2;
   opacity: 0.5;
- transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1);}
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Versión PRO: el link de la página actual SIEMPRE está al 100% sin depender de sticky-hover */
+nav.home    a#yam,
+nav.about   a#about,
+nav.contact a#contact {
+  opacity: 1 !important;
+}
+
+/* Bonus: quita el hover de opacidad en los links activos (opcional pero queda más limpio) */
+nav.home    a#yam:hover,
+nav.about   a#about:hover,
+nav.contact a#contact:hover {
+  opacity: 1 !important;
+}
 
 nav.home    a:nth-child(1),
 nav.about   a:nth-child(2),
 nav.contact a:nth-child(3),
 nav a.sticky-hover,
-nav a:hover { opacity: 1 !important; }
-
-/* Hover OR previously hovered = full opacity */
-nav a:hover,
-nav a.sticky-hover {
+nav a:hover {
   opacity: 1 !important;
 }
 
@@ -111,17 +151,16 @@ nav .lime {
   width: 33.333333%;
   height: 100%;
   pointer-events: none;
-  opacity: 1;
-  transition: none;
+  opacity: 1 !important;
   transition: transform 0.65s cubic-bezier(0.22,1,0.36,1);
 }
 
-/* YOUR EXACT DESIRED GRADIENTS – ACTIVE PAGE (ALWAYS VISIBLE) */
+/* ACTIVE PAGE GRADIENTS */
 nav.home    .lime { background: linear-gradient(90deg, #CEFF2D 0%, #CEFF2D 90%, transparent 100%); }
 nav.about   .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 90%, transparent 100%); }
 nav.contact .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 100%); }
 
-/* HOVER PREVIEW – ONLY when hovering a DIFFERENT page */
+/* HOVER PREVIEW LOGIC */
 nav.home    a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 90%, transparent 100%); }
 nav.home    a:nth-child(3):hover ~ .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 100%); }
 
@@ -131,34 +170,14 @@ nav.about   a:nth-child(3):hover ~ .lime { background: linear-gradient(90deg, tr
 nav.contact a:nth-child(1):hover ~ .lime { background: linear-gradient(90deg, #CEFF2D 0%, #CEFF2D 90%, transparent 100%); }
 nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 90%, transparent 100%); }
 
-nav.show .lime { opacity: 1; }
-
-nav.instant .lime {
-    transition: none !important;
-}
-
-
-/* #yam, #about-about, #contact-contact { opacity: 1 !important; color: #3C3C3C; }
-#about, #contact, #yam-about, #contact-about, #yam-contact, #about-contact { opacity: 0.5; transition: transform 0.3s cubic-bezier(0.22,1,0.36,1); } 
-#about:hover, #contact:hover, #yam-about:hover, #contact-about:hover, #yam-contact:hover, #about-contact:hover {
-  opacity: 1;;
-} */
-
-/* ==================== REST OF YOUR SITE (unchanged) ==================== */
-#home { height: 100vh; padding-top: 2%; display: flex; flex-direction: column; justify-content: center; align-items: center; scroll-snap-align: center; }
-#home-text { position: absolute; text-align: center; font-size: 1rem; line-height: 1.4; color: #838383; z-index: 1000; transition: opacity .01s, transform .01s; }
-
-.project { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; scroll-snap-align: start; scroll-snap-align: center; transform: scale(0.6); opacity: 0.5; filter: blur(30px); transition: transform .8s, opacity .8s, filter .8s; }
-.project.in-view { transform: scale(1); opacity: 1; filter: blur(0); z-index: 2; }
-
-/* === NUEVO CÓDIGO: CROSS-FADE SUAVE Y ELEGANTE === */
+/* ==================== SLIDER ==================== */
 .slider {
   width: 59vh;
   height: 73vh;
-  margin-top: 1%;
+  margin: 0;
   overflow: hidden;
   position: relative;
-  background: #E0E0E0; /* fallback color por si hay lag */
+  background: #E0E0E0;
 }
 
 .slide {
@@ -168,17 +187,12 @@ nav.instant .lime {
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  /* transform: scale(1.04); */
-  filter: blur(8px);
-  transition: 
+  filter: blur(4px);
+  transition:
     opacity 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
     transform 0.4s ease-out,
     filter 0.4s ease;
-  pointer-events: auto; /* evita interferencias */
-  opacity: 0;
-  /* transform: scale(1.03); */
-  filter: blur(4px);
-  
+  pointer-events: auto;
 }
 
 .slide.active {
@@ -188,44 +202,144 @@ nav.instant .lime {
   pointer-events: all;
 }
 
-/* Suaviza aún más el efecto cuando hay zoom en in-view */
 .project.in-view .slide.active {
-  animation: gentleZoom 14s infinite ease-in-out;
+  animation: gentleZoom 12s infinite ease-in-out;
 }
 
-.project.in-view .slide.active { animation: gentleZoom 12s infinite ease-in-out; }
-@keyframes gentleZoom { 0%,100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+@keyframes gentleZoom {
+  0%,100% { transform: scale(1); }
+  50%     { transform: scale(1.04); }
+}
 
-.carousel-dots { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
-.dot { width: 7px; height: 7px; background: #3C3C3C; opacity: .2; border-radius: 50%; cursor: pointer; transition: .3s; }
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: #3C3C3C;
+  opacity: .2;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: .3s;
+}
+
 .dot.active { opacity: 1; }
 
-.project-info { position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; background: #e0e0e0d9; color: #3C3C3C; text-align: center; padding: 5%; opacity: 0; pointer-events: none; transition: opacity .6s ease; z-index: 5; }
+/* ==================== PROJECT INFO OVERLAY ==================== */
+.project-info {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e0e0e0d9;
+  color: #3C3C3C;
+  text-align: center;
+  padding: 5%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .6s ease;
+  z-index: 5;
+}
+
 .project.show-info .project-info { opacity: 1; pointer-events: all; }
 .project.show-info .slider { filter: blur(20px); transition: filter .6s ease; }
 .project.closing-info .project-info { opacity: 0; transition: opacity .6s ease; }
 .project.closing-info .slider { filter: blur(0); transition: filter .6s ease; }
 
-.info-container { position: fixed; bottom: 3%; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: .5rem; opacity: 0; pointer-events: none; transition: opacity .4s ease; z-index: 1000; }
-.info-container.visible { opacity: 1; pointer-events: all; }
+/* ==================== INFO ICON ==================== */
+.info-container {
+  position: fixed;
+  bottom: 3%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .4s ease;
+  z-index: 1000;
+}
 
-.info-name { position: relative; overflow: hidden; background: #ffffffa6; padding: 6px 16px; border-radius: 2px; backdrop-filter: blur(7px); font-size: 1rem; line-height: 1; }
-.info-fill { position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: #CEFF2D; border-radius: 2px; transition: left .5s ease; z-index: 1; }
-.info-text { position: relative; z-index: 2; color: #3C3C3C; transition: color .3s ease; }
-.info-name.hovered .info-fill, .info-name.open .info-fill { left: 0; }
-.info-name.hovered .info-text, .info-name.open .info-text { color: #000; }
+.info-container.visible {
+  opacity: 1;
+  pointer-events: all;
+}
 
-#info-toggle { background: #ffffffa6; border: none; border-radius: 2px; padding: 3px 9px; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: background-color 0.3s ease, backdrop-filter 0.3s ease; backdrop-filter: blur(7px); }
+.info-name {
+  position: relative;
+  overflow: hidden;
+  background: #ffffffa6;
+  padding: 6px 16px;
+  border-radius: 2px;
+  backdrop-filter: blur(7px);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.info-fill {
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%;
+  height: 100%;
+  background: #CEFF2D;
+  border-radius: 2px;
+  transition: left .5s ease;
+  z-index: 1;
+}
+
+.info-text {
+  position: relative;
+  z-index: 2;
+  color: #3C3C3C;
+  transition: color .3s ease;
+}
+
+.info-name.hovered .info-fill,
+.info-name.open .info-fill { left: 0; }
+
+.info-name.hovered .info-text,
+.info-name.open .info-text { color: #000; }
+
+#info-toggle {
+  background: #ffffffa6;
+  border: none;
+  border-radius: 2px;
+  padding: 3px 9px;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+  backdrop-filter: blur(7px);
+}
+
 #info-toggle.hide-mode { background-color: #CEFF2D; backdrop-filter: blur(6px); }
-#info-toggle .plus { display: inline-block; font-size: 1.2rem; transition: transform 0.3s ease; }
+
+#info-toggle .plus {
+  display: inline-block;
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
 #info-toggle.hide-mode .plus { transform: rotate(45deg); }
 #info-toggle:hover .plus { transform: scale(1.4); }
-#info-toggle.hide-mode:hover .plus { transform: rotate(45deg) scale(1.4); }
+#info-toggle.hide-mode:hover .plus {
+  transform: rotate(45deg) scale(1.4);
+}
 
+/* ==================== CUSTOM ARROW CURSOR ==================== */
 .custom-arrow-cursor {
   position: fixed;
   pointer-events: none;
-  width: 40px;       /* adjust to your arrow size */
+  width: 40px;
   height: 40px;
   transform: translate(-50%, -50%);
   opacity: 0;
@@ -239,33 +353,18 @@ nav.instant .lime {
   object-fit: contain;
 }
 
-/* Flip arrow for left/right directions */
-.custom-arrow-cursor.left .cursor-arrow {
-  transform: scaleX(-1);
-}
+.custom-arrow-cursor.left .cursor-arrow { transform: scaleX(-1); }
+.custom-arrow-cursor.right .cursor-arrow { transform: scaleX(1); }
 
-.custom-arrow-cursor.right .cursor-arrow {
-  transform: scaleX(1);
-}
-
-/* Hide system cursor wherever the custom one should appear */
 .slider,
 .custom-arrow-cursor {
   cursor: none !important;
 }
 
-/* ------- PAGE CONTENT FADE SYSTEM (FINAL VERSION) ------- */
+/* ==================== PAGE FADE ==================== */
 .page-content {
   transition: opacity 2s ease !important;
 }
 
-/* After JS triggers fade in */
-.page-content.fade-in.show {
-  opacity: 1 !important;
-}
-
-/* Fade out */
-.page-content.fade-out {
-  opacity: 0 !important;
-}
-
+.page-content.fade-in.show { opacity: 1 !important; }
+.page-content.fade-out { opacity: 0 !important; }

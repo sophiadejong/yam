@@ -55,23 +55,6 @@
     opacity: 1;
 }
 
-#contact-contact {
-    opacity: 100% !important;
-    color: #3C3C3C;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
-#yam-contact,
-#about-contact {
-  opacity: 0.5;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-#yam-contact:hover, #about-contact:hover {
-  opacity: 1;
-}
-
 .social-links {
   margin-top: 20px;
   display: flex;

@@ -11,23 +11,6 @@ hr {
     background: none; 
 }
 
-#about-about {
-    opacity: 1 !important;
-    color: #3C3C3C;
-    text-decoration: none;
-    /* padding: 10px 20px; */
-    border-radius: 5px;
-}
-
-#yam-about, #contact-about {
-    opacity: 0.5; /* 50% = 0.5 */
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-#yam-about:hover, #contact-about:hover {
-  opacity: 1; /* 100% = 1 */
-}
-
 #about-section {
     font-family: "SuisseIntl";
     position: relative;       /* make it the reference for absolute children */

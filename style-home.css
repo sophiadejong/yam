@@ -55,8 +55,8 @@
 .oval-container img:nth-child(12) { left: 19%; top: 72%; transform: translate(-50%, -75%); z-index: 5; }
 .oval-container img:nth-child(13) { left: 12%; top: 50%; transform: translate(-50%, -50%); z-index: 4; }
 .oval-container img:nth-child(14) { left: 19%; top: 28%; transform: translate(-50%, -25%); z-index: 3; }
-.oval-container img:nth-child(15) { left: 29%; top: 16%; transform: translate(-50%, 0); z-index: 3; }
-.oval-container img:nth-child(16) { left: 39%; top: 10%; transform: translate(-50%, 0); z-index: 16; }
+.oval-container img:nth-child(15) { left: 29%; top: 16%; transform: translate(-50%, 0); z-index: 2; }
+.oval-container img:nth-child(16) { left: 39%; top: 10%; transform: translate(-50%, 0); z-index: 1; }
 
 .oval-container.scrolled img {
   opacity: var(--randOpacity);

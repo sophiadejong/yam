@@ -2,7 +2,6 @@
    PAGE FADE IN / OUT — SINGLE, BULLETPROOF SYSTEM (FIXED)
    ========================================================= */
 
-// FADE OUT — works on ALL nav links (YAM, About, Contact)
 document.addEventListener("click", (e) => {
   const link = e.target.closest("nav a");
   if (!link) return;
@@ -20,14 +19,12 @@ document.addEventListener("click", (e) => {
   }, 1000);
 });
 
-// FADE IN — after full page load (no flash, perfect with custom fonts)
 window.addEventListener("load", () => {
   const content = document.querySelector(".page-content");
   if (!content) return;
 
-  // Tiny delay ensures fonts are ready → zero FOUC
   setTimeout(() => {
-    window.scrollTo(0, 0); // ← ensures 0,0 even if browser tried to restore
+    window.scrollTo(0, 0);
     content.classList.add("fade-in", "show");
   }, 60);
 });
@@ -44,21 +41,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const states = ["home", "about", "contact"];
 
-  // Determine current page
   const currentIndex = location.pathname.includes("about.html") ? 1 :
                        location.pathname.includes("contact.html") ? 2 : 0;
 
-  // Instant setup on load (no animation flash)
   nav.classList.add("instant");
   nav.classList.add(states[currentIndex]);
   lime.style.transform = `translateX(${currentIndex * 100}%)`;
 
-  // Current page link starts fully opaque
   links[currentIndex].classList.add("sticky-hover");
 
   let sliderEnabled = true;
 
-  /* ——— STICKY HOVER: stays opaque after hover ——— */
   links.forEach((link, i) => {
     link.addEventListener("mouseenter", () => {
       links.forEach(l => l.classList.remove("sticky-hover"));
@@ -76,7 +69,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  /* ——— CLICK: prepare smooth transition ——— */
   links.forEach((link, i) => {
     link.addEventListener("click", () => {
       if (i === currentIndex) return;
@@ -91,7 +83,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Re-enable transitions
   requestAnimationFrame(() => {
     nav.classList.remove("instant");
     nav.classList.add("show");
@@ -273,8 +264,6 @@ document.addEventListener("DOMContentLoaded", () => {
 /* =========================================================
    FINAL — BULLETPROOF PAGE FADE + NAV SYSTEM (2025)
    ========================================================= */
-
-// FADE OUT — works on ALL nav links
 document.addEventListener("click", (e) => {
   const link = e.target.closest("nav a");
   if (!link) return;
@@ -290,7 +279,6 @@ document.addEventListener("click", (e) => {
   setTimeout(() => window.location.href = href, 1000);
 });
 
-// FADE IN — perfect, no flash
 window.addEventListener("load", () => {
   const content = document.querySelector(".page-content");
   if (content) {
@@ -299,7 +287,7 @@ window.addEventListener("load", () => {
 });
 
 /* =========================================================
-   NAV + LIME + OPACITY — FINAL FIXED VERSION (NO STICKY FOREVER)
+   NAV + LIME + OPACITY — FINAL FIXED VERSION
    ========================================================= */
 document.addEventListener("DOMContentLoaded", () => {
   const nav = document.querySelector("nav");
@@ -314,20 +302,15 @@ document.addEventListener("DOMContentLoaded", () => {
   let targetState = sessionStorage.getItem("navTarget");
   let currentStateIndex = targetState ? states.indexOf(targetState) : currentIndex;
 
-  // === 1. INITIAL STATE (instant, no flash) ===
-  nav.className = ""; // reset
+  nav.className = "";
   nav.classList.add("instant", states[currentStateIndex], "show");
   lime.style.transform = `translateX(${currentStateIndex * 100}%)`;
   links[currentStateIndex].classList.add("sticky-hover");
 
-  // === 2. HOVER BEHAVIOR ===
   links.forEach((link, i) => {
     link.addEventListener("mouseenter", () => {
-      // Remove sticky from all, apply to hovered
       links.forEach(l => l.classList.remove("sticky-hover"));
       link.classList.add("sticky-hover");
-
-      // Move lime preview
       lime.style.transform = `translateX(${i * 100}%)`;
     });
 
@@ -337,24 +320,91 @@ document.addEventListener("DOMContentLoaded", () => {
       sessionStorage.setItem("navTarget", states[i]);
       currentStateIndex = i;
 
-      // Apply final state immediately for next page
       nav.classList.remove(...states);
       nav.classList.add(states[i]);
     });
   });
 
-  // === 3. MOUSE LEAVE NAV → SNAP BACK TO CURRENT PAGE ===
   nav.addEventListener("mouseleave", () => {
     links.forEach(l => l.classList.remove("sticky-hover"));
     links[currentStateIndex].classList.add("sticky-hover");
     lime.style.transform = `translateX(${currentStateIndex * 100}%)`;
   });
 
-  // === 4. Enable transitions after setup ===
   requestAnimationFrame(() => {
     nav.classList.remove("instant");
   });
 
-  // Cleanup
   sessionStorage.removeItem("navTarget");
+});
+
+/* =========================================================
+   OVAL IMAGES — FLY STRAIGHT UP ON SCROLL — 3× SLOWER FROM THE START
+   ========================================================= */
+document.addEventListener("DOMContentLoaded", () => {
+  const oval = document.querySelector(".oval-container");
+  const home = document.getElementById("home");
+  if (!oval || !home) return;
+
+  const imgs = oval.querySelectorAll("img");
+
+  // 1. Random speed & final scale for each image
+  imgs.forEach(img => {
+    img.dataset.speed = 0.7 + Math.random() * 1.6;
+    img.dataset.scale = 0.05 + Math.random() * 3.7;
+  });
+
+  // 2. Capture original CSS transforms once
+  const originalTransforms = [];
+  requestAnimationFrame(() => {
+    imgs.forEach((img, i) => {
+      const matrix = getComputedStyle(img).transform;
+      if (matrix && matrix !== "none") {
+        const values = matrix.split("(")[1].split(")")[0].split(",");
+        originalTransforms[i] = `translate(${values[4]}px, ${values[5]}px)`;
+      } else {
+        originalTransforms[i] = "translate(0px, 0px)";
+      }
+    });
+  });
+
+  // 3. Main animation loop — 3× SLOWER
+  const update = () => {
+    const homeRect = home.getBoundingClientRect();
+    const scrolled = Math.max(0, -homeRect.top);
+    const maxScroll = innerHeight * 0.9;
+
+    // ← THIS IS THE KEY CHANGE: divide by 3 → 3× slower progression
+    const progress = Math.min(scrolled / maxScroll / 3, 1);
+
+    // Lower threshold so the "flying" class still activates early
+    if (progress > 0.006) oval.classList.add("flying");
+    else oval.classList.remove("flying");
+
+    imgs.forEach((img, i) => {
+      const speed = parseFloat(img.dataset.speed);
+      const finalScale = parseFloat(img.dataset.scale);
+
+      // We multiply the individual speed back by ~3 so each image still feels unique
+      let p = progress * speed * 3;
+      p = Math.min(Math.max(p, 0), 1);
+
+      const ease = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+
+      const base = originalTransforms[i] || "translate(0px, 0px)";
+
+      // Fly straight up (negative Y)
+      const flyX = 0;
+      const flyY = -ease * 180;        // same distance, just reached much slower
+      const scale = 1 + (finalScale - 1) * ease;
+
+      img.style.transform = `${base} translate(${flyX}vw, ${flyY}vh) scale(${scale})`;
+      img.style.opacity = 1 - ease * 0.95;
+      img.style.filter = `blur(${ease * 12}px)`;
+    });
+
+    requestAnimationFrame(update);
+  };
+
+  requestAnimationFrame(update);
 });

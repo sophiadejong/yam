@@ -47,6 +47,9 @@ body {
   align-items: center;
   scroll-snap-align: start;  /* ← stays start */
   scroll-snap-stop: always;
+  scroll-behavior: smooth;
+  contain: layout style;                    /* enables GPU acceleration */
+  will-change: transform;
 }
 
 /* Projects snap to PERFECT CENTER */
@@ -379,3 +382,6 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
 
 .page-content.fade-in.show { opacity: 1 !important; }
 .page-content.fade-out { opacity: 0 !important; }
+
+@media (max-width: 860px) {
+}

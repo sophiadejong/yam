@@ -254,3 +254,103 @@ span {
     margin-left: 1%;
     color: #838383;
 }
+
+/* =========================================================
+   MOBILE VERSION – FINAL (preserves ALL original image ratios)
+   ========================================================= */
+
+@media (max-width: 860px) {
+
+  /* General spacing */
+  .separate { margin: 7% 0 4% 0; }
+  .div-text { 
+    font-size: 0.75rem; 
+    margin: 0 5% 1rem; 
+  }
+
+  /* ALFONSO YORDI – preserve original photo ratio */
+  #alfonso-yordi { 
+    padding: 14% 6% 10% 6%; 
+  }
+  .alfonso-photo {
+    width: 78vw;
+    max-width: 420px;
+    height: auto !important;        /* ← forces original ratio */
+    aspect-ratio: unset !important;
+    object-fit: contain;            /* ← no cropping, full image visible */
+    background: transparent;
+    margin-bottom: 2.5rem;
+  }
+  .alfonso-text { 
+    font-size: 0.96rem; 
+    line-height: 1.52;
+    margin-top: 1rem;
+  }
+  .social-links-alfonso {
+    gap: 32px;
+    margin: 2.2rem 0;
+  }
+  .social-item-alfonso img { width: 30px; height: auto; }
+  .social-links-alfonso .divider { height: 24px; }
+
+  /* SERVICES – 2 columns, original images 100% preserved */
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 6vw;
+    max-width: 92%;
+    margin: 10% auto 14%;
+    padding: 0 4%;
+  }
+  .service img {
+    width: 100%;
+    height: auto !important;
+    object-fit: contain !important;   /* ← original proportions guaranteed */
+    background: transparent;
+    margin-bottom: 16px;
+  }
+  .service h3 { font-size: 1.38rem; margin: 0 0 10px 0; }
+  .service p { font-size: 0.93rem; line-height: 1.48; }
+
+  /* CLIENTS marquee */
+  #clients { height: 44vh; }
+  .marquee-single {
+    --speed: 48s;
+    height: 120px;
+    min-height: 160px;
+  }
+  .marquee-single .track img { height: 52px; }
+
+  /* OUR OFFICE – preserve original photo ratio */
+  #our-office {
+    height: auto;
+    min-height: 100vh;
+    padding: 20% 6% 15%;
+  }
+  .office-photo {
+    width: 78vw;
+    max-width: 440px;
+    height: auto !important;        /* ← original ratio */
+    aspect-ratio: unset !important;
+    object-fit: contain !important; /* ← no cropping */
+    background: transparent;
+    margin-bottom: 2.5rem;
+  }
+  .office-text {
+    font-size: 0.98rem;
+    line-height: 1.6;
+    margin-top: 1rem;
+  }
+
+  #yam-footer {
+    margin-left: 5%;
+    font-size: 0.82rem;
+  }
+}
+
+/* Tiny phones – just tighter spacing */
+@media (max-width: 480px) {
+  .services-grid { gap: 7vw; padding: 0 6%; }
+  .service h3 { font-size: 1.3rem; }
+  .service p { font-size: 0.9rem; }
+  .alfonso-photo, .office-photo { width: 84vw; }
+}

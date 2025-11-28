@@ -404,3 +404,13 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
 
 @media (max-width: 860px) {
 }
+
+@media (max-width: 480px) {
+  header{
+    padding: 50px 0 0 0;
+  }
+  .slider {
+    width: 88%;
+    height: 52vh;
+  }  
+}

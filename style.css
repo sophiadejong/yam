@@ -410,7 +410,7 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
     padding: 50px 0 0 0;
   }
   .slider {
-    width: 88%;
+    width: 96%;
     height: 52vh;
   }  
 }

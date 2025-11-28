@@ -79,3 +79,13 @@
 .oval-container.flying img {
   transition: none !important;
 }
+
+@media (max-width: 480px) {
+  .oval-container {
+    width: 151%;
+    height: 56vh;
+  }
+  .info-container {
+    bottom: 50px;  
+}
+}

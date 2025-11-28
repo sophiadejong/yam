@@ -356,6 +356,18 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
   transform: rotate(45deg) scale(1.4);
 }
 
+#info-toggle,
+#info-toggle .plus {
+  color: #3C3C3C !important; 
+}
+
+/* Extra seguro para iOS */
+#info-toggle::-moz-focus-inner {
+  border: 0;
+}
+#info-toggle:focus {
+  outline: none;
+}
 /* ==================== CUSTOM ARROW CURSOR ==================== */
 .custom-arrow-cursor {
   position: fixed;

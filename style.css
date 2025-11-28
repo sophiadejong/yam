@@ -52,6 +52,8 @@ body {
   will-change: transform;
 }
 
+
+
 /* Projects snap to PERFECT CENTER */
 .project {
   height: 100vh;
@@ -77,14 +79,19 @@ body {
 }
 
 #home-text {
-  position: absolute;
+  position: fixed;      /* stays centered on screen */
+  top: 52.5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
   text-align: center;
   font-size: 1rem;
   line-height: 1.4;
   color: #838383;
-  z-index: 1000;
-  transition: opacity .01s, transform .01s;
+  opacity: 1;           /* initial opacity */
+  transition: opacity 0.1s linear; /* smooth fade */
 }
+
 
 /* ==================== NAVIGATION ==================== */
 header {

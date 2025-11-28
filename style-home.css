@@ -10,8 +10,8 @@
   margin-top: 1%;
   perspective: 2000px;
   transform-style: preserve-3d;
+  scroll-snap-type: none !important;
 }
-
 
 /* --- Image styling --- */
 .oval-container img {
@@ -20,6 +20,7 @@
   /* filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15)); */
   /* small overlap */
   margin-top: -0.8%;
+  scroll-snap-type: none !important;
 }
 
 /* Lift & scale on hover */
@@ -41,22 +42,22 @@
 }
 
 /* But since CSS can’t loop with math directly, we manually define the positions */
-.oval-container img:nth-child(1)  { left: 50%; top: 5%;  transform: translate(-50%, 0); z-index: 16; }
-.oval-container img:nth-child(2)  { left: 61%; top: 10%; transform: translate(-50%, 0); z-index: 15; }
-.oval-container img:nth-child(3)  { left: 71%; top: 16%; transform: translate(-50%, 0); z-index: 14; }
-.oval-container img:nth-child(4)  { left: 81%; top: 28%; transform: translate(-50%, -25%); z-index: 13; }
-.oval-container img:nth-child(5)  { left: 88%; top: 50%; transform: translate(-50%, -50%); z-index: 12; }
-.oval-container img:nth-child(6)  { left: 81%; top: 72%; transform: translate(-50%, -75%); z-index: 11; }
-.oval-container img:nth-child(7)  { left: 71%; top: 84%; transform: translate(-50%, -100%); z-index: 10; }
-.oval-container img:nth-child(8)  { left: 61%; top: 90%; transform: translate(-50%, -100%); z-index: 9; }
-.oval-container img:nth-child(9)  { left: 50%; top: 95%; transform: translate(-50%, -100%); z-index: 8; }
-.oval-container img:nth-child(10) { left: 39%; top: 90%; transform: translate(-50%, -100%); z-index: 7; }
-.oval-container img:nth-child(11) { left: 29%; top: 84%; transform: translate(-50%, -100%); z-index: 6; }
-.oval-container img:nth-child(12) { left: 19%; top: 72%; transform: translate(-50%, -75%); z-index: 5; }
-.oval-container img:nth-child(13) { left: 12%; top: 50%; transform: translate(-50%, -50%); z-index: 4; }
-.oval-container img:nth-child(14) { left: 19%; top: 28%; transform: translate(-50%, -25%); z-index: 3; }
-.oval-container img:nth-child(15) { left: 29%; top: 16%; transform: translate(-50%, 0); z-index: 2; }
-.oval-container img:nth-child(16) { left: 39%; top: 10%; transform: translate(-50%, 0); z-index: 1; }
+.oval-container img:nth-child(1)  { left: 50%; top: 5%;  transform: translate(-50%, 0); z-index: 16; scroll-snap-type: none !important;}
+.oval-container img:nth-child(2)  { left: 61%; top: 10%; transform: translate(-50%, 0); z-index: 15; scroll-snap-type: none !important;}
+.oval-container img:nth-child(3)  { left: 71%; top: 16%; transform: translate(-50%, 0); z-index: 14; scroll-snap-type: none !important;}
+.oval-container img:nth-child(4)  { left: 81%; top: 28%; transform: translate(-50%, -25%); z-index: 13; scroll-snap-type: none !important;}
+.oval-container img:nth-child(5)  { left: 88%; top: 50%; transform: translate(-50%, -50%); z-index: 12; scroll-snap-type: none !important;}
+.oval-container img:nth-child(6)  { left: 81%; top: 72%; transform: translate(-50%, -75%); z-index: 11; scroll-snap-type: none !important;}
+.oval-container img:nth-child(7)  { left: 71%; top: 84%; transform: translate(-50%, -100%); z-index: 10; scroll-snap-type: none !important;}
+.oval-container img:nth-child(8)  { left: 61%; top: 90%; transform: translate(-50%, -100%); z-index: 9; scroll-snap-type: none !important;}
+.oval-container img:nth-child(9)  { left: 50%; top: 95%; transform: translate(-50%, -100%); z-index: 8; scroll-snap-type: none !important;}
+.oval-container img:nth-child(10) { left: 39%; top: 90%; transform: translate(-50%, -100%); z-index: 7; scroll-snap-type: none !important;}
+.oval-container img:nth-child(11) { left: 29%; top: 84%; transform: translate(-50%, -100%); z-index: 6; scroll-snap-type: none !important;}
+.oval-container img:nth-child(12) { left: 19%; top: 72%; transform: translate(-50%, -75%); z-index: 5; scroll-snap-type: none !important;}
+.oval-container img:nth-child(13) { left: 12%; top: 50%; transform: translate(-50%, -50%); z-index: 4; scroll-snap-type: none !important;}
+.oval-container img:nth-child(14) { left: 19%; top: 28%; transform: translate(-50%, -25%); z-index: 3; scroll-snap-type: none !important;}
+.oval-container img:nth-child(15) { left: 29%; top: 16%; transform: translate(-50%, 0); z-index: 2; scroll-snap-type: none !important;}
+.oval-container img:nth-child(16) { left: 39%; top: 10%; transform: translate(-50%, 0); z-index: 1; scroll-snap-type: none !important;}
 
 .oval-container.scrolled img {
   opacity: var(--randOpacity);

@@ -10,11 +10,6 @@
   font-weight: 600;
 }
 
-/* Custom --vh fallback for older browsers */
-:root {
-  --vh: 1vh;
-}
-
 /* Prevent flash on load */
 .page-content {
   opacity: 0;
@@ -29,50 +24,50 @@ html {
   margin: 0;
   padding: 0;
   scroll-padding-top: 0;
-  height: 100%;
 }
 
 body {
   font-family: "SuisseIntl", sans-serif;
   min-height: 100vh;
-  min-height: 100dvh; /* modern browsers */
-  min-height: calc(var(--vh, 1vh) * 100);
   background-color: #E0E0E0;
   margin: 0;
   padding: 0;
-  overflow-y: visible;
+  overflow-y: visible; /* MUST stay visible for scroll-snap to work */
 }
 
 /* ==================== SECTION SNAPPING ==================== */
+
+/* Home snaps to TOP */
 #home {
   scroll-snap-type: none !important;
-  height: 100dvh;
-  height: calc(var(--vh, 1vh) * 100);
+  height: 100vh;
   padding-top: 2%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  scroll-snap-align: start;
+  scroll-snap-align: start;  /* ← stays start */
   scroll-snap-stop: always;
-  contain: layout style;
+  scroll-behavior: smooth;
+  contain: layout style;                    /* enables GPU acceleration */
   will-change: transform;
 }
 
+/* Projects snap to PERFECT CENTER */
 .project {
-  height: 100dvh;
-  height: calc(var(--vh, 1vh) * 100);
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  scroll-snap-align: center;
-  scroll-snap-stop: always;
+
+  scroll-snap-align: center; /* ← CENTER SNAP FIX */
+  scroll-snap-stop: always;  
 
   transform: scale(0.6);
   opacity: 0.5;
   filter: blur(30px);
-  transition: transform .8s cubic-bezier(0.22,1,0.36,1), opacity .8s, filter .8s;
+  transition: transform .8s, opacity .8s, filter .8s;
 }
 
 .project.in-view {
@@ -83,7 +78,8 @@ body {
 }
 
 #home-text {
-  position: fixed;
+
+  position: fixed;      /* stays centered on screen */
   top: 52.5%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -92,10 +88,10 @@ body {
   font-size: 1rem;
   line-height: 1.4;
   color: #838383;
-  opacity: 1;
-  transition: opacity 0.1s linear;
-  pointer-events: none;
+  opacity: 1;           /* initial opacity */
+  transition: opacity 0.1s linear; /* smooth fade */
 }
+
 
 /* ==================== NAVIGATION ==================== */
 header {
@@ -147,21 +143,21 @@ nav a {
 }
 
 /* Versión PRO: el link de la página actual SIEMPRE está al 100% sin depender de sticky-hover */
-nav.home a#yam,
-nav.about a#about,
+nav.home    a#yam,
+nav.about   a#about,
 nav.contact a#contact {
   opacity: 1 !important;
 }
 
 /* Bonus: quita el hover de opacidad en los links activos (opcional pero queda más limpio) */
-nav.home a#yam:hover,
-nav.about a#about:hover,
+nav.home    a#yam:hover,
+nav.about   a#about:hover,
 nav.contact a#contact:hover {
   opacity: 1 !important;
 }
 
-nav.home a:nth-child(1),
-nav.about a:nth-child(2),
+nav.home    a:nth-child(1),
+nav.about   a:nth-child(2),
 nav.contact a:nth-child(3),
 nav a.sticky-hover,
 nav a:hover {
@@ -182,16 +178,16 @@ nav .lime {
 }
 
 /* ACTIVE PAGE GRADIENTS */
-nav.home .lime { background: linear-gradient(90deg, #CEFF2D 0%, #CEFF2D 90%, transparent 100%); }
-nav.about .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 90%, transparent 100%); }
+nav.home    .lime { background: linear-gradient(90deg, #CEFF2D 0%, #CEFF2D 90%, transparent 100%); }
+nav.about   .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 90%, transparent 100%); }
 nav.contact .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 100%); }
 
 /* HOVER PREVIEW LOGIC */
-nav.home a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 90%, transparent 100%); }
-nav.home a:nth-child(3):hover ~ .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 100%); }
+nav.home    a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 90%, transparent 100%); }
+nav.home    a:nth-child(3):hover ~ .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 100%); }
 
-nav.about a:nth-child(1):hover ~ .lime { background: linear-gradient(90deg, #CEFF2D 0%, #CEFF2D 90%, transparent 100%); }
-nav.about a:nth-child(3):hover ~ .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 100%); }
+nav.about   a:nth-child(1):hover ~ .lime { background: linear-gradient(90deg, #CEFF2D 0%, #CEFF2D 90%, transparent 100%); }
+nav.about   a:nth-child(3):hover ~ .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 100%); }
 
 nav.contact a:nth-child(1):hover ~ .lime { background: linear-gradient(90deg, #CEFF2D 0%, #CEFF2D 90%, transparent 100%); }
 nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 90%, transparent 100%); }
@@ -199,9 +195,7 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
 /* ==================== SLIDER ==================== */
 .slider {
   width: 59vh;
-  width: 59dvh;
   height: 73vh;
-  height: 73dvh;
   margin: 0.75% 0 0 0;
   overflow: hidden;
   position: relative;
@@ -236,7 +230,7 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
 
 @keyframes gentleZoom {
   0%,100% { transform: scale(1); }
-  50% { transform: scale(1.04); }
+  50%     { transform: scale(1.04); }
 }
 
 .carousel-dots {
@@ -365,7 +359,7 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
 
 #info-toggle,
 #info-toggle .plus {
-  color: #3C3C3C !important;
+  color: #3C3C3C !important; 
 }
 
 /* Extra seguro para iOS */
@@ -375,7 +369,6 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
 #info-toggle:focus {
   outline: none;
 }
-
 /* ==================== CUSTOM ARROW CURSOR ==================== */
 .custom-arrow-cursor {
   position: fixed;
@@ -422,15 +415,9 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
   }
   .slider {
     width: 96%;
-    width: 96vw;
-    height: 66dvh;
-    height: calc(var(--vh, 1vh) * 66);
+    height: 66vh;
   }
   .info-container {
     bottom: 5%;  
-  }  
-  /* Soften snapping for mobile address bar */
-  html {
-    scroll-snap-type: y proximity;
-  }
+}  
 }

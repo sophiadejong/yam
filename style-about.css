@@ -1,176 +1,146 @@
 #nav-about {
-    background: linear-gradient(90deg,  rgba(255, 255, 255, 0.70) 0%, rgba(255, 255, 255, 0.70) 33%, rgba(206, 255, 45, 1) 36%, rgba(206, 255, 45, 1) 63%, rgba(255, 255, 255, 0.70) 66%);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.70) 0%, rgba(255, 255, 255, 0.70) 33%, rgba(206, 255, 45, 1) 36%, rgba(206, 255, 45, 1) 63%, rgba(255, 255, 255, 0.70) 66%);
 }
 
 hr {
-    margin: 0% 2% 1% 2%;
-    border: none;          /* remove default border */
-    border-top: 1px solid #838383; /* add a simple line */
-    height: 1px;            /* ensure thin line */       /* spacing above and below */
-    box-shadow: none;       /* remove any shadow */
-    background: none; 
-}
-
-#about-section {
-    font-family: "SuisseIntl";
-    position: relative;       /* make it the reference for absolute children */
-    width: 100%;
-    min-height: 100vh;        /* full viewport height */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: #838383;
-}
-
-#yam-logo {
-    position: absolute;       /* let it sit behind the text */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 82%;
-    max-width: 60%;
-    opacity: 1;             /* fade it so text is readable */
-    z-index: 0;               /* behind the text */
-}
-
-#about-section h1 {
-    position: relative;       /* text above the logo */
-    z-index: 1;
-    max-width: 80%;
-    color: #838383;         /* darker color for readability */
+  margin: 0% 2% 1% 2%;
+  border: none;
+  border-top: 1px solid #838383;
+  height: 1px;
+  background: none;
 }
 
 .div-text {
-    font-size: 0.8rem;
-    color: #838383;
-    margin: 0 2% 0.75%;
+  font-size: 0.8rem;
+  color: #838383;
+  margin: 0 2% 0.75%;
 }
 
-/* ALFONSO YORDI SECTION */
-
-span {
-    font-size: 0.8rem;
-}
-
+/* =========================================================
+   ALFONSO YORDI – PERFECT VERTICAL CENTER (desktop + mobile)
+   ========================================================= */
 #alfonso-yordi {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 6% 0 3% 0;
-    text-align: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;      /* vertical center */
+  align-items: center;           /* horizontal center */
+    padding: 12vh 0 12vh;
+  box-sizing: border-box;
+  text-align: center;
 }
 
 .alfonso-container {
-    color: #838383;
+  color: #838383;
+  /* max-width: 90%; */
 }
 
 .alfonso-photo {
-    width: 45vh;
-    object-fit: cover;
-    margin-bottom: 20px;
+  width: 45vh;
+  max-width: 88vw;
+  height: auto;
+  object-fit: contain;
+  /* margin-bottom: 2.5rem; */
 }
 
 .alfonso-text {
-    color: #838383;;
-    font-size: 1rem;
-    line-height: 1.4;
+  color: #838383;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.alfonso-text-mobile {
+  display: none;
 }
 
 .social-links-alfonso {
   display: flex;
-  gap: 20px;
   justify-content: center;
   align-items: center;
-}
-
-/* Remove all underlines + preserve original color */
-.social-links-alfonso a,
-.social-links-alfonso a:visited,
-.social-links-alfonso a:hover,
-.social-links-alfonso a:active {
-  text-decoration: none;
-  color: inherit;
-}
-
-/* Also ensure spans never get decoration */
-.social-links-alfonso a span {
-  text-decoration: none;
+  gap: 32px;
+  margin: 1.5rem 0;
 }
 
 .social-item-alfonso {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 1rem;
+  font-size: 0.8rem;
+  text-decoration: none;
+  color: inherit;
 }
 
 .social-item-alfonso img {
-    height: 3%;
+  width: auto;
+  height: 22px;
 }
 
-/* SERVICES SECTION */
+/* Remove all link underlines */
+.social-links-alfonso a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* =========================================================
+   SERVICES
+   ========================================================= */
 #services {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    /* padding: 100px 40px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .services-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.75%;
-    width: 100%;
-    max-width: 96%;
-    margin-bottom: 5%;
-    margin-top: 3%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+gap: 12px;
+  width: 100%;
+  max-width: 96%;
+  margin: 4vh auto;
 }
 
 .service {
-    text-align: center;
+  text-align: center;
 }
 
 .service img {
-    width: 100%;
-    object-fit: cover;
-    margin-bottom: 15px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 1rem;
 }
 
 .service h3 {
-    font-family: "SuisseIntl";
-    font-size: 1.5rem;
-    color: #838383;
-    margin-bottom: 14px;
+  font-family: "SuisseIntl";
+  font-size: 1.5rem;
+  color: #838383;
+  margin: 0.8rem 0 0.6rem;
 }
 
 .service p {
-    color: #838383;
-    font-size: 1rem;
-    line-height: 1.4;
-    text-align: left;
-    margin: 0 0 10px 0;
+  color: #838383;
+  font-size: 1rem;
+  line-height: 1.4;
+  text-align: left;
 }
+
+/* =========================================================
+   CLIENTS MARQUEE
+   ========================================================= */
 #clients {
-  display: flex;
-  flex-direction: column;
-  gap: 50px;
-  padding: 30px 0;
+  padding: 8vh 0;
   overflow: hidden;
-  height: 50vh;
-  justify-content: center;
 }
 
 .marquee-single {
   --gap: 130px;
-  --speed: 25s;           /* ←←← this is your current speed, keep it exactly as you had */
+  --speed: 25s;
   position: relative;
   width: 100%;
   overflow: hidden;
   height: 120px;
-  min-height: 180px;           
+  min-height: 180px;
   display: flex;
   align-items: center;
 }
@@ -179,202 +149,171 @@ span {
   display: inline-flex;
   align-items: center;
   gap: var(--gap);
-  padding-right: var(--gap);           /* keeps perfect spacing at the loop */
+  padding-right: var(--gap);
   will-change: transform;
   animation: scroll-left var(--speed) linear infinite reverse;
 }
 
-/* THE ONLY KEYFRAME YOU NEED – mathematically perfect */
 @keyframes scroll-left {
   from { transform: translateX(0%); }
   to   { transform: translateX(-50%); }
 }
 
-/* Duplicate the track for seamless loop */
-.marquee-single::after {
-  content: "";
-  position: absolute;
-  top: 0; left: 100%;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-/* JS will clone the track and append it */
-
-/* LOGOS */
 .track img {
-  /* width: 150px; */
   opacity: 0.8;
   transition: opacity .3s ease;
+  height: 60px;
 }
 
-.track img:hover {
-  opacity: 1;
-}
+.track img:hover { opacity: 1; }
 
-
-/* OUR OFFICE SECTION */
+/* =========================================================
+   OUR OFFICE – PERFECT VERTICAL CENTER
+   ========================================================= */
 #our-office {
-    font-family: "SuisseIntl";
-    color: #838383;
-    display: flex;
-    justify-content: center;   /* center the container horizontally */
-    align-items: center;       /* center the container vertically */
-    height: 100vh;             /* full viewport height */
-    padding: 0 20px;           /* optional horizontal padding */
-    box-sizing: border-box;
-    text-align: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;      /* vertical center */
+  align-items: center;           /* horizontal center */
+      padding: 20vh 0 0;
+  box-sizing: border-box;
+  text-align: center;
+  color: #838383;
 }
 
 .office-container {
-    display: flex;             /* make the content flex */
-    flex-direction: column;    /* stack vertically */
-    justify-content: center;   /* center vertically inside container */
-    align-items: center;       /* center horizontally inside container */
-    text-align: center;
-    margin-top: 7%;
+  max-width: 90%;
 }
 
 .office-photo {
-    width: 45vh;             /* keeps it proportional */
-    /* max-width: 80%; ensures it doesn’t overflow on small screens */
-    object-fit: cover;
-    margin-bottom: 3%;
+  width: 45vh;
+  max-width: 88vw;
+  height: auto;
+  object-fit: contain;
 }
 
 .office-text {
-    color: #838383;
-    font-size: 1rem;
-    line-height: 1.6;
-    max-width: 600px;        /* prevents long lines on large screens */
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 600px;
 }
 
 #yam-footer {
-    margin-left: 1%;
-    color: #838383;
+  color: #838383;
+margin: 0 0 1% 2%;
+  font-size: 1rem !important
 }
 
 /* =========================================================
-   MOBILE VERSION – FINAL (preserves ALL original image ratios)
+   MOBILE STYLES – CLEAN & BULLETPROOF
    ========================================================= */
-
 @media (max-width: 860px) {
 
-  /* General spacing */
-  .separate { margin: 7% 0 4% 0; }
-  .div-text { 
-    font-size: 0.75rem; 
-    margin: 0 5% 1rem; 
+  .separate { margin: 8% 0 4% 0; }
+  .div-text { font-size: 0.75rem; margin: 0 5% 1rem; }
+
+  /* Alfonso & Office – tighter but still perfectly centered */
+  #alfonso-yordi   { padding: 0 }
+  #our-office      { padding: 0 }
+
+.alfonso-photo,
+  .office-photo {
+    width: 88vw;                    /* or 92vw if you want them a bit bigger */
+    /* max-width: 460px; */
+    height: auto;
+    object-fit: contain;
+    display: block;                 /* ← forces centering */
+    margin-left: auto !important;    /* ← kills the right offset */
+    margin-right: auto !important;   /* ← kills the right offset */
+    margin-bottom: 2rem;
   }
 
-  /* ALFONSO YORDI – preserve original photo ratio */
-  #alfonso-yordi { 
-    padding: 14% 6% 10% 6%; 
+  .alfonso-text,
+  .office-text {
+    font-size: 0.96rem;
+    line-height: 1.5;
   }
-  .alfonso-photo {
-    width: 78vw;
-    height: auto !important;        /* ← forces original ratio */
-    aspect-ratio: unset !important;
-    object-fit: contain;            /* ← no cropping, full image visible */
-    background: transparent;
-  }
-  .alfonso-text { 
-    font-size: 0.96rem; 
-    line-height: 1.52;
-    margin-top: 1rem;
-  }
-  .social-links-alfonso {
-    gap: 32px;
-    margin: 2.2rem 0;
-  }
-  .social-item-alfonso img { width: 30px; height: auto; }
-  .social-links-alfonso .divider { height: 24px; }
 
-  /* SERVICES – 2 columns, original images 100% preserved */
+  /* Services – 2 columns, no overflow ever */
   .services-grid {
     grid-template-columns: 1fr 1fr;
     gap: 6vw;
-    max-width: 92%;
-    margin: 10% auto 14%;
-    padding: 0 4%;
-  }
-  .service img {
     width: 100%;
-    height: auto !important;
-    object-fit: contain !important;   /* ← original proportions guaranteed */
-    background: transparent;
-    margin-bottom: 16px;
+    max-width: 100vw;
+    padding: 0 4vw;
+    margin: 10% auto 14%;
+    box-sizing: border-box;
   }
-  .service h3 { font-size: 1.38rem; margin: 0 0 10px 0; }
-  .service p { font-size: 0.93rem; line-height: 1.48; }
 
-  /* CLIENTS marquee */
+  .service h3 { font-size: 1.38rem; }
+  .service p   { font-size: 0.93rem; line-height: 1.48; }
+
+  /* Clients marquee mobile */
   #clients { height: 44vh; }
   .marquee-single {
-    --speed: 48s;
-    height: 120px;
-    min-height: 160px;
+    height: 100px;
+    min-height: 140px;
   }
-  .marquee-single .track img { height: 52px; }
-
-  /* OUR OFFICE – preserve original photo ratio */
-  #our-office {
-    height: auto;
-    min-height: 100vh;
-    padding: 20% 6% 15%;
-  }
-  .office-photo {
-    width: 78vw;
-    max-width: 440px;
-    height: auto !important;        /* ← original ratio */
-    aspect-ratio: unset !important;
-    object-fit: contain !important; /* ← no cropping */
-    background: transparent;
-    margin-bottom: 2.5rem;
-  }
-  .office-text {
-    font-size: 0.98rem;
-    line-height: 1.6;
-    margin-top: 1rem;
-  }
-
-  #yam-footer {
-    margin-left: 5%;
-    font-size: 0.82rem;
-  }
+  .marquee-single .track img { height: 48px; }
 }
 
-/* Tiny phones – just tighter spacing */
 @media (max-width: 480px) {
-  header{
-    padding: 50px 0 0 0;
-  }
-  .services-grid { gap: 12px; padding: 0 6%; }
-  .service h3 { font-size: 1.5rem; text-align: left;}
-  .service p { font-size: 0.9rem; line-height: 1.3;}
-      #alfonso-yordi {
-        padding: 30% 6% 10% 6%;
-    }
-  .alfonso-photo, .office-photo { width: 88vw; margin-bottom: 0}
-      .separate {
-        margin: 0 0 2% 0;
-    }
+  header { padding-top: 50px; }
 
-  .marquee-single {
-    --gap: 70px;
+  .alfonso-photo { width: 90%; max-width: none; }
+  .office-photo { width: 100%; max-width: none; }
+  
+  .alfonso-text-mobile {
+    display: block;
+    color: #838383;
+    font-size: 1rem;
+    line-height: 1.4;
+    padding: 0 5%;
+    text-align: left;
   }
-      .marquee-single .track img {
-        height: 40px;
-    }
-  .alfonso-text, .office-text {         
-        font-size: 0.9rem;
-        line-height: 1.3;
-        margin-top: 1rem;
-        text-align: left;
-  }
-    #clients {
-        height: 15vh;
-    }
 
+  .social-item-alfonso img {
+    width: auto;
+    height: 22px; 
   }
+
+  #alfonso-yordi { padding: 26% 0 0 0; }
+  .alfonso-text { display: none; }
+
+  .social-links-alfonso {
+    margin: 2rem 0 2rem 0;
+  }
+  hr { margin: 0% 5% 1% 5%; }
+
+  #services {
+    padding: 0 5%;
+  }
+
+  .services-grid { gap: 12px; padding: 0; }
+  .service h3 { font-size: 1.4rem; text-align: left; }
+  .service p  { font-size: 0.9rem; line-height: 1.35; }
+
+  .marquee-single .track img { height: 40px; }
+      .marquee-single {
+        --gap: 70px;
+        height: 80px;
+        min-height: 140px;
+    }
+  #clients { height: 15vh; }
+
+  .alfonso-text,
+  .office-text {
+    font-size: 0.9rem;
+    line-height: 1.35;
+  }
+
+  .office-container {
+    padding: 25% 0 0 0;
+  }
+
+  .alfonso-text {
+    text-align: left;
+  }  
+}

@@ -24,9 +24,11 @@ hr {
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  justify-content: center;      /* vertical center */
-  align-items: center;           /* horizontal center */
-    padding: 12vh 0 12vh;
+  justify-content: center;
+  /* vertical center */
+  align-items: center;
+  /* horizontal center */
+  padding: 12vh 0 12vh;
   box-sizing: border-box;
   text-align: center;
 }
@@ -94,7 +96,7 @@ hr {
 .services-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-gap: 12px;
+  gap: 12px;
   width: 100%;
   max-width: 96%;
   margin: 4vh auto;
@@ -155,8 +157,13 @@ gap: 12px;
 }
 
 @keyframes scroll-left {
-  from { transform: translateX(0%); }
-  to   { transform: translateX(-50%); }
+  from {
+    transform: translateX(0%);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 .track img {
@@ -165,7 +172,9 @@ gap: 12px;
   height: 60px;
 }
 
-.track img:hover { opacity: 1; }
+.track img:hover {
+  opacity: 1;
+}
 
 /* =========================================================
    OUR OFFICE – PERFECT VERTICAL CENTER
@@ -175,9 +184,11 @@ gap: 12px;
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  justify-content: center;      /* vertical center */
-  align-items: center;           /* horizontal center */
-      padding: 12vh 0 0;
+  justify-content: center;
+  /* vertical center */
+  align-items: center;
+  /* horizontal center */
+  padding: 12vh 0 0;
   box-sizing: border-box;
   text-align: center;
   color: #838383;
@@ -202,7 +213,7 @@ gap: 12px;
 
 #yam-footer {
   color: #838383;
-margin: 0 0 1% 2%;
+  margin: 0 0 1% 2%;
   font-size: 1rem !important
 }
 
@@ -211,22 +222,37 @@ margin: 0 0 1% 2%;
    ========================================================= */
 @media (max-width: 860px) {
 
-  .separate { margin: 8% 0 4% 0; }
-  .div-text { font-size: 0.75rem; margin: 0 5% 1rem; }
+  .separate {
+    margin: 8% 0 4% 0;
+  }
+
+  .div-text {
+    font-size: 0.75rem;
+    margin: 0 5% 1rem;
+  }
 
   /* Alfonso & Office – tighter but still perfectly centered */
-  #alfonso-yordi   { padding: 0 }
-  #our-office      { padding: 0 }
+  #alfonso-yordi {
+    padding: 0
+  }
 
-.alfonso-photo,
+  #our-office {
+    padding: 0
+  }
+
+  .alfonso-photo,
   .office-photo {
-    width: 88vw;                    /* or 92vw if you want them a bit bigger */
+    width: 88vw;
+    /* or 92vw if you want them a bit bigger */
     /* max-width: 460px; */
     height: auto;
     object-fit: contain;
-    display: block;                 /* ← forces centering */
-    margin-left: auto !important;    /* ← kills the right offset */
-    margin-right: auto !important;   /* ← kills the right offset */
+    display: block;
+    /* ← forces centering */
+    margin-left: auto !important;
+    /* ← kills the right offset */
+    margin-right: auto !important;
+    /* ← kills the right offset */
     margin-bottom: 2rem;
   }
 
@@ -247,24 +273,45 @@ margin: 0 0 1% 2%;
     box-sizing: border-box;
   }
 
-  .service h3 { font-size: 1.38rem; }
-  .service p   { font-size: 0.93rem; line-height: 1.48; }
+  .service h3 {
+    font-size: 1.38rem;
+  }
+
+  .service p {
+    font-size: 0.93rem;
+    line-height: 1.48;
+  }
 
   /* Clients marquee mobile */
-  #clients { height: 44vh; }
+  #clients {
+    height: 44vh;
+  }
+
   .marquee-single {
     height: 100px;
     min-height: 140px;
   }
-  .marquee-single .track img { height: 48px; }
+
+  .marquee-single .track img {
+    height: 48px;
+  }
 }
 
 @media (max-width: 480px) {
-  header { padding-top: 50px; }
+  header {
+    padding-top: 50px;
+  }
 
-  .alfonso-photo { width: 90%; max-width: none; }
-  .office-photo { width: 100%; max-width: none; }
-  
+  .alfonso-photo {
+    width: 90%;
+    max-width: none;
+  }
+
+  .office-photo {
+    width: 100%;
+    max-width: none;
+  }
+
   .alfonso-text-mobile {
     display: block;
     color: #838383;
@@ -276,32 +323,57 @@ margin: 0 0 1% 2%;
 
   .social-item-alfonso img {
     width: auto;
-    height: 22px; 
+    height: 22px;
   }
 
-  #alfonso-yordi { padding: 26% 0 0 0; }
-  .alfonso-text { display: none; }
+  #alfonso-yordi {
+    padding: 26% 0 0 0;
+  }
+
+  .alfonso-text {
+    display: none;
+  }
 
   .social-links-alfonso {
     margin: 2rem 0 2rem 0;
   }
-  hr { margin: 0% 5% 1% 5%; }
+
+  hr {
+    margin: 0% 5% 1% 5%;
+  }
 
   #services {
     padding: 0 5%;
   }
 
-  .services-grid { gap: 12px; padding: 0; }
-  .service h3 { font-size: 1.4rem; text-align: left; }
-  .service p  { font-size: 0.9rem; line-height: 1.35; }
+  .services-grid {
+    gap: 12px;
+    padding: 0;
+  }
 
-  .marquee-single .track img { height: 40px; }
-      .marquee-single {
-        --gap: 70px;
-        height: 80px;
-        min-height: 140px;
-    }
-  #clients { height: 15vh; }
+  .service h3 {
+    font-size: 1.4rem;
+    text-align: left;
+  }
+
+  .service p {
+    font-size: 0.9rem;
+    line-height: 1.35;
+  }
+
+  .marquee-single .track img {
+    height: 40px;
+  }
+
+  .marquee-single {
+    --gap: 70px;
+    height: 80px;
+    min-height: 140px;
+  }
+
+  #clients {
+    height: 15vh;
+  }
 
   .alfonso-text,
   .office-text {
@@ -315,5 +387,5 @@ margin: 0 0 1% 2%;
 
   .alfonso-text {
     text-align: left;
-  }  
+  }
 }

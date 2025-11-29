@@ -265,7 +265,6 @@ hr {
   /* Services – 2 columns, no overflow ever */
   .services-grid {
     grid-template-columns: 1fr 1fr;
-    gap: 6vw;
     width: 100%;
     max-width: 100vw;
     padding: 0 4vw;
@@ -347,7 +346,7 @@ hr {
   }
 
   .services-grid {
-    gap: 12px;
+    gap: 10px;
     padding: 0;
   }
 

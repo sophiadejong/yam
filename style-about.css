@@ -177,7 +177,7 @@ gap: 12px;
   flex-direction: column;
   justify-content: center;      /* vertical center */
   align-items: center;           /* horizontal center */
-      padding: 20vh 0 0;
+      padding: 12vh 0 0;
   box-sizing: border-box;
   text-align: center;
   color: #838383;

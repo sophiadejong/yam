@@ -237,7 +237,7 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
 /* ==================== SLIDER ==================== */
 .slider {
   aspect-ratio: 4 / 5;
-  width: 60vmin;
+  width: 59vmin;
   height: auto;
   margin: 0.75% 0 0 0;
   overflow: hidden;

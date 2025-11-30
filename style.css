@@ -445,11 +445,24 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
 .page-content.fade-out { opacity: 0 !important; }
 
 /* ==================== NO-SCROLL LOCK CLASS ==================== */
+/* Prevent body from scrolling */
 .no-scroll {
   overflow: hidden !important;
-  height: 100svh !important;
-  position: relative !important;
+  height: 100svh;
 }
+
+/* Prevent wrapper from moving */
+#page-wrapper.freeze {
+  overflow: hidden !important;
+  pointer-events: none;
+}
+
+/* Prevent wrapper from moving */
+#page-wrapper.freeze {
+  overflow: hidden !important;
+  pointer-events: none;
+}
+
 
 /* ==================== RESPONSIVE ==================== */
 @media (max-width: 860px) { }

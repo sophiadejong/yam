@@ -276,6 +276,17 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
   50%     { transform: scale(1.04); }
 }
 
+/* --- FADE ANIMATION FOR DOTS --- */
+.carousel-dots .dot {
+  opacity: 0.4;
+  transition: opacity 0.6s ease; /* match your slide fade duration */
+}
+
+.carousel-dots .dot.active {
+  opacity: 1;
+}
+
+
 .carousel-dots {
   display: flex;
   justify-content: center;

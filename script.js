@@ -181,9 +181,23 @@ document.addEventListener("DOMContentLoaded", () => {
       updateSlide();
     }
 
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+      updateSlide();
+    }
+
+    /* ---------- CLICK LEFT/RIGHT TO CHANGE SLIDE ---------- */
     project.addEventListener("click", (e) => {
       if (e.target.closest(".carousel-dots") || project.classList.contains("show-info")) return;
-      nextSlide();
+
+      const rect = slider.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+
+      if (x <= rect.width / 2) {
+        prevSlide();
+      } else {
+        nextSlide();
+      }
     });
 
     slider.addEventListener("mouseenter", (e) => {

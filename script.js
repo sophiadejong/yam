@@ -198,7 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.documentElement.style.scrollSnapType = "none";
       } else {
         document.body.style.overflow = "";
-        document.documentElement.style.scrollSnapType = "";
+        document.documentElement.style.scrollSnapType = "y mandatory";
         currentProject.classList.add("closing-info");
         setTimeout(() => currentProject.classList.remove("closing-info"), 620);
       }

@@ -1,6 +1,4 @@
-/* ==================== DYNAMIC VIEWPORT HEIGHT ==================== */
-:root { --actual-vh: 100dvh; }
-
+/* ==================== FONTS ==================== */
 @font-face {
   font-family: "SuisseIntl";
   src: url("fonts/SuisseIntl-Regular.otf") format("opentype");
@@ -12,7 +10,10 @@
   font-weight: 600;
 }
 
-.page-content { opacity: 0; }
+/* Prevent flash on load */
+.page-content {
+  opacity: 0;
+}
 
 /* ==================== CORE SCROLL SYSTEM ==================== */
 html {
@@ -20,44 +21,52 @@ html {
   scroll-behavior: smooth;
   overflow-y: scroll;
   background-color: #E0E0E0;
-  margin: 0; padding: 0;
+  margin: 0;
+  padding: 0;
   scroll-padding-top: 0;
-  height: var(--actual-vh, 100dvh);
-  height: -webkit-fill-available;
+  height: 100dvh;                    /* ← FIX 1 */
+  height: -webkit-fill-available;    /* ← FIX 1 (iOS Safari) */
 }
 
 body {
   font-family: "SuisseIntl", sans-serif;
-  min-height: var(--actual-vh, 100dvh);
+  min-height: 100dvh;                /* ← FIX 1 */
   background-color: #E0E0E0;
-  margin: 0; padding: 0;
-  overflow-y: visible;
+  margin: 0;
+  padding: 0;
+  overflow-y: visible; /* MUST stay visible for scroll-snap to work */
 }
 
 /* ==================== SECTION SNAPPING ==================== */
-#home, .project {
-  height: var(--actual-vh, 100dvh);
-  min-height: var(--actual-vh, 100dvh);
-  flex-shrink: 0;
+#home,
+.project {
+  height: 100dvh;                    /* ← FIX 1 (was 100vh) */
+  min-height: 100dvh;
 }
 
+/* Home snaps to TOP */
 #home {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+  scroll-snap-type: none !important;
   padding-top: 2%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  scroll-behavior: smooth;
+  contain: layout style;
+  will-change: transform;
 }
 
+/* Projects snap to PERFECT CENTER */
 .project {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   scroll-snap-align: center;
-  scroll-snap-stop: always;
+  scroll-snap-stop: always;  
   transform: scale(0.6);
   opacity: 0.5;
   filter: blur(30px);
@@ -85,20 +94,25 @@ body {
   transition: opacity 0.1s linear;
 }
 
-/* ==================== HEADER & NAV ==================== */
+/* ==================== NAVIGATION — 100% YOUR ORIGINAL DESIGN ==================== */
 header {
   position: fixed;
   width: 100%;
   z-index: 1000;
   padding: 1.75% 0 0 0;
-  padding-top: max(1.75%, env(safe-area-inset-top, 1.75%));
+  padding-top: max(1.75%, env(safe-area-inset-top, 1.75%));  /* ← FIX 2 (invisible on desktop) */
   text-align: center;
+  scroll-snap-type: none !important;
 }
 
-.header-div { display: flex; justify-content: center; align-items: center; }
+.header-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-#yam { padding: 5px 10px 5px 7px; }
-#about { padding: 5px 10px; }
+#yam     { padding: 5px 10px 5px 7px; }
+#about   { padding: 5px 10px; }
 #contact { padding: 5px 7px 5px 10px; }
 
 nav {
@@ -122,12 +136,26 @@ nav a {
   transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-nav.home a#yam,
-nav.about a#about,
-nav.contact a#contact { opacity: 1 !important; }
+/* Versión PRO: el link de la página actual SIEMPRE está al 100% */
+nav.home    a#yam,
+nav.about   a#about,
+nav.contact a#contact {
+  opacity: 1 !important;
+}
 
+nav.home    a#yam:hover,
+nav.about   a#about:hover,
+nav.contact a#contact:hover {
+  opacity: 1 !important;
+}
+
+nav.home    a:nth-child(1),
+nav.about   a:nth-child(2),
+nav.contact a:nth-child(3),
 nav a.sticky-hover,
-nav a:hover { opacity: 1 !important; }
+nav a:hover {
+  opacity: 1 !important;
+}
 
 nav.instant a { transition: none !important; }
 nav.instant .lime { transition: none !important; }
@@ -138,19 +166,20 @@ nav .lime {
   width: 33.333333%;
   height: 100%;
   pointer-events: none;
+  opacity: 1 !important;
   transition: transform 0.65s cubic-bezier(0.22,1,0.36,1);
 }
 
 /* ACTIVE PAGE GRADIENTS */
-nav.home .lime { background: linear-gradient(90deg, #CEFF2D 0%, #CEFF2D 90%, transparent 100%); }
-nav.about .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 90%, transparent 100%); }
+nav.home    .lime { background: linear-gradient(90deg, #CEFF2D 0%, #CEFF2D 90%, transparent 100%); }
+nav.about   .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 90%, transparent 100%); }
 nav.contact .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 100%); }
 
 /* HOVER PREVIEW LOGIC */
-nav.home a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 90%, transparent 100%); }
-nav.home a:nth-child(3):hover ~ .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 100%); }
-nav.about a:nth-child(1):hover ~ .lime { background: linear-gradient(90deg, #CEFF2D 0%, #CEFF2D 90%, transparent 100%); }
-nav.about a:nth-child(3):hover ~ .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 100%); }
+nav.home    a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 90%, transparent 100%); }
+nav.home    a:nth-child(3):hover ~ .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 100%); }
+nav.about   a:nth-child(1):hover ~ .lime { background: linear-gradient(90deg, #CEFF2D 0%, #CEFF2D 90%, transparent 100%); }
+nav.about   a:nth-child(3):hover ~ .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 100%); }
 nav.contact a:nth-child(1):hover ~ .lime { background: linear-gradient(90deg, #CEFF2D 0%, #CEFF2D 90%, transparent 100%); }
 nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 90%, transparent 100%); }
 
@@ -172,17 +201,28 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
   object-fit: cover;
   opacity: 0;
   filter: blur(4px);
-  transition: opacity 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.4s ease-out, filter 0.4s ease;
+  transition:
+    opacity 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+    transform 0.4s ease-out,
+    filter 0.4s ease;
+  pointer-events: auto;
 }
 
 .slide.active {
   opacity: 1;
   transform: scale(1);
   filter: blur(0);
+  pointer-events: all;
 }
 
-.project.in-view .slide.active { animation: gentleZoom 12s infinite ease-in-out; }
-@keyframes gentleZoom { 0%,100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+.project.in-view .slide.active {
+  animation: gentleZoom 12s infinite ease-in-out;
+}
+
+@keyframes gentleZoom {
+  0%,100% { transform: scale(1); }
+  50%     { transform: scale(1.04); }
+}
 
 .carousel-dots {
   display: flex;
@@ -203,7 +243,7 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
 
 .dot.active { opacity: 1; }
 
-/* ==================== PROJECT INFO ==================== */
+/* ==================== PROJECT INFO OVERLAY ==================== */
 .project-info {
   position: absolute;
   inset: 0;
@@ -225,7 +265,7 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
 .project.closing-info .project-info { opacity: 0; transition: opacity .6s ease; }
 .project.closing-info .slider { filter: blur(0); transition: filter .6s ease; }
 
-/* ==================== INFO BUTTON ==================== */
+/* ==================== INFO ICON ==================== */
 .info-container {
   position: fixed;
   bottom: 3%;
@@ -240,7 +280,10 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
   z-index: 1000;
 }
 
-.info-container.visible { opacity: 1; pointer-events: all; }
+.info-container.visible {
+  opacity: 1;
+  pointer-events: all;
+}
 
 .info-name {
   position: relative;
@@ -264,9 +307,16 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
   z-index: 1;
 }
 
-.info-text { position: relative; z-index: 2; color: #3C3C3C; transition: color .3s ease; }
+.info-text {
+  position: relative;
+  z-index: 2;
+  color: #3C3C3C;
+  transition: color .3s ease;
+}
+
 .info-name.hovered .info-fill,
 .info-name.open .info-fill { left: 0; }
+
 .info-name.hovered .info-text,
 .info-name.open .info-text { color: #000; }
 
@@ -294,10 +344,19 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
 
 #info-toggle.hide-mode .plus { transform: rotate(45deg); }
 #info-toggle:hover .plus { transform: scale(1.4); }
-#info-toggle.hide-mode:hover .plus { transform: rotate(45deg) scale(1.4); }
-#info-toggle, #info-toggle .plus { color: #3C3C3C !important; }
+#info-toggle.hide-mode:hover .plus {
+  transform: rotate(45deg) scale(1.4);
+}
 
-/* ==================== CUSTOM CURSOR ==================== */
+#info-toggle,
+#info-toggle .plus {
+  color: #3C3C3C !important; 
+}
+
+#info-toggle::-moz-focus-inner { border: 0; }
+#info-toggle:focus { outline: none; }
+
+/* ==================== CUSTOM ARROW CURSOR ==================== */
 .custom-arrow-cursor {
   position: fixed;
   pointer-events: none;
@@ -309,20 +368,43 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
   z-index: 9999;
 }
 
-.custom-arrow-cursor .cursor-arrow { width: 100%; height: 100%; object-fit: contain; }
-.custom-arrow-cursor.left .cursor-arrow { transform: scaleX(-1); }
+.custom-arrow-cursor .cursor-arrow {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 
-.slider, .custom-arrow-cursor { cursor: none !important; }
+.custom-arrow-cursor.left .cursor-arrow { transform: scaleX(-1); }
+.custom-arrow-cursor.right .cursor-arrow { transform: scaleX(1); }
+
+.slider,
+.custom-arrow-cursor {
+  cursor: none !important;
+}
 
 /* ==================== PAGE FADE ==================== */
-.page-content { transition: opacity 2s ease !important; }
+.page-content {
+  transition: opacity 2s ease !important;
+}
+
 .page-content.fade-in.show { opacity: 1 !important; }
 .page-content.fade-out { opacity: 0 !important; }
 
-/* ==================== MOBILE ==================== */
+@media (max-width: 860px) {
+}
+
 @media (max-width: 480px) {
-  header { padding: 50px 0 0 0; }
-  .custom-arrow-cursor { display: none; }
-  .slider { width: 96%; height: 66dvh; }
-  .info-container { bottom: 5%; }
+  header{
+    padding: 50px 0 0 0;
+  }
+  .custom-arrow-cursor {
+    display: none;
+  }
+  .slider {
+    width: 96%;
+    height: 66dvh;        /* ← FIX 3 */
+  }
+  .info-container {
+    bottom: 5%;  
+  }  
 }

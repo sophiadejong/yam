@@ -39,35 +39,35 @@ body {
 }
 
 /* ==================== SECTION SNAPPING ==================== */
+#home,
+.project {
+  height: 100dvh;
+  min-height: 100dvh;
+}
 
 /* Home snaps to TOP */
 #home {
-  height: 100dvh;
-  min-height: 100dvh;
+  scroll-snap-type: none !important;
   padding-top: 2%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  scroll-snap-align: start;  /* ← stays start */
+  scroll-snap-align: start;
   scroll-snap-stop: always;
   scroll-behavior: smooth;
-  contain: layout style;                    /* enables GPU acceleration */
+  contain: layout style;
   will-change: transform;
 }
 
 /* Projects snap to PERFECT CENTER */
 .project {
-  height: 100dvh;
-  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  scroll-snap-align: center; /* ← CENTER SNAP FIX */
+  scroll-snap-align: center;
   scroll-snap-stop: always;  
-
   transform: scale(0.6);
   opacity: 0.5;
   filter: blur(30px);
@@ -82,7 +82,7 @@ body {
 }
 
 #home-text {
-  position: fixed;      /* stays centered on screen */
+  position: fixed;
   top: 52.5%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -91,30 +91,26 @@ body {
   font-size: 1rem;
   line-height: 1.4;
   color: #838383;
-  opacity: 1;           /* initial opacity */
-  transition: opacity 0.1s linear; /* smooth fade */
+  opacity: 1;
+  transition: opacity 0.1s linear;
 }
 
-/* ==================== NAVIGATION — FIXED ON MOBILE ==================== */
+/* Hide the fixed home text when info panel is open */
+.info-open ~ #home-text,
+body.info-open #home-text {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+/* ==================== NAVIGATION — FIXED ON MOBILE (2025 BEST PRACTICE) ==================== */
 header {
   position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
   z-index: 1000;
+  padding: 1.75% 0 0 0;
+  padding-top: max(1.75%, env(safe-area-inset-top, 1.75%));  /* ← FIX 2 (invisible on desktop) */
   text-align: center;
-  contain: layout style paint;                    /* Prevents jump + improves perf */
-  
-  /* THIS IS THE KEY FIX — works on every modern mobile browser */
-  padding-top: max(24px, env(safe-area-inset-top));
-  
-  /* Legacy iOS fallback (safe to keep) */
-  padding-top: max(24px, constant(safe-area-inset-top));
-  
-  /* Force hardware acceleration to avoid jitter */
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
-  backface-visibility: hidden;
+  scroll-snap-type: none !important;
 }
 
 .header-div {
@@ -123,17 +119,9 @@ header {
   align-items: center;
 }
 
-#yam {
-  padding: 5px 10px 5px 7px;
-}
-
-#about {
-  padding: 5px 10px;
-}
-
-#contact {
-  padding: 5px 7px 5px 10px;
-}
+#yam     { padding: 5px 10px 5px 7px; }
+#about   { padding: 5px 10px; }
+#contact { padding: 5px 7px 5px 10px; }
 
 nav {
   display: flex;
@@ -156,14 +144,13 @@ nav a {
   transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Versión PRO: el link de la página actual SIEMPRE está al 100% sin depender de sticky-hover */
+/* Active page always 100% opacity */
 nav.home    a#yam,
 nav.about   a#about,
 nav.contact a#contact {
   opacity: 1 !important;
 }
 
-/* Bonus: quita el hover de opacidad en los links activos (opcional pero queda más limpio) */
 nav.home    a#yam:hover,
 nav.about   a#about:hover,
 nav.contact a#contact:hover {
@@ -199,17 +186,16 @@ nav.contact .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 1
 /* HOVER PREVIEW LOGIC */
 nav.home    a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 90%, transparent 100%); }
 nav.home    a:nth-child(3):hover ~ .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 100%); }
-
 nav.about   a:nth-child(1):hover ~ .lime { background: linear-gradient(90deg, #CEFF2D 0%, #CEFF2D 90%, transparent 100%); }
 nav.about   a:nth-child(3):hover ~ .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 100%); }
-
 nav.contact a:nth-child(1):hover ~ .lime { background: linear-gradient(90deg, #CEFF2D 0%, #CEFF2D 90%, transparent 100%); }
 nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 90%, transparent 100%); }
 
 /* ==================== SLIDER ==================== */
 .slider {
-  width: 59vh;
-  height: 73vh;
+  aspect-ratio: 4 / 5;     /* or 3 / 4, or 1 / 1 */
+  width: 60vmin;
+  height: auto;
   margin: 0.75% 0 0 0;
   overflow: hidden;
   position: relative;
@@ -376,13 +362,9 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
   color: #3C3C3C !important; 
 }
 
-/* Extra seguro para iOS */
-#info-toggle::-moz-focus-inner {
-  border: 0;
-}
-#info-toggle:focus {
-  outline: none;
-}
+#info-toggle::-moz-focus-inner { border: 0; }
+#info-toggle:focus { outline: none; }
+
 /* ==================== CUSTOM ARROW CURSOR ==================== */
 .custom-arrow-cursor {
   position: fixed;
@@ -417,11 +399,21 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
 .page-content.fade-in.show { opacity: 1 !important; }
 .page-content.fade-out { opacity: 0 !important; }
 
+/* ==================== RESPONSIVE ==================== */
 @media (max-width: 860px) {
 }
 
 @media (max-width: 480px) {
-  header {
-    padding-top: max(24px, env(safe-area-inset-top)) !important; /* Extra insurance on small screens */
+  header{
+    padding: 50px 0 0 0;
   }
+  .custom-arrow-cursor {
+    display: none;
+  }
+  .slider {
+  width: 90vmin;
+  }
+  .info-container {
+    bottom: 5%;  
+  }  
 }

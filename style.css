@@ -120,7 +120,6 @@ body {
   top: 52.5%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1;
   text-align: center;
   font-size: 1rem;
   line-height: 1.4;
@@ -128,6 +127,7 @@ body {
   opacity: 1;
   transition: opacity 0.1s linear;
   pointer-events: none;
+    z-index: 0;  
 }
 
 

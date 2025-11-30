@@ -1,54 +1,54 @@
 /* =========================================================
-   DYNAMIC VH FIX + MOBILE RE-SNAP ON RESIZE
+   ULTIMATE MOBILE VIEWPORT FIX – NO MORE JUMPS (2025)
    ========================================================= */
-(function () {
-  function setVH() {
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
-  }
-
-  // Set on load and resize (address bar show/hide)
-  window.addEventListener('load', setVH);
-  window.addEventListener('resize', setVH);
-  setVH();
+(() => {
+  const updateVH = () => {
+    const vh = window.innerHeight;
+    document.documentElement.style.setProperty('--actual-vh', `${vh}px`);
+  };
+  updateVH();
+  window.addEventListener('resize', updateVH);
+  window.addEventListener('orientationchange', () => setTimeout(updateVH, 120));
 })();
 
-/* Optional: re-snap to current project when viewport resizes (fixes jumpy mobile snapping) */
-let resizeTimeout;
+/* Legacy --vh fallback */
+(function () {
+  const setVH = () => {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  };
+  setVH();
+  window.addEventListener('resize', setVH);
+})();
+
+/* Re-snap current project after resize (prevents jump) */
+let resizeTimer;
 window.addEventListener('resize', () => {
-  clearTimeout(resizeTimeout);
-  resizeTimeout = setTimeout(() => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
     const current = document.querySelector('.project.in-view');
-    if (current) {
-      current.scrollIntoView({ behavior: 'auto', block: 'center', inline: 'center' });
-    }
-  }, 150);
+    if (current) current.scrollIntoView({ behavior: 'auto', block: 'center' });
+  }, 180);
 });
 
 /* =========================================================
-   PAGE FADE IN / OUT — SINGLE, BULLETPROOF SYSTEM
+   PAGE FADE IN / OUT
    ========================================================= */
 document.addEventListener("click", (e) => {
   const link = e.target.closest("nav a");
   if (!link) return;
-
   e.preventDefault();
   const href = link.getAttribute("href");
   const content = document.querySelector(".page-content");
   if (!content || content.classList.contains("fade-out")) return;
-
   content.classList.add("fade-out");
   content.classList.remove("show");
-
-  setTimeout(() => {
-    window.location.href = href;
-  }, 1000);
+  setTimeout(() => window.location.href = href, 1000);
 });
 
 window.addEventListener("load", () => {
   const content = document.querySelector(".page-content");
   if (!content) return;
-
   setTimeout(() => {
     window.scrollTo(0, 0);
     content.classList.add("fade-in", "show");
@@ -56,7 +56,7 @@ window.addEventListener("load", () => {
 });
 
 /* =========================================================
-   NAV STATE + LIME BAR — FINAL FIXED VERSION
+   NAV STATE + LIME BAR
    ========================================================= */
 document.addEventListener("DOMContentLoaded", () => {
   const nav = document.querySelector("nav");
@@ -82,7 +82,6 @@ document.addEventListener("DOMContentLoaded", () => {
       link.classList.add("sticky-hover");
       lime.style.transform = `translateX(${i * 100}%)`;
     });
-
     link.addEventListener("click", () => {
       if (i === currentIndex) return;
       sessionStorage.setItem("navTarget", states[i]);
@@ -111,7 +110,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const infoName = document.getElementById("info-name");
   const infoText = infoName?.querySelector(".info-text");
   const infoContainer = document.querySelector(".info-container");
-
   let currentProject = null;
 
   /* ---------- CUSTOM CURSOR ---------- */
@@ -119,24 +117,18 @@ document.addEventListener("DOMContentLoaded", () => {
   cursor.className = "custom-arrow-cursor";
   cursor.innerHTML = `<img src="right-arrow.png" alt="arrow" class="cursor-arrow">`;
   document.body.appendChild(cursor);
-
-  const updateCursorPos = (e) => {
-    cursor.style.left = e.clientX + "px";
-    cursor.style.top = e.clientY + "px";
-  };
+  const updateCursorPos = e => { cursor.style.left = e.clientX + "px"; cursor.style.top = e.clientY + "px"; };
   const showCursor = () => cursor.style.opacity = "1";
   const hideCursor = () => cursor.style.opacity = "0";
 
   /* ---------- OBSERVER ---------- */
-  const projectObserver = new IntersectionObserver((entries) => {
+  const projectObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       const el = entry.target;
       if (entry.intersectionRatio >= 0.55) {
         currentProject = el;
         el.classList.add("in-view");
-        if (!infoContainer.classList.contains("visible")) {
-          infoContainer.classList.add("visible");
-        }
+        if (!infoContainer.classList.contains("visible")) infoContainer.classList.add("visible");
         switch (el.id) {
           case "project1": infoText.textContent = "Animario"; break;
           case "project2": infoText.textContent = "Higher"; break;
@@ -145,60 +137,42 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         el.classList.remove("in-view");
         if (currentProject === el) currentProject = null;
-        if (!projects.some(p => p.classList.contains("in-view"))) {
-          infoContainer.classList.remove("visible");
-        }
+        if (!projects.some(p => p.classList.contains("in-view"))) infoContainer.classList.remove("visible");
       }
     });
   }, { threshold: [0, 0.25, 0.5, 0.55, 0.75, 1] });
-
   projects.forEach(p => projectObserver.observe(p));
 
   /* ---------- SLIDER ---------- */
   projects.forEach(project => {
     const slider = project.querySelector(".slider");
     if (!slider) return;
-
     const slides = Array.from(slider.querySelectorAll(".slide"));
     let currentIndex = 0;
 
     const dotsContainer = document.createElement("div");
     dotsContainer.className = "carousel-dots";
-
     slides.forEach((_, i) => {
       const dot = document.createElement("span");
       dot.className = "dot" + (i === 0 ? " active" : "");
-      dot.addEventListener("click", (e) => {
-        e.stopPropagation();
-        currentIndex = i;
-        updateSlide();
-      });
+      dot.addEventListener("click", e => { e.stopPropagation(); currentIndex = i; updateSlide(); });
       dotsContainer.appendChild(dot);
     });
     slider.after(dotsContainer);
 
-    function updateSlide() {
+    const updateSlide = () => {
       slides.forEach((s, idx) => s.classList.toggle("active", idx === currentIndex));
       dotsContainer.querySelectorAll(".dot").forEach((d, idx) => d.classList.toggle("active", idx === currentIndex));
-    }
+    };
+    const nextSlide = () => { currentIndex = (currentIndex + 1) % slides.length; updateSlide(); };
 
-    function nextSlide() {
-      currentIndex = (currentIndex + 1) % slides.length;
-      updateSlide();
-    }
-
-    project.addEventListener("click", (e) => {
+    project.addEventListener("click", e => {
       if (e.target.closest(".carousel-dots") || project.classList.contains("show-info")) return;
       nextSlide();
     });
 
-    slider.addEventListener("mouseenter", (e) => {
-      if (project.classList.contains("show-info")) return;
-      updateCursorPos(e);
-      showCursor();
-    });
-
-    slider.addEventListener("mousemove", (e) => {
+    slider.addEventListener("mouseenter", e => { if (!project.classList.contains("show-info")) { updateCursorPos(e); showCursor(); } });
+    slider.addEventListener("mousemove", e => {
       if (project.classList.contains("show-info")) { hideCursor(); return; }
       updateCursorPos(e);
       const rect = slider.getBoundingClientRect();
@@ -206,12 +180,11 @@ document.addEventListener("DOMContentLoaded", () => {
       cursor.classList.toggle("left", x <= rect.width / 2);
       cursor.classList.toggle("right", x > rect.width / 2);
     });
-
     slider.addEventListener("mouseleave", hideCursor);
     updateSlide();
   });
 
-  /* ---------- INFO TOGGLE ---------- */
+  /* ---------- INFO TOGGLE – FIXED FOR MOBILE ---------- */
   if (infoToggle && infoName && infoText) {
     infoToggle.addEventListener("click", () => {
       if (!currentProject) return;
@@ -219,33 +192,36 @@ document.addEventListener("DOMContentLoaded", () => {
       infoToggle.classList.toggle("hide-mode", open);
       infoName.classList.toggle("open", open);
       infoContainer.classList.toggle("info-open", open);
-      document.body.style.overflowY = open ? "hidden" : "scroll";
-      hideCursor();
-      if (!open) {
+
+      if (open) {
+        document.body.style.overflow = "hidden";
+        document.documentElement.style.scrollSnapType = "none";
+      } else {
+        document.body.style.overflow = "";
+        document.documentElement.style.scrollSnapType = "";
         currentProject.classList.add("closing-info");
         setTimeout(() => currentProject.classList.remove("closing-info"), 620);
       }
+      hideCursor();
     });
 
     infoToggle.addEventListener("mouseenter", () => infoName.classList.add("hovered"));
- infoToggle.addEventListener("mouseleave", () => infoName.classList.remove("hovered"));
+    infoToggle.addEventListener("mouseleave", () => infoName.classList.remove("hovered"));
   }
 
-  /* ---------- HOME TEXT SCROLL FADE ---------- */
+  /* ---------- HOME TEXT FADE ---------- */
   const homeText = document.getElementById("home-text");
   if (homeText) {
     const fadeHeight = window.innerHeight * 0.3;
     window.addEventListener("scroll", () => {
-      const scrollY = window.scrollY;
-      let opacity = 1 - scrollY / fadeHeight;
-      opacity = Math.max(0, Math.min(1, opacity));
+      const opacity = Math.max(0, Math.min(1, 1 - window.scrollY / fadeHeight));
       homeText.style.opacity = opacity;
     });
   }
 });
 
 /* =========================================================
-   MAXIMUM CHAOS EXPLOSION — DISAPPEARS AT 15% INTO PROJECTS
+   OVAL EXPLOSION CHAOS
    ========================================================= */
 document.addEventListener("DOMContentLoaded", () => {
   const oval = document.querySelector(".oval-container");
@@ -254,28 +230,22 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!oval || !home || !projectsSection) return;
 
   const imgs = oval.querySelectorAll("img");
-
   imgs.forEach(img => {
     const orig = getComputedStyle(img).transform;
     img.dataset.base = orig === "none" ? "translate(-50%, 0%)" : orig;
-
     const angle = Math.random() * Math.PI * 2;
     const force = 180 + Math.random() * 300;
     img.dataset.x = Math.cos(angle) * force;
     img.dataset.y = Math.sin(angle) * force;
     img.dataset.speed = 0.5 + Math.random() * 2.4;
-    img.dataset.scale = Math.random() < 0.3 
-      ? 5 + Math.random() * 10 
-      : 0.2 + Math.random() * 2;
+    img.dataset.scale = Math.random() < 0.3 ? 5 + Math.random() * 10 : 0.2 + Math.random() * 2;
   });
 
   const tick = () => {
     const homeRect = home.getBoundingClientRect();
     const projectsRect = projectsSection.getBoundingClientRect();
-
     const scrolledFromHome = Math.max(0, -homeRect.top);
     const explosionProgress = Math.min(scrolledFromHome / (innerHeight * 0.6), 1);
-
     const scrolledIntoProjects = Math.max(0, window.innerHeight - projectsRect.top);
     const percentIntoProjects = scrolledIntoProjects / (projectsRect.height + window.innerHeight);
     const isPast15PercentIntoProjects = percentIntoProjects >= 0.15;
@@ -291,24 +261,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const y = parseFloat(img.dataset.y);
         const speed = parseFloat(img.dataset.speed);
         const scale = parseFloat(img.dataset.scale);
-
         let p = explosionProgress * speed / 2;
         p = Math.min(p, 1);
-
-        const ease = p < 0.5 
-          ? 4 * p * p * p 
-          : 1 - Math.pow(-2 * p + 2, 3) / 2;
-
-        img.style.transform = `
-          ${base}
-          translate(${x * ease}vw, ${y * ease}vh)
-          scale(${1 + (scale - 1) * ease})
-        `;
+        const ease = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+        img.style.transform = `${base} translate(${x * ease}vw, ${y * ease}vh) scale(${1 + (scale - 1) * ease})`;
       });
     }
-
     requestAnimationFrame(tick);
   };
-
   requestAnimationFrame(tick);
 });

@@ -13,113 +13,119 @@
   <header>
 
     <script>
-  // Kill the browser's scroll restoration (the #1 cause of "jump on navigation")
-  if ('scrollRestoration' in history) {
-    history.scrollRestoration = 'manual';
-  }
-</script>
+      // Kill the browser's scroll restoration (the #1 cause of "jump on navigation")
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+    </script>
 
     <div class="header-div">
       <nav>
-<a id="yam"         href="index.html">YAM</a>
-  <a id="about"       href="about.html">About</a>
-  <a id="contact"     href="contact.html">Contact</a>
+        <a id="yam" href="index.html">YAM</a>
+        <a id="about" href="about.html">About</a>
+        <a id="contact" href="contact.html">Contact</a>
 
-  <!-- the moving lime highlight -->
-  <div class="lime"></div>
+        <!-- the moving lime highlight -->
+        <div class="lime"></div>
       </nav>
     </div>
   </header>
 
-  <main class="page-content">
-                <h2 id="home-text">
+
+  <!-- WRAPPER ADDED SO HEADER NEVER FREEZES -->
+  <div id="page-wrapper">
+
+    <main class="page-content">
+      <h2 id="home-text">
         YAM works across the disciplines of design, <br>
         art direction and typography for clients<br> 
         in culture and commerce.
       </h2>
-    <section id="home">
 
-      <div class="oval-container">
+      <section id="home">
+        <div class="oval-container">
+          <img src="images/home/1.png" alt="1">
+          <img src="images/home/2.png" alt="2">
+          <img src="images/home/3.png" alt="3">
+          <img src="images/home/4.png" alt="4">
+          <img src="images/home/5.png" alt="5">
+          <img src="images/home/6.png" alt="6">
+          <img src="images/home/7.png" alt="7">
+          <img src="images/home/8.png" alt="8">
+          <img src="images/home/9.png" alt="9">
+          <img src="images/home/10.png" alt="10">
+          <img src="images/home/11.png" alt="11">
+          <img src="images/home/12.png" alt="12">
+          <img src="images/home/13.png" alt="13">
+          <img src="images/home/14.png" alt="14">
+          <img src="images/home/15.png" alt="15">
+          <img src="images/home/16.png" alt="16">
+        </div>
+      </section>
 
-        <img src="images/home/1.png" alt="1">
-        <img src="images/home/2.png" alt="2">
-        <img src="images/home/3.png" alt="3">
-        <img src="images/home/4.png" alt="4">
-        <img src="images/home/5.png" alt="5">
-        <img src="images/home/6.png" alt="6">
-        <img src="images/home/7.png" alt="7">
-        <img src="images/home/8.png" alt="8">
-        <img src="images/home/9.png" alt="9">
-        <img src="images/home/10.png" alt="10">
-        <img src="images/home/11.png" alt="11">
-        <img src="images/home/12.png" alt="12">
-        <img src="images/home/13.png" alt="13">
-        <img src="images/home/14.png" alt="14">
-        <img src="images/home/15.png" alt="15">
-        <img src="images/home/16.png" alt="16">
-      </div>
+      <section id="projects">
+        <div class="projects-wrapper">
 
-    </section>
-
-    <section id="projects">
-<div class="projects-wrapper">
-      <!-- PROJECT 1 -->
-      <div class="project" id="project1">
-        <div class="slider">
-          <div class="slider-inner">
-            <img src="projects/animario/animario.png" alt="" class="slide active">
-            <img src="projects/higher/higher.png" alt="" class="slide">
-            <!-- add more images here if you want -->
+          <!-- PROJECT 1 -->
+          <div class="project" id="project1">
+            <div class="slider">
+              <div class="slider-inner">
+                <img src="projects/animario/animario.png" alt="" class="slide active">
+                <img src="projects/higher/higher.png" alt="" class="slide">
+              </div>
+            </div>
+            <div class="project-info">
+              <p>
+                Animario is Madrid’s international contemporary animation film festival, with Poland as the guest country for its 2024 edition.<br><br>
+                This year’s identity draws on wycinanki—the 19th-century Polish art of paper cutting used to depict daily life and decorate homes.<br><br>
+                Credits:<br>
+                Alfonso Yordi<br>
+                Victor Clemente<br>
+                Jaime del Corro<br>
+                Matteo Guarnaccia
+              </p>
+            </div>
           </div>
-        </div>
-        <div class="project-info">
-          <p>
-            Animario is Madrid’s international contemporary animation film festival, with Poland as the guest country for its 2024 edition.<br><br>
-            This year’s identity draws on wycinanki—the 19th-century Polish art of paper cutting used to depict daily life and decorate homes.<br><br>
-            Credits:<br>
-            Alfonso Yordi<br>
-            Victor Clemente<br>
-            Jaime del Corro<br>
-            Matteo Guarnaccia
-          </p>
-        </div>
-      </div>
 
-      <!-- PROJECT 2 -->
-      <div class="project" id="project2">
-        <div class="slider">
-          <div class="slider-inner">
-            <img src="projects/animario/animario.png" alt="" class="slide active">
-            <img src="projects/higher/higher.png" alt="" class="slide">
+          <!-- PROJECT 2 -->
+          <div class="project" id="project2">
+            <div class="slider">
+              <div class="slider-inner">
+                <img src="projects/animario/animario.png" alt="" class="slide active">
+                <img src="projects/higher/higher.png" alt="" class="slide">
+              </div>
+            </div>
+            <div class="project-info">
+              <p>Branding and visual identity for a modern tech startup focused on innovation.</p>
+            </div>
           </div>
-        </div>
-        <div class="project-info">
-          <p>Branding and visual identity for a modern tech startup focused on innovation.</p>
-        </div>
-      </div>
 
-      <!-- PROJECT 3 -->
-      <div class="project" id="project3">
-        <div class="slider">
-          <div class="slider-inner">
-            <img src="projects/animario/animario.png" alt="" class="slide active">
-            <img src="projects/higher/higher.png" alt="" class="slide">
+          <!-- PROJECT 3 -->
+          <div class="project" id="project3">
+            <div class="slider">
+              <div class="slider-inner">
+                <img src="projects/animario/animario.png" alt="" class="slide active">
+                <img src="projects/higher/higher.png" alt="" class="slide">
+              </div>
+            </div>
+            <div class="project-info">
+              <p>
+                Animario is Madrid’s international contemporary animation film festival.<br><br>
+                Credits:<br>
+                Alfonso Yordi<br>
+                Victor Clemente<br>
+                Jaime del Corro<br>
+                Matteo Guarnaccia
+              </p>
+            </div>
           </div>
+
         </div>
-        <div class="project-info">
-          <p>
-            Animario is Madrid’s international contemporary animation film festival.<br><br>
-            Credits:<br>
-            Alfonso Yordi<br>
-            Victor Clemente<br>
-            Jaime del Corro<br>
-            Matteo Guarnaccia
-          </p>
-        </div>
-      </div>
-</div>
-    </section>
-  </main>
+      </section>
+
+    </main>
+
+  </div><!-- END WRAPPER -->
 
   <!-- Fixed project name + toggle -->
   <div class="info-container">

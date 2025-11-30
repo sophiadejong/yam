@@ -7,13 +7,12 @@
     document.documentElement.style.setProperty('--vh', `${vh}px`);
   }
 
-  // Set on load and resize (address bar show/hide)
   window.addEventListener('load', setVH);
   window.addEventListener('resize', setVH);
   setVH();
 })();
 
-/* Optional: re-snap to current project when viewport resizes (fixes jumpy mobile snapping) */
+/* Optional: re-snap to current project when viewport resizes */
 let resizeTimeout;
 window.addEventListener('resize', () => {
   clearTimeout(resizeTimeout);
@@ -26,7 +25,7 @@ window.addEventListener('resize', () => {
 });
 
 /* =========================================================
-   PAGE FADE IN / OUT — SINGLE, BULLETPROOF SYSTEM
+   PAGE FADE IN / OUT
    ========================================================= */
 document.addEventListener("click", (e) => {
   const link = e.target.closest("nav a");
@@ -35,6 +34,7 @@ document.addEventListener("click", (e) => {
   e.preventDefault();
   const href = link.getAttribute("href");
   const content = document.querySelector(".page-content");
+
   if (!content || content.classList.contains("fade-out")) return;
 
   content.classList.add("fade-out");
@@ -56,7 +56,7 @@ window.addEventListener("load", () => {
 });
 
 /* =========================================================
-   NAV STATE + LIME BAR — FINAL FIXED VERSION
+   NAV STATE + LIME BAR
    ========================================================= */
 document.addEventListener("DOMContentLoaded", () => {
   const nav = document.querySelector("nav");
@@ -211,51 +211,48 @@ document.addEventListener("DOMContentLoaded", () => {
     updateSlide();
   });
 
-  /* ---------- INFO TOGGLE ---------- */
- /* ---------- INFO TOGGLE — FINAL BULLETPROOF VERSION ---------- */
-if (infoToggle && infoName && infoText) {
+  /* =========================================================
+     INFO TOGGLE — FIXED VERSION (FREEZES ONLY WRAPPER)
+     ========================================================= */
+  const wrapper = document.getElementById("page-wrapper");
   let lockedScrollY = 0;
 
-  infoToggle.addEventListener("click", () => {
-    if (!currentProject) return;
+  if (infoToggle && infoName && infoText) {
+    infoToggle.addEventListener("click", () => {
+      if (!currentProject) return;
 
-    const open = currentProject.classList.toggle("show-info");
-    infoToggle.classList.toggle("hide-mode", open);
-    infoName.classList.toggle("open", open);
-    infoContainer.classList.toggle("info-open", open);
-    
-    // Add/remove a class on body so CSS can hide #home-text
-    document.body.classList.toggle("info-open", open);
+      const open = currentProject.classList.toggle("show-info");
+      infoToggle.classList.toggle("hide-mode", open);
+      infoName.classList.toggle("open", open);
+      infoContainer.classList.toggle("info-open", open);
 
-    if (open) {
-      lockedScrollY = window.scrollY;
-      document.documentElement.style.overflow = "hidden";
-      document.body.style.overflow = "hidden";
-      document.body.style.position = "fixed";
-      document.body.style.top = `-${lockedScrollY}px`;
-      document.body.style.width = "100%";
-    } else {
-      document.documentElement.style.overflow = "";
-      document.body.style.overflow = "";
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.width = "";
+      document.body.classList.toggle("info-open", open);
 
-      window.scrollTo({
-        top: lockedScrollY,
-        behavior: "instant"
-      });
+      if (open) {
+        lockedScrollY = window.scrollY;
 
-      currentProject.classList.add("closing-info");
-      setTimeout(() => currentProject.classList.remove("closing-info"), 620);
-    }
+        wrapper.style.position = "fixed";
+        wrapper.style.top = `-${lockedScrollY}px`;
+        wrapper.style.left = "0";
+        wrapper.style.right = "0";
+      } else {
+        wrapper.style.position = "";
+        wrapper.style.top = "";
+        wrapper.style.left = "";
+        wrapper.style.right = "";
 
-    hideCursor();
-  });
+        window.scrollTo({ top: lockedScrollY, behavior: "instant" });
 
-  infoToggle.addEventListener("mouseenter", () => infoName.classList.add("hovered"));
-  infoToggle.addEventListener("mouseleave", () => infoName.classList.remove("hovered"));
-}
+        currentProject.classList.add("closing-info");
+        setTimeout(() => currentProject.classList.remove("closing-info"), 620);
+      }
+
+      hideCursor();
+    });
+
+    infoToggle.addEventListener("mouseenter", () => infoName.classList.add("hovered"));
+    infoToggle.addEventListener("mouseleave", () => infoName.classList.remove("hovered"));
+  }
 
   /* ---------- HOME TEXT SCROLL FADE ---------- */
   const homeText = document.getElementById("home-text");
@@ -271,7 +268,7 @@ if (infoToggle && infoName && infoText) {
 });
 
 /* =========================================================
-   MAXIMUM CHAOS EXPLOSION — DISAPPEARS AT 15% INTO PROJECTS
+   OVAL CHAOS ANIMATION
    ========================================================= */
 document.addEventListener("DOMContentLoaded", () => {
   const oval = document.querySelector(".oval-container");

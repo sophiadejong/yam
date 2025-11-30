@@ -24,13 +24,14 @@ html {
   margin: 0;
   padding: 0;
   scroll-padding-top: 0;
-  height: 100dvh;                    /* ← FIX 1 */
-  height: -webkit-fill-available;    /* ← FIX 1 (iOS Safari) */
+  height: 100dvh;                    /* Mobile-safe full height */
+  height: -webkit-fill-available;    /* iOS Safari fix */
 }
 
 body {
   font-family: "SuisseIntl", sans-serif;
-  min-height: 100dvh;                /* ← FIX 1 */
+  min-height: 100dvh;
+  min-height: -webkit-fill-available;
   background-color: #E0E0E0;
   margin: 0;
   padding: 0;
@@ -40,7 +41,7 @@ body {
 /* ==================== SECTION SNAPPING ==================== */
 #home,
 .project {
-  height: 100dvh;                    /* ← FIX 1 (was 100vh) */
+  height: 100dvh;
   min-height: 100dvh;
 }
 
@@ -94,15 +95,26 @@ body {
   transition: opacity 0.1s linear;
 }
 
-/* ==================== NAVIGATION — 100% YOUR ORIGINAL DESIGN ==================== */
+/* ==================== NAVIGATION — FIXED ON MOBILE (2025 BEST PRACTICE) ==================== */
 header {
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   z-index: 1000;
-  padding: 1.75% 0 0 0;
-  padding-top: max(1.75%, env(safe-area-inset-top, 1.75%));  /* ← FIX 2 (invisible on desktop) */
   text-align: center;
-  scroll-snap-type: none !important;
+  contain: layout style paint;                    /* Prevents jump + improves perf */
+  
+  /* THIS IS THE KEY FIX — works on every modern mobile browser */
+  padding-top: max(24px, env(safe-area-inset-top));
+  
+  /* Legacy iOS fallback (safe to keep) */
+  padding-top: max(24px, constant(safe-area-inset-top));
+  
+  /* Force hardware acceleration to avoid jitter */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .header-div {
@@ -136,7 +148,7 @@ nav a {
   transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Versión PRO: el link de la página actual SIEMPRE está al 100% */
+/* Active page always 100% opacity */
 nav.home    a#yam,
 nav.about   a#about,
 nav.contact a#contact {
@@ -390,12 +402,13 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
 .page-content.fade-in.show { opacity: 1 !important; }
 .page-content.fade-out { opacity: 0 !important; }
 
+/* ==================== RESPONSIVE ==================== */
 @media (max-width: 860px) {
 }
 
 @media (max-width: 480px) {
   header{
-    padding: 50px 0 0 0;
+    padding-top: max(24px, env(safe-area-inset-top)) !important; /* Extra insurance on small screens */
   }
   .custom-arrow-cursor {
     display: none;

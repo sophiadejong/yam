@@ -1,7 +1,7 @@
 .oval-container {
   position: relative;
   width: 87%;              /* 100% - (17% left + 17% right) = 66% */
-  height: 65vh;            /* fills 80% of viewport height */
+  height: 64vh;            /* fills 80% of viewport height */
   /* margin: 0 17%;           */
   display: flex;
   justify-content: center;

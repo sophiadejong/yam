@@ -1,63 +1,57 @@
 .oval-container {
   position: relative;
   width: 87%;              /* 100% - (17% left + 17% right) = 66% */
-  height: 93vh;            /* fills 80% of viewport height */
+  height: 65vh;            /* fills 80% of viewport height */
   /* margin: 0 17%;           */
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: visible;
-  margin-top: 1.5%;
   perspective: 2000px;
   transform-style: preserve-3d;
   scroll-snap-type: none !important;
 }
 
-/* --- Image styling --- */
+
 .oval-container img {
   position: absolute;
   width: 12%;
-  /* filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15)); */
-  /* small overlap */
-  margin-top: -0.8%;
-  scroll-snap-type: none !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Stable base transform */
+  transition: none !important;
+  --count: 16; 
+  will-change: transform, opacity, filter;
 }
 
-/* Lift & scale on hover */
-.oval-container img:hover {
-  transform: scale(1.05);
-  z-index: 10;
-}
 
-/* --- Distribute images equally along the oval path --- */
 .oval-container img {
-  /* Use CSS variables for easy control */
-  --count: 16; /* total number of images */
+  position: absolute;
+  width: 12%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Stable base transform */
+  transition: none !important;
 }
 
-.oval-container img:nth-child(n) {
-  /* i goes from 0 to (count - 1) */
-  top: calc(50% - (40% * sin((360deg / var(--count)) * (var(--i, 0)))));
-  left: calc(50% + (40% * cos((360deg / var(--count)) * (var(--i, 0)))));
-}
+/* With your exact z-index values + scroll-snap-type */
+.oval-container img:nth-child(1)  { left: 50%; top: 5%;  z-index: 16; scroll-snap-type: none !important; }
+.oval-container img:nth-child(2)  { left: 61%; top: 10%; z-index: 15; scroll-snap-type: none !important; }
+.oval-container img:nth-child(3)  { left: 71%; top: 16%; z-index: 14; scroll-snap-type: none !important; }
+.oval-container img:nth-child(4)  { left: 81%; top: 28%; z-index: 13; scroll-snap-type: none !important; }
+.oval-container img:nth-child(5)  { left: 88%; top: 50%; z-index: 12; scroll-snap-type: none !important; }
+.oval-container img:nth-child(6)  { left: 81%; top: 72%; z-index: 11; scroll-snap-type: none !important; }
+.oval-container img:nth-child(7)  { left: 71%; top: 84%; z-index: 10; scroll-snap-type: none !important; }
+.oval-container img:nth-child(8)  { left: 61%; top: 90%; z-index: 9;  scroll-snap-type: none !important; }
+.oval-container img:nth-child(9)  { left: 50%; top: 95%; z-index: 8;  scroll-snap-type: none !important; }
+.oval-container img:nth-child(10) { left: 39%; top: 90%; z-index: 7;  scroll-snap-type: none !important; }
+.oval-container img:nth-child(11) { left: 29%; top: 84%; z-index: 6;  scroll-snap-type: none !important; }
+.oval-container img:nth-child(12) { left: 19%; top: 72%; z-index: 5;  scroll-snap-type: none !important; }
+.oval-container img:nth-child(13) { left: 12%; top: 50%; z-index: 4;  scroll-snap-type: none !important; }
+.oval-container img:nth-child(14) { left: 19%; top: 28%; z-index: 3;  scroll-snap-type: none !important; }
+.oval-container img:nth-child(15) { left: 29%; top: 16%; z-index: 2;  scroll-snap-type: none !important; }
+.oval-container img:nth-child(16) { left: 39%; top: 10%; z-index: 1;  scroll-snap-type: none !important; }
 
-/* But since CSS can’t loop with math directly, we manually define the positions */
-.oval-container img:nth-child(1)  { left: 50%; top: 5%;  transform: translate(-50%, 0); z-index: 16; scroll-snap-type: none !important;}
-.oval-container img:nth-child(2)  { left: 61%; top: 10%; transform: translate(-50%, 0); z-index: 15; scroll-snap-type: none !important;}
-.oval-container img:nth-child(3)  { left: 71%; top: 16%; transform: translate(-50%, 0); z-index: 14; scroll-snap-type: none !important;}
-.oval-container img:nth-child(4)  { left: 81%; top: 28%; transform: translate(-50%, -25%); z-index: 13; scroll-snap-type: none !important;}
-.oval-container img:nth-child(5)  { left: 88%; top: 50%; transform: translate(-50%, -50%); z-index: 12; scroll-snap-type: none !important;}
-.oval-container img:nth-child(6)  { left: 81%; top: 72%; transform: translate(-50%, -75%); z-index: 11; scroll-snap-type: none !important;}
-.oval-container img:nth-child(7)  { left: 71%; top: 84%; transform: translate(-50%, -100%); z-index: 10; scroll-snap-type: none !important;}
-.oval-container img:nth-child(8)  { left: 61%; top: 90%; transform: translate(-50%, -100%); z-index: 9; scroll-snap-type: none !important;}
-.oval-container img:nth-child(9)  { left: 50%; top: 95%; transform: translate(-50%, -100%); z-index: 8; scroll-snap-type: none !important;}
-.oval-container img:nth-child(10) { left: 39%; top: 90%; transform: translate(-50%, -100%); z-index: 7; scroll-snap-type: none !important;}
-.oval-container img:nth-child(11) { left: 29%; top: 84%; transform: translate(-50%, -100%); z-index: 6; scroll-snap-type: none !important;}
-.oval-container img:nth-child(12) { left: 19%; top: 72%; transform: translate(-50%, -75%); z-index: 5; scroll-snap-type: none !important;}
-.oval-container img:nth-child(13) { left: 12%; top: 50%; transform: translate(-50%, -50%); z-index: 4; scroll-snap-type: none !important;}
-.oval-container img:nth-child(14) { left: 19%; top: 28%; transform: translate(-50%, -25%); z-index: 3; scroll-snap-type: none !important;}
-.oval-container img:nth-child(15) { left: 29%; top: 16%; transform: translate(-50%, 0); z-index: 2; scroll-snap-type: none !important;}
-.oval-container img:nth-child(16) { left: 39%; top: 10%; transform: translate(-50%, 0); z-index: 1; scroll-snap-type: none !important;}
 
 .oval-container.scrolled img {
   opacity: var(--randOpacity);
@@ -70,11 +64,6 @@
 /* =========================================================
    OVAL IMAGES — FLY AWAY ON SCROLL DOWN • RETURN INSTANTLY ON ENTER
    ========================================================= */
-
-.oval-container img {
-  transition: none !important;
-  will-change: transform, opacity, filter;
-}
 
 .oval-container.flying img {
   transition: none !important;

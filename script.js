@@ -291,7 +291,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   imgs.forEach(img => {
     const orig = getComputedStyle(img).transform;
-    img.dataset.base = orig === "none" ? "translate(-50%, 0%)" : orig;
+    img.dataset.base = "translate(-50%, -50%)"; 
 
     const angle = Math.random() * Math.PI * 2;
     const force = 180 + Math.random() * 300;

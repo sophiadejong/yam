@@ -143,14 +143,12 @@ header {
   position: fixed;
   width: 100%;
   z-index: 10000;
-
   /* REQUIRED FIXES FOR MOBILE HEADER SHIFT */
   transform: translateZ(0);
   will-change: transform;
   backface-visibility: hidden;
-
-  padding: 1.75% 0 0 0;
-  padding-top: max(1.75%, env(safe-area-inset-top, 1.75%));
+  padding: 1.9% 0 0 0;
+  padding-top: max(1.9%, env(safe-area-inset-top, 1.9%));
   text-align: center;
   scroll-snap-type: none !important;
 }

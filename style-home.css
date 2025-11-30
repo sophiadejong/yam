@@ -7,7 +7,7 @@
   justify-content: center;
   align-items: center;
   overflow: visible;
-  margin-top: 1%;
+  margin-top: 1.5%;
   perspective: 2000px;
   transform-style: preserve-3d;
   scroll-snap-type: none !important;

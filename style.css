@@ -95,6 +95,13 @@ body {
   transition: opacity 0.1s linear;
 }
 
+/* Hide the fixed home text when info panel is open */
+.info-open ~ #home-text,
+body.info-open #home-text {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
 /* ==================== NAVIGATION — FIXED ON MOBILE (2025 BEST PRACTICE) ==================== */
 header {
   position: fixed;

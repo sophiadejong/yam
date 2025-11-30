@@ -212,24 +212,50 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ---------- INFO TOGGLE ---------- */
-  if (infoToggle && infoName && infoText) {
-    infoToggle.addEventListener("click", () => {
-      if (!currentProject) return;
-      const open = currentProject.classList.toggle("show-info");
-      infoToggle.classList.toggle("hide-mode", open);
-      infoName.classList.toggle("open", open);
-      infoContainer.classList.toggle("info-open", open);
-      document.body.style.overflowY = open ? "hidden" : "scroll";
-      hideCursor();
-      if (!open) {
-        currentProject.classList.add("closing-info");
-        setTimeout(() => currentProject.classList.remove("closing-info"), 620);
-      }
-    });
+ /* ---------- INFO TOGGLE — FINAL BULLETPROOF VERSION ---------- */
+if (infoToggle && infoName && infoText) {
+  let lockedScrollY = 0;
 
-    infoToggle.addEventListener("mouseenter", () => infoName.classList.add("hovered"));
- infoToggle.addEventListener("mouseleave", () => infoName.classList.remove("hovered"));
-  }
+  infoToggle.addEventListener("click", () => {
+    if (!currentProject) return;
+
+    const open = currentProject.classList.toggle("show-info");
+    infoToggle.classList.toggle("hide-mode", open);
+    infoName.classList.toggle("open", open);
+    infoContainer.classList.toggle("info-open", open);
+    
+    // Add/remove a class on body so CSS can hide #home-text
+    document.body.classList.toggle("info-open", open);
+
+    if (open) {
+      lockedScrollY = window.scrollY;
+      document.documentElement.style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${lockedScrollY}px`;
+      document.body.style.width = "100%";
+    } else {
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+
+      window.scrollTo({
+        top: lockedScrollY,
+        behavior: "instant"
+      });
+
+      currentProject.classList.add("closing-info");
+      setTimeout(() => currentProject.classList.remove("closing-info"), 620);
+    }
+
+    hideCursor();
+  });
+
+  infoToggle.addEventListener("mouseenter", () => infoName.classList.add("hovered"));
+  infoToggle.addEventListener("mouseleave", () => infoName.classList.remove("hovered"));
+}
 
   /* ---------- HOME TEXT SCROLL FADE ---------- */
   const homeText = document.getElementById("home-text");

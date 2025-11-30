@@ -212,7 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* =========================================================
-     INFO TOGGLE — FIXED VERSION (FREEZES ONLY WRAPPER)
+     INFO TOGGLE — MOBILE-SAFE SCROLL LOCK (NO HEADER SHIFT)
      ========================================================= */
   const wrapper = document.getElementById("page-wrapper");
   let lockedScrollY = 0;
@@ -231,16 +231,14 @@ document.addEventListener("DOMContentLoaded", () => {
       if (open) {
         lockedScrollY = window.scrollY;
 
-        wrapper.style.position = "fixed";
-        wrapper.style.top = `-${lockedScrollY}px`;
-        wrapper.style.left = "0";
-        wrapper.style.right = "0";
-      } else {
-        wrapper.style.position = "";
-        wrapper.style.top = "";
-        wrapper.style.left = "";
-        wrapper.style.right = "";
+        // SAFE mobile freeze (does NOT move header)
+        document.body.classList.add("no-scroll");
+        wrapper.style.transform = `translateY(-${lockedScrollY}px)`;
 
+      } else {
+        // Restore scrolling
+        document.body.classList.remove("no-scroll");
+        wrapper.style.transform = "";
         window.scrollTo({ top: lockedScrollY, behavior: "instant" });
 
         currentProject.classList.add("closing-info");

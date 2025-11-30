@@ -401,8 +401,8 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
     display: none;
   }
   .slider {
-    width: 96%;
-    height: 66dvh;        /* ← FIX 3 */
+        width: 90%;
+        height: 52dvh;
   }
   .info-container {
     bottom: 5%;  

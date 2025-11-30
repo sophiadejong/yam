@@ -82,7 +82,13 @@
 
 @media (max-width: 480px) {
   .oval-container {
-    width: 151%;
+    width: 145%;
     height: 56vh;
+    margin-top: 0;
+  }
+  #home-text {
+    top: 50%;
+    width: 100%;
+    font-size: 0.9rem;
   }
 }

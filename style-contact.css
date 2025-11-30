@@ -156,5 +156,12 @@
   #h4-text-mobile {
     margin-top: 8%;
   }
-
+  #yam-footer, #yam-footer-contact {
+  text-decoration: none !important;
+}
+#email {
+  text-decoration: none !important;
+  border: none !important;
+  outline: none !important;
+}
 }

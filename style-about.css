@@ -213,7 +213,8 @@ hr {
 
 #yam-footer {
   color: #838383;
-  margin: 0 0 1% 2%;
+  padding: 0 0 1% 1%;
+  bottom: 0;
   font-size: 1rem !important
 }
 
@@ -346,7 +347,7 @@ hr {
   }
 
   .services-grid {
-    gap: 10px;
+    gap: 8px;
     padding: 0;
   }
 
@@ -387,4 +388,10 @@ hr {
   .alfonso-text {
     text-align: left;
   }
+  #yam-footer {
+  color: #838383;
+  padding: 0 0 2% 2%;
+  font-size: 1rem !important;
+  text-decoration: none !important;
+}
 }

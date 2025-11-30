@@ -50,7 +50,6 @@ window.addEventListener("load", () => {
   if (!content) return;
 
   setTimeout(() => {
-    window.scrollTo(0, 0);
     content.classList.add("fade-in", "show");
   }, 60);
 });
@@ -106,6 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
    PROJECTS + SLIDER + INFO SYSTEM
    ========================================================= */
 document.addEventListener("DOMContentLoaded", () => {
+  const wrapper = document.getElementById("page-wrapper");
   const projects = Array.from(document.querySelectorAll(".project"));
   const infoToggle = document.getElementById("info-toggle");
   const infoName = document.getElementById("info-name");
@@ -212,9 +212,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* =========================================================
-     INFO TOGGLE — MOBILE-SAFE SCROLL LOCK (NO HEADER SHIFT)
+     INFO TOGGLE — MOBILE SAFE SCROLL LOCK USING WRAPPER
      ========================================================= */
-  const wrapper = document.getElementById("page-wrapper");
   let lockedScrollY = 0;
 
   if (infoToggle && infoName && infoText) {
@@ -226,20 +225,20 @@ document.addEventListener("DOMContentLoaded", () => {
       infoName.classList.toggle("open", open);
       infoContainer.classList.toggle("info-open", open);
 
-      document.body.classList.toggle("info-open", open);
-
       if (open) {
-        lockedScrollY = window.scrollY;
+        lockedScrollY = wrapper.scrollTop;
 
-        // SAFE mobile freeze (does NOT move header)
+        document.body.classList.add("info-open");
         document.body.classList.add("no-scroll");
+
         wrapper.style.transform = `translateY(-${lockedScrollY}px)`;
 
       } else {
-        // Restore scrolling
+        document.body.classList.remove("info-open");
         document.body.classList.remove("no-scroll");
+
         wrapper.style.transform = "";
-        window.scrollTo({ top: lockedScrollY, behavior: "instant" });
+        wrapper.scrollTo({ top: lockedScrollY, behavior: "instant" });
 
         currentProject.classList.add("closing-info");
         setTimeout(() => currentProject.classList.remove("closing-info"), 620);
@@ -252,12 +251,15 @@ document.addEventListener("DOMContentLoaded", () => {
     infoToggle.addEventListener("mouseleave", () => infoName.classList.remove("hovered"));
   }
 
-  /* ---------- HOME TEXT SCROLL FADE ---------- */
+  /* =========================================================
+     HOME TEXT SCROLL FADE — NOW LISTENS TO WRAPPER SCROLL
+     ========================================================= */
   const homeText = document.getElementById("home-text");
   if (homeText) {
     const fadeHeight = window.innerHeight * 0.3;
-    window.addEventListener("scroll", () => {
-      const scrollY = window.scrollY;
+
+    wrapper.addEventListener("scroll", () => {
+      const scrollY = wrapper.scrollTop;
       let opacity = 1 - scrollY / fadeHeight;
       opacity = Math.max(0, Math.min(1, opacity));
       homeText.style.opacity = opacity;
@@ -272,6 +274,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const oval = document.querySelector(".oval-container");
   const home = document.getElementById("home");
   const projectsSection = document.getElementById("projects");
+  
   if (!oval || !home || !projectsSection) return;
 
   const imgs = oval.querySelectorAll("img");

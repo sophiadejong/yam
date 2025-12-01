@@ -497,8 +497,8 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
   }
 
   #info-toggle {
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -512,6 +512,7 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
   transform-origin: center;
   margin-top: 0;  /* remove -2px adjustment */
 }
+
 
  /* #info-toggle {
     padding: 3px 9px;

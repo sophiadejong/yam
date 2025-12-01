@@ -491,17 +491,35 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
   .info-container {
     bottom: 5%;  
   }
-    #info-toggle {
-    padding: 3px 9px;
-    font-size: 1rem;   /* keep same as text */
-  }
+
   .info-name {
     padding: 7px 20px; /* ensure consistency */
   }
 
-  .plus {
+  #info-toggle {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#info-toggle .plus {
+  display: block;
+  width: 100%;
+  text-align: center;
+  line-height: 1;
+  transform-origin: center;
+  margin-top: 0;  /* remove -2px adjustment */
+}
+
+ /* #info-toggle {
+    padding: 3px 9px;
+    font-size: 1rem;   /* keep same as text */
+  /* } */
+  /* .plus {
     margin-top: -2px;
-  }
+  } */ 
 }
 
 @media (pointer: coarse) {

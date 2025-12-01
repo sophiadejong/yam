@@ -254,9 +254,9 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
   opacity: 0;
   filter: blur(4px);
   transition:
-    opacity 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
-    transform 0.4s ease-out,
-    filter 0.4s ease;
+    opacity 0.2s cubic-bezier(0.25, 0.8, 0.25, 1),
+    transform 0.2s ease-out,
+    filter 0.2s ease;
   pointer-events: auto;
 }
 
@@ -278,7 +278,7 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
 
 /* --- FADE ANIMATION FOR DOTS --- */
 .carousel-dots .dot {
-  opacity: 0.4;
+  opacity: 0.2;
   transition: opacity 0.6s ease; /* match your slide fade duration */
 }
 
@@ -290,13 +290,13 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
 .carousel-dots {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 5px;
   margin-top: 20px;
 }
 
 .dot {
-  width: 7px;
-  height: 7px;
+  width: 5px;
+  height: 5px;
   background: #3C3C3C;
   opacity: .2;
   border-radius: 50%;
@@ -321,6 +321,11 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
   pointer-events: none;
   transition: opacity .6s ease;
   z-index: 5;
+  line-height: 1.4;
+}
+
+.project-info p {
+padding: 0 30%;
 }
 
 .project.show-info .project-info { opacity: 1; pointer-events: all; }
@@ -331,7 +336,7 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
 /* ==================== INFO ICON ==================== */
 .info-container {
   position: fixed;
-  bottom: 3%;
+  bottom: 25px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -501,6 +506,8 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
     padding: 7px 20px; /* ensure consistency */
   }
 
+  .info-text 
+
   #info-toggle {
   width: 30px;
   height: 30px;
@@ -517,7 +524,9 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
   transform-origin: center;
   margin-top: 0;  /* remove -2px adjustment */
 }
-
+.project-info p {
+    padding: 0 10%;
+  }
 
  /* #info-toggle {
     padding: 3px 9px;
@@ -531,5 +540,19 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
 @media (pointer: coarse) {
   .info-name.hovered .info-fill {
     left: -100% !important; /* prevent fill animation on mobile hover */
+  }
+  #info-toggle .plus {
+    /* This transition makes the closing animation buttery smooth */
+    transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+    transform-origin: center;
+  }
+
+  /* Optional: slightly bigger × on mobile for better tap target */
+  #info-toggle.hide-mode .plus {
+    transform: rotate(45deg) scale(1.4);
+  }
+
+  #info-toggle:not(.hide-mode) .plus {
+    transform: rotate(0deg) scale(1);
   }
 }

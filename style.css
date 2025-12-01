@@ -478,6 +478,11 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
 
 
 @media (max-width: 480px) {
+
+  #yam     { padding: 5px 7px 5px 7px; }
+#about   { padding: 5px 10px; }
+#contact { padding: 5px 7px 5px 7px; }
+
   header{
     padding: 50px 0 0 0;
   }

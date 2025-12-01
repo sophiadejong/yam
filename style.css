@@ -491,7 +491,7 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
     bottom: 5%;  
   }
     #info-toggle {
-    padding: 3px 6px;
+    padding: 2px 4px;
     font-size: 1rem;   /* keep same as text */
   }
   .info-name {

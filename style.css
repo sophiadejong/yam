@@ -490,6 +490,13 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
   .info-container {
     bottom: 5%;  
   }
+    #info-toggle {
+    padding: 6px 16px; /* match .info-name */
+    font-size: 1rem;   /* keep same as text */
+  }
+  .info-name {
+    padding: 6px 16px; /* ensure consistency */
+  }
 }
 
 @media (pointer: coarse) {

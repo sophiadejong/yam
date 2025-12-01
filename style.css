@@ -491,11 +491,11 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
     bottom: 5%;  
   }
     #info-toggle {
-    padding: 6px 16px; /* match .info-name */
+    padding: 4px 9px;
     font-size: 1rem;   /* keep same as text */
   }
   .info-name {
-    padding: 6px 16px; /* ensure consistency */
+    padding: 6px 20px; /* ensure consistency */
   }
 }
 

@@ -495,7 +495,7 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
     font-size: 1rem;   /* keep same as text */
   }
   .info-name {
-    padding: 6px 20px; /* ensure consistency */
+    padding: 7px 20px; /* ensure consistency */
   }
 }
 

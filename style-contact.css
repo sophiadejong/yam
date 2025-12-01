@@ -72,13 +72,20 @@
 .social-item {
   display: flex;
   align-items: center;
-  gap: 8px;
   font-size: 0.8rem;
 }
 
 .social-item img {
-    height: 20px; /* or whatever looks right */
-    width: auto;
+    width: 40px; /* or whatever looks right */
+    height: auto;
+}
+
+.arena {
+  gap: 8px;
+}
+
+.instagram .linkedin {
+  gap: 10px;
 }
 
 .divider {

@@ -324,6 +324,20 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
   line-height: 1.4;
 }
 
+.project-info a {
+  color: #3C3C3C;
+  transition: all 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  text-decoration: underline;
+  text-decoration-color: #CEFF2D;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 1px;
+}
+
+.project-info a:hover {
+  color: #CEFF2D;
+  opacity: 0.66;
+}
+
 .project-info p {
 padding: 0 30%;
 }
@@ -357,7 +371,7 @@ padding: 0 30%;
   position: relative;
   overflow: hidden;
   background: #ffffffa6;
-  padding: 6px 16px;
+  padding: 6px 20px;
   border-radius: 2px;
   backdrop-filter: blur(7px);
   font-size: 1rem;

@@ -67,15 +67,22 @@ hr {
 .social-item-alfonso {
   display: flex;
   align-items: center;
-  gap: 8px;
   font-size: 0.8rem;
   text-decoration: none;
   color: inherit;
 }
 
+.arena {
+  gap: 6px;
+}
+
+.instagram.linkedin {
+  gap: 10px;
+}
+
 .social-item-alfonso img {
-  width: auto;
-  height: 20px;
+    width: 40px; /* or whatever looks right */
+    height: auto;
 }
 
 /* Remove all link underlines */
@@ -136,7 +143,7 @@ hr {
 }
 
 .marquee-single {
-  --gap: 130px;
+  --gap: 100px;
   --speed: 25s;
   position: relative;
   width: 100%;
@@ -169,7 +176,7 @@ hr {
 .track img {
   opacity: 0.8;
   transition: opacity .3s ease;
-  height: 60px;
+  height: 140px;
 }
 
 .track img:hover {

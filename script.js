@@ -129,8 +129,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
           switch (el.id) {
             case "project1": infoText.textContent = "Animario"; break;
-            case "project2": infoText.textContent = "Higher"; break;
-            case "project3": infoText.textContent = "Animario"; break;
+            case "project2": infoText.textContent = "At.Par"; break;
+            case "project3": infoText.textContent = "Creaxures"; break;
+            case "project4": infoText.textContent = "Higher"; break;
+            case "project5": infoText.textContent = "Monaileona"; break;
+            case "project6": infoText.textContent = "Musa"; break;
+            case "project7": infoText.textContent = "Smol Studios"; break;
+            case "project8": infoText.textContent = "Split Hazard"; break;            
           }
         } else {
           el.classList.remove("in-view");
@@ -147,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   projects.forEach(p => projectObserver.observe(p));
 
-  /* ---------- SLIDER ---------- */
+  /* ---------- SLIDER (UPDATED FOR IMAGES + VIDEOS) ---------- */
   projects.forEach(project => {
     const slider = project.querySelector(".slider");
     if (!slider) return;
@@ -170,7 +175,21 @@ document.addEventListener("DOMContentLoaded", () => {
     slider.after(dots);
 
     function updateSlide() {
-      slides.forEach((s, idx) => s.classList.toggle("active", idx === currentIndex));
+      slides.forEach((s, idx) => {
+        const isActive = idx === currentIndex;
+        s.classList.toggle("active", isActive);
+
+        if (s.tagName === "VIDEO") {
+          if (isActive) {
+            s.currentTime = 0;
+            s.play();
+          } else {
+            s.pause();
+            s.currentTime = 0;
+          }
+        }
+      });
+
       dots.querySelectorAll(".dot").forEach((d, idx) =>
         d.classList.toggle("active", idx === currentIndex)
       );
@@ -282,61 +301,74 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* =========================================================
-   OVAL CHAOS
+   OVAL CHAOS — 100% RELIABLE HIDE + PERFECT EXPLOSION
    ========================================================= */
 document.addEventListener("DOMContentLoaded", () => {
   const oval = document.querySelector(".oval-container");
   const home = document.getElementById("home");
-  const projectsSection = document.getElementById("projects");
-  if (!oval || !home || !projectsSection) return;
+  const wrapper = document.getElementById("page-wrapper");
+  if (!oval || !home || !wrapper) return;
 
   const imgs = oval.querySelectorAll("img");
 
+  // Pre-calculate scatter values once
   imgs.forEach(img => {
-    img.dataset.base = "translate(-50%, -50%)"; 
+    img.dataset.base = "translate(-50%, -50%)";
 
     const angle = Math.random() * Math.PI * 2;
     const force = 180 + Math.random() * 300;
-
     img.dataset.x = Math.cos(angle) * force;
     img.dataset.y = Math.sin(angle) * force;
-
     img.dataset.speed = 0.5 + Math.random() * 2.4;
-    img.dataset.scale =
-      Math.random() < 0.3 ? 5 + Math.random() * 10 : 0.2 + Math.random() * 2;
+    img.dataset.scale = Math.random() < 0.3 ? 5 + Math.random() * 10 : 0.2 + Math.random() * 2;
   });
 
   const tick = () => {
-    const homeRect = home.getBoundingClientRect();
-    const projectsRect = projectsSection.getBoundingClientRect();
+    const scrollY = wrapper.scrollTop;
+    const homeHeight = home.offsetHeight;
+    const triggerHideAt = homeHeight - window.innerHeight * 0.3; // start hiding early
 
-    const p = Math.min(Math.max(0, -homeRect.top) / (innerHeight * 0.6), 1);
+    // 0 = at top of home, 1 = fully past home section
+    const progress = Math.max(0, Math.min(1, (scrollY - homeHeight + window.innerHeight) / (window.innerHeight * 0.8)));
 
-    const intoProjects = Math.max(0, window.innerHeight - projectsRect.top);
-    const pct = intoProjects / (projectsRect.height + window.innerHeight);
+    // Hide ovals completely once we’re clearly into the projects
+    const shouldHide = scrollY > triggerHideAt;
+    oval.style.opacity = shouldHide ? "0" : "1";
+    oval.style.pointerEvents = shouldHide ? "none" : "auto";
 
-    oval.style.opacity = pct >= 0.15 ? "0" : "1";
-    oval.style.pointerEvents = pct >= 0.15 ? "none" : "auto";
+    // Explosion animation (only runs while still visible)
+    if (!shouldHide && progress > 0.001) {
+      imgs.forEach(img => {
+        const x = parseFloat(img.dataset.x);
+        const y = parseFloat(img.dataset.y);
+        const speed = parseFloat(img.dataset.speed);
+        const scale = parseFloat(img.dataset.scale);
 
-    imgs.forEach(img => {
-      const base = img.dataset.base;
-      const x = parseFloat(img.dataset.x);
-      const y = parseFloat(img.dataset.y);
-      const speed = parseFloat(img.dataset.speed);
-      const scale = parseFloat(img.dataset.scale);
+        let t = Math.min(progress * speed * 0.6, 1);
+        const ease = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
-      let t = Math.min(p * speed * 0.5, 1);
-      const ease = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-
-      img.style.transform = `
-        ${base}
-        translate(${x * ease}vw, ${y * ease}vh)
-        scale(${1 + (scale - 1) * ease})
-      `;
-    });
+        img.style.transform = `
+          ${img.dataset.base}
+          translate(${x * ease}vw, ${y * ease}vh)
+          scale(${1 + (scale - 1) * ease})
+        `;
+      });
+    } else if (!shouldHide) {
+      // Reset to center when at top
+      imgs.forEach(img => {
+        img.style.transform = img.dataset.base;
+      });
+    }
 
     requestAnimationFrame(tick);
   };
+
+  // Force correct state on direct load / back navigation
+  if (wrapper.scrollTop === 0) {
+    oval.style.opacity = "1";
+    oval.style.pointerEvents = "auto";
+    imgs.forEach(img => img.style.transform = img.dataset.base);
+  }
 
   requestAnimationFrame(tick);
 });

@@ -259,7 +259,7 @@ hr {
 
   .alfonso-text,
   .office-text {
-    font-size: 0.96rem;
+    font-size: 0.8rem;
     line-height: 1.5;
   }
 
@@ -327,7 +327,7 @@ hr {
   }
 
   #alfonso-yordi {
-    padding: 26% 0 0 0;
+    padding: 28% 0 0 0;
   }
 
   .alfonso-text {
@@ -336,6 +336,7 @@ hr {
 
   .social-links-alfonso {
     margin: 2rem 0 2rem 0;
+    display: none;
   }
 
   hr {
@@ -360,6 +361,10 @@ hr {
     font-size: 0.9rem;
     line-height: 1.35;
   }
+
+  .service img {
+    margin-bottom: 0;
+}
 
   .marquee-single .track img {
     height: 40px;

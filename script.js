@@ -186,7 +186,6 @@ document.addEventListener("DOMContentLoaded", () => {
       updateSlide();
     }
 
-    /* ---------- CLICK LEFT/RIGHT TO CHANGE SLIDE ---------- */
     project.addEventListener("click", (e) => {
       if (e.target.closest(".carousel-dots") || project.classList.contains("show-info")) return;
 
@@ -221,11 +220,13 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* =========================================================
-     INFO TOGGLE — SAFE FREEZE (NO TRANSFORMS)
+     INFO TOGGLE — MOBILE FIXED
      ========================================================= */
   let lockedScrollY = 0;
 
   if (infoToggle && infoName && infoText) {
+    const isTouch = matchMedia("(pointer: coarse)").matches;
+
     infoToggle.addEventListener("click", () => {
       if (!currentProject) return;
 
@@ -237,7 +238,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (open) {
         lockedScrollY = wrapper.scrollTop;
-
         document.body.classList.add("no-scroll");
         wrapper.classList.add("freeze");
       } else {
@@ -253,12 +253,15 @@ document.addEventListener("DOMContentLoaded", () => {
       hideCursor();
     });
 
-    infoToggle.addEventListener("mouseenter", () =>
-      infoName.classList.add("hovered")
-    );
-    infoToggle.addEventListener("mouseleave", () =>
-      infoName.classList.remove("hovered")
-    );
+    // Desktop hover animations only
+    if (!isTouch) {
+      infoToggle.addEventListener("mouseenter", () =>
+        infoName.classList.add("hovered")
+      );
+      infoToggle.addEventListener("mouseleave", () =>
+        infoName.classList.remove("hovered")
+      );
+    }
   }
 
   /* =========================================================
@@ -279,7 +282,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* =========================================================
-   OVAL CHAOS (unchanged)
+   OVAL CHAOS
    ========================================================= */
 document.addEventListener("DOMContentLoaded", () => {
   const oval = document.querySelector(".oval-container");
@@ -290,7 +293,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const imgs = oval.querySelectorAll("img");
 
   imgs.forEach(img => {
-    const orig = getComputedStyle(img).transform;
     img.dataset.base = "translate(-50%, -50%)"; 
 
     const angle = Math.random() * Math.PI * 2;

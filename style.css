@@ -491,3 +491,9 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
     bottom: 5%;  
   }
 }
+
+@media (pointer: coarse) {
+  .info-name.hovered .info-fill {
+    left: -100% !important; /* prevent fill animation on mobile hover */
+  }
+}

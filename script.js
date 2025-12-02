@@ -115,15 +115,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const showCursor = () => cursor.style.opacity = "1";
   const hideCursor = () => cursor.style.opacity = "0";
 
-  /* ---------- OBSERVER FOR PROJECT VIEW ---------- */
+  /* ---------- OBSERVER FOR PROJECT VIEW (NOW SYNCHRONIZED WITH OVALS) ---------- */
   const projectObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach(entry => {
         const el = entry.target;
 
-        if (entry.intersectionRatio >= 0.55) {
-          currentProject = el;
+        if (entry.isIntersecting) {
           el.classList.add("in-view");
+          currentProject = el;
 
           infoContainer.classList.add("visible");
 
@@ -135,36 +135,41 @@ document.addEventListener("DOMContentLoaded", () => {
             case "project5": infoText.textContent = "Monaileona"; break;
             case "project6": infoText.textContent = "Musa"; break;
             case "project7": infoText.textContent = "Smol Studios"; break;
-            case "project8": infoText.textContent = "Split Hazard"; break;            
+            case "project8": infoText.textContent = "Split Hazard"; break;
           }
         } else {
           el.classList.remove("in-view");
           if (currentProject === el) currentProject = null;
-
-          if (!projects.some(p => p.classList.contains("in-view"))) {
-            infoContainer.classList.remove("visible");
-          }
         }
       });
+
+      // Update info bar visibility
+      const anyInView = projects.some(p => p.classList.contains("in-view"));
+      infoContainer.classList.toggle("visible", anyInView);
     },
-    { threshold: [0, 0.5, 0.55, 1] }
+    {
+      root: wrapper,
+      rootMargin: "-45% 0px -45% 0px",  // Triggers early — syncs perfectly with oval hide
+      threshold: 0
+    }
   );
 
   projects.forEach(p => projectObserver.observe(p));
 
-  /* ---------- SLIDER (UPDATED FOR IMAGES + VIDEOS) ---------- */
+  /* ---------- SLIDER (IMAGES + VIDEOS) ---------- */
   projects.forEach(project => {
     const slider = project.querySelector(".slider");
     if (!slider) return;
 
     const slides = Array.from(slider.querySelectorAll(".slide"));
-    let currentIndex = 0;
+    let currentIndex = slides.findIndex(s => s.classList.contains("active"));
+    if (currentIndex === -1) currentIndex = 0;
 
     const dots = document.createElement("div");
     dots.className = "carousel-dots";
     slides.forEach((_, i) => {
       const dot = document.createElement("span");
-      dot.className = "dot" + (i === 0 ? " active" : "");
+      dot.className = "dot" + (i === currentIndex ? " active" : "");
       dot.addEventListener("click", (e) => {
         e.stopPropagation();
         currentIndex = i;
@@ -211,11 +216,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const rect = slider.getBoundingClientRect();
       const x = e.clientX - rect.left;
 
-      if (x <= rect.width / 2) {
-        prevSlide();
-      } else {
-        nextSlide();
-      }
+      if (x <= rect.width / 2) prevSlide();
+      else nextSlide();
     });
 
     slider.addEventListener("mouseenter", (e) => {
@@ -238,14 +240,11 @@ document.addEventListener("DOMContentLoaded", () => {
     updateSlide();
   });
 
-  /* =========================================================
-     INFO TOGGLE — MOBILE FIXED
-     ========================================================= */
+  /* ---------- INFO TOGGLE ---------- */
   let lockedScrollY = 0;
+  const isTouch = matchMedia("(pointer: coarse)").matches;
 
   if (infoToggle && infoName && infoText) {
-    const isTouch = matchMedia("(pointer: coarse)").matches;
-
     infoToggle.addEventListener("click", () => {
       if (!currentProject) return;
 
@@ -262,7 +261,6 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         document.body.classList.remove("no-scroll");
         wrapper.classList.remove("freeze");
-
         wrapper.scrollTo({ top: lockedScrollY, behavior: "instant" });
 
         currentProject.classList.add("closing-info");
@@ -272,25 +270,16 @@ document.addEventListener("DOMContentLoaded", () => {
       hideCursor();
     });
 
-    // Desktop hover animations only
     if (!isTouch) {
-      infoToggle.addEventListener("mouseenter", () =>
-        infoName.classList.add("hovered")
-      );
-      infoToggle.addEventListener("mouseleave", () =>
-        infoName.classList.remove("hovered")
-      );
+      infoToggle.addEventListener("mouseenter", () => infoName.classList.add("hovered"));
+      infoToggle.addEventListener("mouseleave", () => infoName.classList.remove("hovered"));
     }
   }
 
-  /* =========================================================
-     HOME TEXT — FADE ON WRAPPER SCROLL
-     ========================================================= */
+  /* ---------- HOME TEXT FADE ---------- */
   const homeText = document.getElementById("home-text");
-
   if (homeText) {
     const fadeHeight = window.innerHeight * 0.3;
-
     wrapper.addEventListener("scroll", () => {
       const y = wrapper.scrollTop;
       let opacity = 1 - y / fadeHeight;
@@ -301,7 +290,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* =========================================================
-   OVAL CHAOS — 100% RELIABLE HIDE + PERFECT EXPLOSION
+   OVAL CHAOS — NOW PERFECTLY SYNCED WITH FIRST PROJECT
    ========================================================= */
 document.addEventListener("DOMContentLoaded", () => {
   const oval = document.querySelector(".oval-container");
@@ -311,7 +300,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const imgs = oval.querySelectorAll("img");
 
-  // Pre-calculate scatter values once
   imgs.forEach(img => {
     img.dataset.base = "translate(-50%, -50%)";
 
@@ -326,17 +314,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const tick = () => {
     const scrollY = wrapper.scrollTop;
     const homeHeight = home.offsetHeight;
-    const triggerHideAt = homeHeight - window.innerHeight * 0.3; // start hiding early
 
-    // 0 = at top of home, 1 = fully past home section
-    const progress = Math.max(0, Math.min(1, (scrollY - homeHeight + window.innerHeight) / (window.innerHeight * 0.8)));
+    // Hide ovals when 60% of home section has been scrolled
+    const triggerHideAt = homeHeight * 0.6;
 
-    // Hide ovals completely once we’re clearly into the projects
     const shouldHide = scrollY > triggerHideAt;
     oval.style.opacity = shouldHide ? "0" : "1";
     oval.style.pointerEvents = shouldHide ? "none" : "auto";
 
-    // Explosion animation (only runs while still visible)
+    const progress = Math.max(0, Math.min(1, (scrollY - homeHeight + window.innerHeight) / (window.innerHeight * 0.8)));
+
     if (!shouldHide && progress > 0.001) {
       imgs.forEach(img => {
         const x = parseFloat(img.dataset.x);
@@ -354,16 +341,12 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
       });
     } else if (!shouldHide) {
-      // Reset to center when at top
-      imgs.forEach(img => {
-        img.style.transform = img.dataset.base;
-      });
+      imgs.forEach(img => img.style.transform = img.dataset.base);
     }
 
     requestAnimationFrame(tick);
   };
 
-  // Force correct state on direct load / back navigation
   if (wrapper.scrollTop === 0) {
     oval.style.opacity = "1";
     oval.style.pointerEvents = "auto";

@@ -15,114 +15,116 @@
 
 <body>
   <script>
-  // Kill the browser's scroll restoration (the #1 cause of "jump on navigation")
-  if ('scrollRestoration' in history) {
-    history.scrollRestoration = 'manual';
-  }
-</script>
+    // Kill the browser's scroll restoration (the #1 cause of "jump on navigation")
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+  </script>
   <header>
     <div class="header-div">
       <nav>
-<a id="yam"         href="index.html">YAM</a>
-  <a id="about"       href="about.html">About</a>
-  <a id="contact"     href="contact.html">Contact</a>
+        <a id="yam" href="index.html">YAM</a>
+        <a id="about" href="about.html">About</a>
+        <a id="contact" href="contact.html">Contact</a>
 
-  <!-- the moving lime highlight -->
-  <div class="lime"></div>
+        <!-- the moving lime highlight -->
+        <div class="lime"></div>
       </nav>
     </div>
   </header>
-<div id="page-wrapper">
-  <main class="page-content">
-    <section id="contact-section">
-      <h4>Say hi!</h4>
-      <!-- Email with data attribute for reliability -->
-      <h1 id="email" data-email="hello@yamstudio.xyz">hello@yamstudio.xyz</h1>
+  <div id="page-wrapper">
+    <main class="page-content">
+      <section id="contact-section">
+        <h4>Say hi!</h4>
+        <!-- Email with data attribute for reliability -->
+        <h1 id="email" data-email="hello@yamstudio.xyz">hello@yamstudio.xyz</h1>
 
-      <!-- Social links -->
-       <div class="social-links">
-            <!-- ARE.NA -->
-            <a href="https://www.are.na/yam-studio/channels" target="_blank" class="social-item arena">
-              <img src="images/Are.na.png" alt="Arena icon">
-              <span>Are.na</span>
-            </a>
+        <!-- Social links -->
+        <div class="social-links">
 
-            <img src="images/line.png" alt="vertical line" class="divider">
+          <!-- INSTAGRAM -->
+          <a href="https://www.instagram.com/yamstudio.xyz/" target="_blank" class="social-item instagram">
+            <img src="images/Insta.png" alt="Instagram icon">
+            <span>Instagram</span>
+          </a>
+          <img src="images/line.png" alt="vertical line" class="divider">
 
-            <!-- INSTAGRAM -->
-            <a href="https://www.instagram.com/yamstudio.xyz/" target="_blank" class="social-item instagram">
-              <img src="images/Insta.png" alt="Instagram icon">
-              <span>Instagram</span>
-            </a>
+          <!-- ARE.NA -->
+          <a href="https://www.are.na/yam-studio/channels" target="_blank" class="social-item arena">
+            <img src="images/Are.na.png" alt="Arena icon">
+            <span>Are.na</span>
+          </a>
 
-            <img src="images/line.png" alt="vertical line" class="divider">
+          <img src="images/line.png" alt="vertical line" class="divider">
 
-            <!-- LINKEDIN -->
-            <a href="https://es.linkedin.com/in/alfonso-yordi-82762a106" target="_blank" class="social-item linkedin">
-              <img src="images/Linkedin.png" alt="Linked In icon">
-              <span>LinkedIn</span>
-            </a>
+          <!-- LINKEDIN -->
+          <a href="https://es.linkedin.com/in/alfonso-yordi-82762a106" target="_blank" class="social-item linkedin">
+            <img src="images/Linkedin.png" alt="Linked In icon">
+            <span>LinkedIn</span>
+          </a>
 
-</div>
+        </div>
 
+        <h4 id="h4-text">We work independently and with studios worldwide, teaming up with<br>a close network of
+          creatives
+          to cover
+          projects of any scale.<br>Always open to new projects and conversations.</h4>
 
-      <h4 id="h4-text">We work independently and with studios worldwide, teaming up with<br>a close network of creatives
-        to cover
-        projects of any scale.<br>Always open to new projects and conversations.</h4>
+        <h4 id="h4-text-mobile">We work independently and with studios worldwide,<br>teaming up with a close network of
+          creatives
+          to<br>cover projects of any scale. Always open to<br>new projects and conversations.</h4>
+      </section>
 
-      <h4 id="h4-text-mobile">We work independently and with studios worldwide,<br>teaming up with a close network of creatives
-        to<br>cover projects of any scale. Always open to<br>new projects and conversations.</h4>
-    </section>
-
-    <footer>
-      <p id="yam-footer-contact">YAM©<span class="faded-year">2025</span></p>
-    </footer>
-  </main>
-</div>
+      <footer>
+        <p id="yam-footer-contact">YAM©<span class="faded-year">2025</span></p>
+      </footer>
+    </main>
+  </div>
   <!-- Email copy script (inline for contact page only) -->
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const emailElement = document.getElementById("email");
-    if (!emailElement) return;
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const emailElement = document.getElementById("email");
+      if (!emailElement) return;
 
-    const originalEmail = emailElement.dataset.email || emailElement.textContent.trim();
-    emailElement.style.cursor = "pointer";
+      const originalEmail = emailElement.dataset.email || emailElement.textContent.trim();
+      emailElement.style.cursor = "pointer";
 
-    emailElement.addEventListener("click", async () => {
-      try {
-        await navigator.clipboard.writeText(originalEmail);
+      emailElement.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(originalEmail);
 
-        // 1. Fade out current text
-        emailElement.classList.add("fade-out");
-
-        // 2. After fade-out → show "Copied!"
-        setTimeout(() => {
-          emailElement.textContent = "Copied!";
-          emailElement.classList.remove("fade-out");
-          emailElement.classList.add("copied");
-          // Trigger reflow to restart animation
-          void emailElement.offsetWidth;
-          emailElement.classList.add("fade-in");
-        }, 300);
-
-        // 3. After 1.5s total → fade out "Copied!"
-        setTimeout(() => {
-          emailElement.classList.remove("fade-in");
+          // 1. Fade out current text
           emailElement.classList.add("fade-out");
 
-          // 4. After fade-out → restore email
+          // 2. After fade-out → show "Copied!"
           setTimeout(() => {
-            emailElement.textContent = originalEmail;
-            emailElement.classList.remove("fade-out", "copied");
+            emailElement.textContent = "Copied!";
+            emailElement.classList.remove("fade-out");
+            emailElement.classList.add("copied");
+            // Trigger reflow to restart animation
             void emailElement.offsetWidth;
             emailElement.classList.add("fade-in");
           }, 300);
-        }, 1500);
 
-      } catch (err) {
-        console.error("Failed to copy email:", err);
-      }
+          // 3. After 1.5s total → fade out "Copied!"
+          setTimeout(() => {
+            emailElement.classList.remove("fade-in");
+            emailElement.classList.add("fade-out");
+
+            // 4. After fade-out → restore email
+            setTimeout(() => {
+              emailElement.textContent = originalEmail;
+              emailElement.classList.remove("fade-out", "copied");
+              void emailElement.offsetWidth;
+              emailElement.classList.add("fade-in");
+            }, 300);
+          }, 1500);
+
+        } catch (err) {
+          console.error("Failed to copy email:", err);
+        }
+      });
     });
-  });
-</script>
+  </script>
+
 </html>

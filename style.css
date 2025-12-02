@@ -267,14 +267,14 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
   pointer-events: all;
 }
 
-.project.in-view .slide.active {
+/* .project.in-view .slide.active {
   animation: gentleZoom 12s infinite ease-in-out;
 }
 
 @keyframes gentleZoom {
   0%,100% { transform: scale(1); }
   50%     { transform: scale(1.04); }
-}
+} */
 
 /* --- FADE ANIMATION FOR DOTS --- */
 .carousel-dots .dot {

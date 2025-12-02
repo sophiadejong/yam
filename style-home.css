@@ -22,18 +22,10 @@
   transform: translate(-50%, -50%); /* Stable base transform */
   transition: none !important;
   --count: 16; 
+  padding-top: 4.5%;
   will-change: transform, opacity, filter;
 }
 
-
-.oval-container img {
-  position: absolute;
-  width: 12%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* Stable base transform */
-  transition: none !important;
-}
 
 /* With your exact z-index values + scroll-snap-type */
 .oval-container img:nth-child(1)  { left: 50%; top: 5%;  z-index: 16; scroll-snap-type: none !important; }

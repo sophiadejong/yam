@@ -69,6 +69,8 @@ header, nav {
   will-change: transform;
 }
 
+
+
 /* Projects snap to PERFECT CENTER */
 .project {
   scroll-snap-align: center;

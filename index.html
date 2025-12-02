@@ -14,6 +14,10 @@
 
 <body>
     <script>
+      window.addEventListener('load', () => {
+    window.scrollTo(0, 0);
+    document.getElementById('page-wrapper')?.scrollTo(0, 0);
+  });
           window.addEventListener("load", () => {
     requestAnimationFrame(() => {
       document.querySelector("nav").style.transition = 
@@ -393,6 +397,7 @@ document.addEventListener("DOMContentLoaded", () => {
   check();
 });
 </script>
+
 
   <!-- <script>
 document.addEventListener("DOMContentLoaded", () => {

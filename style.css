@@ -578,7 +578,8 @@ padding: 0 30%;
   margin-top: 0;  /* remove -2px adjustment */
 }
 .project-info p {
-    padding: 0 5%;
+    padding: 0 2%;
+    font-size: 0.8rem;
   }
 
  /* #info-toggle {

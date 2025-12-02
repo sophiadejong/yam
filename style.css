@@ -75,7 +75,7 @@ header, nav {
 }
 
 .snap-zone-start {
-  height: 3vh; /* zone where snapping should be OFF */
+  height: 1vh; /* zone where snapping should be OFF */
 }
 
 /* ==================== SECTION SNAPPING ==================== */

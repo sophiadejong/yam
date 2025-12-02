@@ -8,6 +8,7 @@
   align-items: center;
   overflow: visible;
   perspective: 2000px;
+    /* padding-top: 2%; */
   transform-style: preserve-3d;
   scroll-snap-type: none !important;
 }

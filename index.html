@@ -41,6 +41,7 @@
     </div>
   </header>
 
+<div class="snap-break"></div>
 
   <!-- WRAPPER ADDED SO HEADER NEVER FREEZES -->
   <div id="page-wrapper">
@@ -74,6 +75,7 @@
       </section>
 
       <section id="projects">
+        <div class="snap-zone-start"></div>
         <div class="projects-wrapper">
 
           <!-- PROJECT 1 -->
@@ -351,8 +353,191 @@
     </button>
   </div>
 
+  
   <script src="script.js" defer></script>
+  <script>
 
+    document.addEventListener("DOMContentLoaded", () => {
+  const wrapper = document.getElementById("page-wrapper");
+  const projectsWrapper = document.querySelector(".projects-wrapper");
+  const snapStartZone = document.querySelector(".snap-zone-start");
+
+  if (!wrapper || !projectsWrapper || !snapStartZone) return;
+
+  function enableSnap() {
+    wrapper.classList.add("snap-enabled");
+  }
+  function disableSnap() {
+    wrapper.classList.remove("snap-enabled");
+  }
+
+  // Default: OFF
+  disableSnap();
+
+  // Observer 1 → Turn snap ON when projects section is inside viewport
+  const projectsObserver = new IntersectionObserver(
+    (entries) => {
+      if (entries[0].isIntersecting) {
+        enableSnap();
+      }
+    },
+    {
+      root: wrapper,
+      threshold: 0.1
+    }
+  );
+
+  // Observer 2 → Turn snap OFF early when scrolling up
+  const upObserver = new IntersectionObserver(
+    (entries) => {
+      if (entries[0].isIntersecting) {
+        disableSnap();
+      }
+    },
+    {
+      root: wrapper,
+      threshold: 0.01
+    }
+  );
+
+  projectsObserver.observe(projectsWrapper);
+  upObserver.observe(snapStartZone);
+});
+
+
+
+
+
+
+//   document.addEventListener("DOMContentLoaded", () => {
+//   const wrapper = document.getElementById("page-wrapper");
+//   const projectsWrapper = document.querySelector(".projects-wrapper");
+//   if (!wrapper || !projectsWrapper) return;
+
+//   let disableTimer = null;
+//   const DISABLE_DELAY = 300; // ms of hysteresis before turning snapping off
+
+//   // helper to safely add/remove class while avoiding jumps
+//   function enableSnap() {
+//     clearTimeout(disableTimer);
+//     // If already enabled, do nothing
+//     if (wrapper.classList.contains("snap-enabled")) return;
+
+//     // Temporarily disable smooth behavior to avoid an automatic animated jump
+//     const prev = wrapper.style.scrollBehavior;
+//     wrapper.style.scrollBehavior = "auto";
+
+//     // Add class
+//     wrapper.classList.add("snap-enabled");
+
+//     // restore smooth behavior on next frame (so snap can animate normally afterwards)
+//     requestAnimationFrame(() => {
+//       wrapper.style.scrollBehavior = prev || "";
+//     });
+//   }
+
+//   function scheduleDisableSnap() {
+//     // If already scheduled, reset timer
+//     clearTimeout(disableTimer);
+//     disableTimer = setTimeout(() => {
+//       // If page is frozen (info open) do not disable
+//       if (wrapper.classList.contains("freeze") || document.body.classList.contains("no-scroll")) {
+//         return;
+//       }
+//       // Avoid toggling if user is currently interacting (pointer down)
+//       if (pointerDown) return;
+//       wrapper.classList.remove("snap-enabled");
+//     }, DISABLE_DELAY);
+//   }
+
+//   // Track pointer down (user actively interacting) to avoid toggling mid-drag
+//   let pointerDown = false;
+//   wrapper.addEventListener("pointerdown", () => (pointerDown = true));
+//   window.addEventListener("pointerup", () => { pointerDown = false; });
+
+//   // Use IntersectionObserver with wrapper as the root so visibility is relative to the scrolling area
+//   const io = new IntersectionObserver(
+//     (entries) => {
+//       entries.forEach(entry => {
+//         if (entry.isIntersecting) {
+//           enableSnap();
+//         } else {
+//           // schedule disable (hysteresis to avoid flicker)
+//           scheduleDisableSnap();
+//         }
+//       });
+//     },
+//     {
+//       root: wrapper,
+//       rootMargin: "-45% 0px -45% 0px", // trigger when projects-wrapper enters central area
+//       threshold: 0
+//     }
+//   );
+
+//   io.observe(projectsWrapper);
+
+//   // If info-panel locks scrolling we should ensure snap is off (or leave it on?) — keep snap enabled while frozen
+//   const observerForFreeze = new MutationObserver(() => {
+//     // if freeze or no-scroll is set, keep snapping enabled so the page doesn't change underneath user
+//     if (wrapper.classList.contains("freeze") || document.body.classList.contains("no-scroll")) {
+//       enableSnap();
+//       clearTimeout(disableTimer);
+//     }
+//   });
+//   observerForFreeze.observe(document.body, { attributes: true, attributeFilter: ["class"] });
+//   observerForFreeze.observe(wrapper, { attributes: true, attributeFilter: ["class"] });
+
+//   // Optional: If the page is already scrolled into projects on load, enable snap
+//   const rect = projectsWrapper.getBoundingClientRect();
+//   const wrapperRect = wrapper.getBoundingClientRect();
+//   const isInsideOnLoad = rect.top < wrapperRect.bottom - wrapperRect.height * 0.25 && rect.bottom > wrapperRect.top + wrapperRect.height * 0.25;
+//   if (isInsideOnLoad) enableSnap();
+// });
+
+// document.addEventListener("DOMContentLoaded", () => {
+//   const wrapper = document.getElementById("page-wrapper");
+//   const projectsWrapper = document.querySelector(".projects-wrapper");
+//   if (!wrapper || !projectsWrapper) return;
+
+//   // Start with snapping disabled
+//   wrapper.classList.remove("snap-enabled");
+
+//   const enableSnap = () => wrapper.classList.add("snap-enabled");
+//   const disableSnap = () => wrapper.classList.remove("snap-enabled");
+
+//   // Use IntersectionObserver to enable snapping only inside projects
+//   const io = new IntersectionObserver(
+//     entries => {
+//       entries.forEach(entry => {
+//         if (entry.isIntersecting) {
+//           enableSnap(); // snap enabled when projects-wrapper is visible
+//         } else {
+//           disableSnap(); // snap disabled when projects-wrapper is not visible
+//         }
+//       });
+//     },
+//     {
+//       root: wrapper,
+//       rootMargin: "-20% 0px -20% 0px", // trigger slightly before it enters center
+//       threshold: 0
+//     }
+//   );
+
+//   io.observe(projectsWrapper);
+
+//   // Optional: prevent any jump behavior
+//   wrapper.addEventListener("scroll", () => {
+//     if (!wrapper.classList.contains("snap-enabled")) {
+//       wrapper.style.scrollBehavior = "auto"; // free scroll for home
+//     } else {
+//       wrapper.style.scrollBehavior = "smooth"; // smooth scroll in projects
+//     }
+//   });
+// });
+
+
+
+  </script>
 </body>
 
 </html>

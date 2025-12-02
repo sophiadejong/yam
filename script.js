@@ -317,6 +317,152 @@ document.addEventListener("DOMContentLoaded", () => {
 /* =========================================================
    OVAL CHAOS — NOW PERFECTLY SYNCED WITH FIRST PROJECT
    ========================================================= */
+// document.addEventListener("DOMContentLoaded", () => {
+//   const oval = document.querySelector(".oval-container");
+//   const home = document.getElementById("home");
+//   const wrapper = document.getElementById("page-wrapper");
+//   if (!oval || !home || !wrapper) return;
+
+//   const imgs = oval.querySelectorAll("img");
+
+//   imgs.forEach(img => {
+//     img.dataset.base = "translate(-50%, -50%)";
+
+//     const angle = Math.random() * Math.PI * 2;
+//     const force = 180 + Math.random() * 300;
+
+//     img.dataset.x = Math.cos(angle) * force;
+//     img.dataset.y = Math.sin(angle) * force;
+//     img.dataset.speed = 0.5 + Math.random() * 2.4;
+//     img.dataset.scale = Math.random() < 0.3
+//       ? 5 + Math.random() * 10
+//       : 0.2 + Math.random() * 2;
+//   });
+
+//   const tick = () => {
+//     const scrollY = wrapper.scrollTop;
+//     const homeHeight = home.offsetHeight;
+
+//     const triggerHideAt = homeHeight * 0.8;
+//     const shouldHide = scrollY > triggerHideAt;
+
+//     oval.style.opacity = shouldHide ? "0" : "1";
+//     oval.style.pointerEvents = shouldHide ? "none" : "auto";
+
+//     // ✅ CHAOS BEGINS AS SOON AS YOU SCROLL
+//     const progress = Math.max(0, Math.min(1, scrollY / window.innerHeight));
+
+//     if (!shouldHide && progress > 0.001) {
+//       imgs.forEach(img => {
+//         const x = parseFloat(img.dataset.x);
+//         const y = parseFloat(img.dataset.y);
+//         const speed = parseFloat(img.dataset.speed);
+//         const scale = parseFloat(img.dataset.scale);
+
+//         let t = Math.min(progress * speed * 0.6, 1);
+//         const ease = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+//         img.style.transform = `
+//           ${img.dataset.base}
+//           translate(${x * ease}vw, ${y * ease}vh)
+//           scale(${1 + (scale - 1) * ease})
+//         `;
+//       });
+//     } else if (!shouldHide) {
+//       imgs.forEach(img => img.style.transform = img.dataset.base);
+//     }
+
+//     requestAnimationFrame(tick);
+//   };
+
+//   if (wrapper.scrollTop === 0) {
+//     oval.style.opacity = "1";
+//     oval.style.pointerEvents = "auto";
+//     imgs.forEach(img => img.style.transform = img.dataset.base);
+//   }
+
+//   requestAnimationFrame(tick);
+// });
+
+// document.addEventListener("DOMContentLoaded", () => {
+//   const oval = document.querySelector(".oval-container");
+//   const home = document.getElementById("home");
+//   const wrapper = document.getElementById("page-wrapper");
+//   if (!oval || !home || !wrapper) return;
+
+//   const imgs = oval.querySelectorAll("img");
+
+//   imgs.forEach(img => {
+//     img.dataset.base = "translate(-50%, -50%)";
+
+//     const angle = Math.random() * Math.PI * 2;
+//     const force = 180 + Math.random() * 300;
+
+//     img.dataset.x = Math.cos(angle) * force;
+//     img.dataset.y = Math.sin(angle) * force;
+//     img.dataset.speed = 0.5 + Math.random() * 2.4;
+//     img.dataset.scale =
+//       Math.random() < 0.3 ? 5 + Math.random() * 10 : 0.2 + Math.random() * 2;
+//   });
+
+//   const tick = () => {
+//     const scrollY = wrapper.scrollTop;
+//     const homeHeight = home.offsetHeight;
+
+//     // ----------------------------
+//     // ⭐ NEW: SMOOTH 95% FADE LOGIC
+//     // ----------------------------
+//     const startFade = homeHeight * 0.95; // 95%
+//     const endFade = homeHeight * 1.05;   // fully hidden shortly after
+
+//     let opacity = 1;
+
+//     if (scrollY >= startFade) {
+//       opacity = 1 - (scrollY - startFade) / (endFade - startFade);
+//       opacity = Math.max(0, Math.min(1, opacity));
+//     }
+
+//     oval.style.opacity = opacity.toFixed(3);
+//     oval.style.pointerEvents = opacity <= 0 ? "none" : "auto";
+
+//     // --------------------------------
+//     // ORIGINAL CHAOS TRANSFORM HANDLING
+//     // --------------------------------
+//     const progress = Math.max(0, Math.min(1, scrollY / window.innerHeight));
+
+//     if (opacity > 0 && progress > 0.001) {
+//       imgs.forEach(img => {
+//         const x = parseFloat(img.dataset.x);
+//         const y = parseFloat(img.dataset.y);
+//         const speed = parseFloat(img.dataset.speed);
+//         const scale = parseFloat(img.dataset.scale);
+
+//         let t = Math.min(progress * speed * 0.6, 1);
+//         const ease =
+//           t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+//         img.style.transform = `
+//           ${img.dataset.base}
+//           translate(${x * ease}vw, ${y * ease}vh)
+//           scale(${1 + (scale - 1) * ease})
+//         `;
+//       });
+//     } else if (opacity > 0) {
+//       imgs.forEach(img => (img.style.transform = img.dataset.base));
+//     }
+
+//     requestAnimationFrame(tick);
+//   };
+
+//   if (wrapper.scrollTop === 0) {
+//     oval.style.opacity = "1";
+//     oval.style.pointerEvents = "auto";
+//     imgs.forEach(img => (img.style.transform = img.dataset.base));
+//   }
+
+//   requestAnimationFrame(tick);
+// });
+
 document.addEventListener("DOMContentLoaded", () => {
   const oval = document.querySelector(".oval-container");
   const home = document.getElementById("home");
@@ -329,35 +475,58 @@ document.addEventListener("DOMContentLoaded", () => {
     img.dataset.base = "translate(-50%, -50%)";
 
     const angle = Math.random() * Math.PI * 2;
-    const force = 180 + Math.random() * 300;
-    img.dataset.x = Math.cos(angle) * force;
-    img.dataset.y = Math.sin(angle) * force;
+    const force = 200 + Math.random() * 300; // larger to ensure offscreen
+
+    let x = Math.cos(angle) * force;
+    let y = Math.sin(angle) * force;
+
+    // ✅ Force downward images away from center toward corners
+    if (y > 0) {
+      x = x < 0 ? -force : force; // push fully left or right
+      y = Math.abs(y) + force; // make sure it ends below viewport
+    }
+
+    img.dataset.x = x;
+    img.dataset.y = y;
     img.dataset.speed = 0.5 + Math.random() * 2.4;
-    img.dataset.scale = Math.random() < 0.3 ? 5 + Math.random() * 10 : 0.2 + Math.random() * 2;
+    img.dataset.scale =
+      Math.random() < 0.3 ? 5 + Math.random() * 10 : 0.2 + Math.random() * 2;
   });
 
   const tick = () => {
     const scrollY = wrapper.scrollTop;
     const homeHeight = home.offsetHeight;
 
-    // Hide ovals when 60% of home section has been scrolled
-    const triggerHideAt = homeHeight * 0.6;
+    // ----------------------------
+    // ⭐ Smooth fade out at 95% scroll
+    // ----------------------------
+    const startFade = homeHeight * 0.95;
+    const endFade = homeHeight * 1.05;
 
-    const shouldHide = scrollY > triggerHideAt;
-    oval.style.opacity = shouldHide ? "0" : "1";
-    oval.style.pointerEvents = shouldHide ? "none" : "auto";
+    let opacity = 1;
+    if (scrollY >= startFade) {
+      opacity = 1 - (scrollY - startFade) / (endFade - startFade);
+      opacity = Math.max(0, Math.min(1, opacity));
+    }
 
-    const progress = Math.max(0, Math.min(1, (scrollY - homeHeight + window.innerHeight) / (window.innerHeight * 0.8)));
+    oval.style.opacity = opacity.toFixed(3);
+    oval.style.pointerEvents = opacity <= 0 ? "none" : "auto";
 
-    if (!shouldHide && progress > 0.001) {
+    // --------------------------------
+    // ⭐ Chaos transform
+    // --------------------------------
+    const progress = Math.max(0, Math.min(1, scrollY / window.innerHeight));
+
+    if (opacity > 0 && progress > 0.001) {
       imgs.forEach(img => {
         const x = parseFloat(img.dataset.x);
         const y = parseFloat(img.dataset.y);
         const speed = parseFloat(img.dataset.speed);
         const scale = parseFloat(img.dataset.scale);
 
-        let t = Math.min(progress * speed * 0.6, 1);
-        const ease = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        let t = Math.min(progress * speed * 0.6, 0.6);
+        const ease =
+          t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
         img.style.transform = `
           ${img.dataset.base}
@@ -365,8 +534,8 @@ document.addEventListener("DOMContentLoaded", () => {
           scale(${1 + (scale - 1) * ease})
         `;
       });
-    } else if (!shouldHide) {
-      imgs.forEach(img => img.style.transform = img.dataset.base);
+    } else if (opacity > 0) {
+      imgs.forEach(img => (img.style.transform = img.dataset.base));
     }
 
     requestAnimationFrame(tick);
@@ -375,7 +544,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (wrapper.scrollTop === 0) {
     oval.style.opacity = "1";
     oval.style.pointerEvents = "auto";
-    imgs.forEach(img => img.style.transform = img.dataset.base);
+    imgs.forEach(img => (img.style.transform = img.dataset.base));
   }
 
   requestAnimationFrame(tick);

@@ -26,6 +26,7 @@
   height: 100svh;
 } */
 
+
 html {
   /* REMOVE scroll-snap-type */
   scroll-behavior: smooth;
@@ -36,26 +37,45 @@ html {
   height: 100svh;
 }
 
-#page-wrapper {
-  scroll-snap-type: y mandatory;
-  height: 100svh;
-  overflow-y: scroll;     /* this is now the scrolling area */
-  -webkit-overflow-scrolling: touch;
-}
-
 body {
   font-family: "SuisseIntl", sans-serif;
-
   /* NEW: stable mobile behavior */
-  height: 100%;
-  min-height: 100%;
   -webkit-overflow-scrolling: touch;
-
   min-height: 100svh;
   background-color: #E0E0E0;
   margin: 0;
   padding: 0;
   overflow-y: visible;
+  
+}
+
+header, nav {
+  overflow-anchor: none;
+}
+
+.snap-break {
+  height: 1px;
+  pointer-events: none;
+}
+
+#page-wrapper {
+  scroll-snap-type: none; /* default off */
+  height: 100svh;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+
+  /* 🔥 Anti-snap fixes */
+  padding-top: 1px !important;     /* breaks Chrome's alignment snap */
+  margin-top: -1px !important;     /* visually cancels padding so nothing shifts */
+  overflow-anchor: none !important;/* stops Chrome from snapping to fixed nav */
+}
+
+#page-wrapper.snap-enabled {
+  scroll-snap-type: y mandatory;
+}
+
+.snap-zone-start {
+  height: 3vh; /* zone where snapping should be OFF */
 }
 
 /* ==================== SECTION SNAPPING ==================== */

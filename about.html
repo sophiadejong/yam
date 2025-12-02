@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="style-home.css">
   <link rel="stylesheet" href="style-about.css">
   <link rel="stylesheet" href="style-contact.css">
+  <link rel="preload" href="fonts/SuisseIntl-Regular.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="fonts/SuisseIntl-Medium.otf" as="font" type="font/otf" crossorigin>
   <script src="script.js" defer></script>
   <title>YAM STUDIO - About</title>
 </head>
@@ -17,6 +19,15 @@
   <header>
 
     <script>
+      window.addEventListener("load", () => {
+        requestAnimationFrame(() => {
+          document.querySelector("nav").style.transition =
+            "transform 0.65s cubic-bezier(0.22,1,0.36,1), background 0.65s";
+          document.querySelectorAll("nav a").forEach(a => {
+            a.style.transition = "opacity 0.75s cubic-bezier(0.22,1,0.36,1)";
+          });
+        });
+      });
       // Kill the browser's scroll restoration (the #1 cause of "jump on navigation")
       if ('scrollRestoration' in history) {
         history.scrollRestoration = 'manual';
@@ -79,7 +90,8 @@
             <img src="images/line.png" alt="vertical line" class="divider">
 
             <!-- LINKEDIN -->
-            <a href="https://es.linkedin.com/in/alfonso-yordi-82762a106" target="_blank" class="social-item-alfonso linkedin">
+            <a href="https://es.linkedin.com/in/alfonso-yordi-82762a106" target="_blank"
+              class="social-item-alfonso linkedin">
               <img src="images/Linkedin.png" alt="Linked In icon">
               <span>LinkedIn</span>
             </a>
@@ -212,12 +224,10 @@
 
     </main>
 
-      <footer>
-    <p id="yam-footer">YAM©<span class="faded-year">2025</span></p>
-  </footer>
+    <footer>
+      <p id="yam-footer">YAM©<span class="faded-year">2025</span></p>
+    </footer>
   </div><!-- END WRAPPER -->
-
-
 
 </body>
 

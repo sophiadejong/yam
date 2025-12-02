@@ -7,20 +7,28 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="style-home.css">
+  <link rel="preload" href="fonts/SuisseIntl-Regular.otf" as="font" type="font/otf" crossorigin>
+<link rel="preload" href="fonts/SuisseIntl-Medium.otf" as="font" type="font/otf" crossorigin>
   <title>YAM STUDIO</title>
 </head>
 
 <body>
-
-  <header>
-
     <script>
+          window.addEventListener("load", () => {
+    requestAnimationFrame(() => {
+      document.querySelector("nav").style.transition = 
+        "transform 0.65s cubic-bezier(0.22,1,0.36,1), background 0.65s";
+      document.querySelectorAll("nav a").forEach(a => {
+        a.style.transition = "opacity 0.75s cubic-bezier(0.22,1,0.36,1)";
+      });
+    });
+  });
       // Kill the browser's scroll restoration (the #1 cause of "jump on navigation")
       if ('scrollRestoration' in history) {
         history.scrollRestoration = 'manual';
       }
     </script>
-
+  <header>
     <div class="header-div">
       <nav>
         <a id="yam" href="index.html">YAM</a>

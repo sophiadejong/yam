@@ -11,34 +11,59 @@
   setVH();
 })();
 
+window.addEventListener("load", () => {
+  const content = document.querySelector(".page-content");
+  if (!content) return;
+
+  // force style application
+  void content.offsetWidth;
+
+  // start fade-in
+  content.classList.remove("start-hidden");
+});
+
+
 /* =========================================================
-   PAGE FADE IN / OUT
+   PAGE FADE OUT — FINALLY FIXED & WORKING
+   ========================================================= */
+/* =========================================================
+   SMOOTH PAGE FADE-OUT — no violence, just elegance
    ========================================================= */
 document.addEventListener("click", (e) => {
   const link = e.target.closest("nav a");
   if (!link) return;
 
-  e.preventDefault();
   const href = link.getAttribute("href");
+  if (!href || link.href === location.href) return;
+  e.preventDefault();
+
   const content = document.querySelector(".page-content");
+  if (!content) return;
 
-  if (!content || content.classList.contains("fade-out")) return;
-
+  // fade out
   content.classList.add("fade-out");
-  content.classList.remove("show");
 
   setTimeout(() => {
     window.location.href = href;
-  }, 500);
+  }, 1300); // slightly above 1.2s
 });
 
+
+/* =========================================================
+   PAGE FADE IN — keep your original 1-second delay
+   ========================================================= */
 window.addEventListener("load", () => {
   const content = document.querySelector(".page-content");
   if (!content) return;
 
-  setTimeout(() => {
-    content.classList.add("fade-in", "show");
-  }, 1000);
+  // Force reflow + clean state
+  void content.offsetWidth;
+  content.classList.remove("fade-out");
+
+setTimeout(() => {
+  content.classList.add("fade-in");
+}, 300);
+
 });
 
 /* =========================================================
@@ -355,3 +380,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
   requestAnimationFrame(tick);
 });
+

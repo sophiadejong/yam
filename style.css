@@ -464,13 +464,33 @@ padding: 0 30%;
   cursor: none !important;
 }
 
-/* ==================== PAGE FADE ==================== */
 .page-content {
-  transition: opacity 2s ease !important;
+  opacity: 1;
+  transition: opacity 1.2s cubic-bezier(0.65,0,0.35,1);
 }
 
-.page-content.fade-in.show { opacity: 1 !important; }
-.page-content.fade-out { opacity: 0 !important; }
+.page-content.start-hidden {
+  opacity: 0;
+}
+
+.page-content.fade-out {
+  opacity: 0 !important;
+}
+
+
+/* .page-content {
+  opacity: 0;
+  transition: opacity 1.2s cubic-bezier(0.65, 0, 0.35, 1);
+  will-change: opacity;
+} */
+
+.page-content.fade-in {
+  opacity: 1 !important;
+}
+
+.page-content.fade-out {
+  opacity: 0 !important;
+}
 
 /* ==================== NO-SCROLL LOCK CLASS ==================== */
 /* Prevent body from scrolling */

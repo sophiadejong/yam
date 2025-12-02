@@ -13,25 +13,36 @@
 </head>
 
 <body>
-    <script>
-      window.addEventListener('load', () => {
+<script>
+  // 1. Desactivamos la restauración automática del scroll
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+
+  // 2. Forzamos scroll a 0 en TODOS los momentos posibles
+  const forceScrollToTop = () => {
     window.scrollTo(0, 0);
-    document.getElementById('page-wrapper')?.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    const wrapper = document.getElementById('page-wrapper');
+    if (wrapper) wrapper.scrollTop = 0;
+  };
+
+  // Ejecutamos en todos los eventos que existen
+  window.addEventListener('load', forceScrollToTop);
+  document.addEventListener('DOMContentLoaded', forceScrollToTop);
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted) forceScrollToTop(); // crucial para Safari/iOS
   });
-          window.addEventListener("load", () => {
-    requestAnimationFrame(() => {
-      document.querySelector("nav").style.transition = 
-        "transform 0.65s cubic-bezier(0.22,1,0.36,1), background 0.65s";
-      document.querySelectorAll("nav a").forEach(a => {
-        a.style.transition = "opacity 0.75s cubic-bezier(0.22,1,0.36,1)";
-      });
-    });
+
+  // Y una última patada después de que todo haya pintado
+  window.addEventListener('load', () => {
+    setTimeout(forceScrollToTop, 0);
+    setTimeout(forceScrollToTop, 50);
+    setTimeout(forceScrollToTop, 100);
+    setTimeout(forceScrollToTop, 300);
   });
-      // Kill the browser's scroll restoration (the #1 cause of "jump on navigation")
-      if ('scrollRestoration' in history) {
-        history.scrollRestoration = 'manual';
-      }
-    </script>
+</script>
   <header>
     <div class="header-div">
       <nav>

@@ -15,11 +15,13 @@ window.addEventListener("load", () => {
   const content = document.querySelector(".page-content");
   if (!content) return;
 
-  // force style application
+  // Forzamos que el navegador calcule el layout real (con la altura completa de #home y los ovales)
   void content.offsetWidth;
 
-  // start fade-in
-  content.classList.remove("start-hidden");
+  // Quitamos la clase en el siguiente frame → así el navegador ya ha medido todo correctamente
+  requestAnimationFrame(() => {
+    content.classList.remove("start-hidden");
+  });
 });
 
 

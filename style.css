@@ -4,11 +4,11 @@
   src: url("fonts/SuisseIntl-Regular.otf") format("opentype");
   font-weight: 400;
 }
-@font-face {
+/* @font-face {
   font-family: "SuisseIntlMedium";
   src: url("fonts/SuisseIntl-Medium.otf") format("opentype");
   font-weight: 600;
-}
+} */
 
 /* Prevent flash on load */
 .page-content {
@@ -69,7 +69,9 @@ header, nav {
   will-change: transform;
 }
 
-
+#home {
+  padding-bottom: 30dvh !important;  /* fuerza espacio extra */
+}
 
 /* Projects snap to PERFECT CENTER */
 .project {
@@ -95,6 +97,25 @@ header, nav {
 }
 
 #home-text {
+  position: fixed;           /* ← FIXED, no absolute → así NO afecta al flujo ni a la altura */
+  top: 53%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;              /* ← muy arriba, encima de todo */
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: #838383;
+  opacity: 1;
+  transition: opacity 0.18s linear;
+  pointer-events: none;      /* ← no interfiere con scroll ni clicks */
+  width: 90%;
+  max-width: 900px;
+  padding: 0 5%;
+  box-sizing: border-box;
+}
+
+/* #home-text {
   position: absolute;
   top: 52.5%;
   left: 50%;
@@ -103,11 +124,11 @@ header, nav {
   font-size: 1rem;
   line-height: 1.4;
   color: #838383;
-  opacity: 1;
+  opacity: 1 !important;
   transition: opacity 0.1s linear;
   pointer-events: none;
-    z-index: 0;  
-}
+  z-index: 0;  
+} */
 
 
 /* Hide the fixed home text when info panel is open */
@@ -445,17 +466,21 @@ padding: 0 30%;
 
 .page-content {
   opacity: 1;
+  visibility: visible;
+  position: relative;          /* ← vuelve al flujo normal */
   transition: opacity 1.2s cubic-bezier(0.65,0,0.35,1);
 }
 
 .page-content.start-hidden {
   opacity: 0;
+  visibility: hidden;          /* ← evita que mida altura 0 */
+  position: absolute;          /* ← lo saca del flujo mientras está hidden */
+  top: 0; left: 0; width: 100%;
 }
 
 .page-content.fade-out {
   opacity: 0 !important;
 }
-
 
 /* .page-content {
   opacity: 0;

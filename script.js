@@ -500,8 +500,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // ----------------------------
     // ⭐ Smooth fade out at 95% scroll
     // ----------------------------
-    const startFade = homeHeight * 0.90;
-    const endFade = homeHeight * 1;
+    const startFade = homeHeight * 0.80;
+    const endFade = homeHeight * 0.90;
 
     let opacity = 1;
     if (scrollY >= startFade) {

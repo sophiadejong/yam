@@ -29,7 +29,7 @@ document.addEventListener("click", (e) => {
 
   setTimeout(() => {
     window.location.href = href;
-  }, 1000);
+  }, 500);
 });
 
 window.addEventListener("load", () => {
@@ -38,7 +38,7 @@ window.addEventListener("load", () => {
 
   setTimeout(() => {
     content.classList.add("fade-in", "show");
-  }, 60);
+  }, 1000);
 });
 
 /* =========================================================

@@ -41,7 +41,7 @@
     </div>
   </header>
 
-<div class="snap-break"></div>
+<!-- <div class="snap-break"></div> -->
 
   <!-- WRAPPER ADDED SO HEADER NEVER FREEZES -->
   <div id="page-wrapper">
@@ -74,7 +74,7 @@
         </div>
       </section>
 
-      <div class="snap-zone-start"></div>
+      <!-- <div class="snap-zone-start"></div> -->
       <section id="projects">
         <div class="projects-wrapper">
 
@@ -355,59 +355,108 @@
 
   
   <script src="script.js" defer></script>
+
   <script>
-
-    document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
   const wrapper = document.getElementById("page-wrapper");
-  const projectsWrapper = document.querySelector(".projects-wrapper");
-  const snapStartZone = document.querySelector(".snap-zone-start");
+  const home = document.getElementById("home");
 
-  if (!wrapper || !projectsWrapper || !snapStartZone) return;
+  if (!wrapper || !home) return;
 
-  function enableSnap() {
-    wrapper.classList.add("snap-enabled");
-  }
-  function disableSnap() {
-    wrapper.classList.remove("snap-enabled");
-  }
+  let isScrollingDown = true;
 
-  // Default: OFF
-  disableSnap();
+  const check = () => {
+    const scrollTop = wrapper.scrollTop;
+    const homeHeight = home.offsetHeight;
 
-  // Observer 1 → Turn snap ON when projects section is inside viewport
-  const projectsObserver = new IntersectionObserver(
-    (entries) => {
-      if (entries[0].isIntersecting) {
-        enableSnap();
-      }
-    },
-    {
-      root: wrapper,
-      threshold: 0.1
+    // Detect scroll direction (very important for smoothness)
+    const scrollingDown = scrollTop > (wrapper.lastScrollTop || 0);
+    wrapper.lastScrollTop = scrollTop;
+
+    // When scrolling UP and we're in the top 40% of home → disable snapping instantly
+    if (!scrollingDown && scrollTop < homeHeight * 0.8) {
+      wrapper.classList.add("free-scroll");
     }
-  );
-
-  // Observer 2 → Turn snap OFF early when scrolling up
-  const upObserver = new IntersectionObserver(
-    (entries) => {
-      if (entries[0].isIntersecting) {
-        disableSnap();
-      }
-    },
-    {
-      root: wrapper,
-      threshold: 0.01
+    // When scrolling DOWN and past 30% of home → enable snapping
+    else if (scrollingDown && scrollTop > homeHeight * 0.3) {
+      wrapper.classList.remove("free-scroll");
     }
-  );
+    // If we're in the middle zone, keep the current state (prevents flickering)
+    // → this is what makes it feel buttery
+  };
 
-  projectsObserver.observe(projectsWrapper);
-  upObserver.observe(snapStartZone);
+  wrapper.addEventListener("scroll", () => {
+    requestAnimationFrame(check);
+  });
+
+  // Initial check
+  check();
 });
+</script>
 
+  <!-- <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const wrapper = document.getElementById("page-wrapper");
+  const home = document.getElementById("home");
 
+  if (!wrapper || !home) return;
 
+  const check = () => {
+    if (wrapper.scrollTop < home.offsetHeight * 0.6) {
+      wrapper.classList.add("no-snap");
+    } else {
+      wrapper.classList.remove("no-snap");
+    }
+  };
 
+  wrapper.addEventListener("scroll", check);
+  check(); // run on load
+});
+</script> -->
+<script>
+// FINAL VERSION — does exactly what you want: home = free scroll, projects = perfect center snap
 
+// document.addEventListener("DOMContentLoaded", () => {
+//   const wrapper = document.getElementById("page-wrapper");
+//   const home = document.getElementById("home");
+//   const firstProject = document.querySelector(".project");
+
+//   if (!wrapper || !home || !firstProject) return;
+
+//   let allowDisable = true;  // prevents flickering
+
+//   const observer = new IntersectionObserver((entries) => {
+//     const homeEntry = entries.find(e => e.target === home);
+
+//     // As soon as home is less than 30% visible → enable project snapping
+//     if (homeEntry && homeEntry.intersectionRatio < 0.7) {
+//       wrapper.classList.add("snap-enabled");
+//       allowDisable = true;
+//     } 
+//     // When scrolling back up and home becomes mostly visible again → disable snapping
+//     else if (homeEntry && homeEntry.intersectionRatio > 0.8 && allowDisable) {
+//       wrapper.classList.remove("snap-enabled");
+//       allowDisable = false;  // prevent re-triggering until we go down again
+//     }
+//   }, {
+//     root: wrapper,
+//     threshold: [0, 0.1, 0.3, 0.5, 0.7, 0.8, 0.9, 1.0]
+//   });
+
+//   observer.observe(home);
+
+//   // If page loads already in projects → enable snap
+//   if (wrapper.scrollTop > home.offsetHeight * 0.5) {
+//     wrapper.classList.add("snap-enabled");
+//   }
+
+//   // Optional: re-enable disable permission when scrolling down again
+//   wrapper.addEventListener("scroll", () => {
+//     if (wrapper.scrollTop > home.offsetHeight * 0.8) {
+//       allowDisable = true;
+//     }
+//   });
+// });
 
 //   document.addEventListener("DOMContentLoaded", () => {
 //   const wrapper = document.getElementById("page-wrapper");

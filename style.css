@@ -15,18 +15,6 @@
   opacity: 0;
 }
 
-/* ==================== CORE SCROLL SYSTEM ==================== */
-/* html {
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
-  overflow-y: scroll;
-  background-color: #E0E0E0;
-  margin: 0;
-  padding: 0;
-  height: 100svh;
-} */
-
-
 html {
   /* REMOVE scroll-snap-type */
   scroll-behavior: smooth;
@@ -39,7 +27,6 @@ html {
 
 body {
   font-family: "SuisseIntl", sans-serif;
-  /* NEW: stable mobile behavior */
   -webkit-overflow-scrolling: touch;
   min-height: 100svh;
   background-color: #E0E0E0;
@@ -53,61 +40,45 @@ header, nav {
   overflow-anchor: none;
 }
 
-.snap-break {
-  height: 1px;
-  pointer-events: none;
-}
-
 #page-wrapper {
-  scroll-snap-type: none; /* default off */
   height: 100svh;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
-
-  /* 🔥 Anti-snap fixes */
-  padding-top: 1px !important;     /* breaks Chrome's alignment snap */
-  margin-top: -1px !important;     /* visually cancels padding so nothing shifts */
-  overflow-anchor: none !important;/* stops Chrome from snapping to fixed nav */
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;   
 }
 
-#page-wrapper.snap-enabled {
-  scroll-snap-type: y mandatory;
-}
-
-.snap-zone-start {
-  height: 1vh; /* zone where snapping should be OFF */
-}
-
-/* ==================== SECTION SNAPPING ==================== */
-#home,
-.project {
-  height: 100svh;
-  min-height: 100svh;
-}
-
-/* Home snaps to TOP */
-#home {
+/* #page-wrapper.no-snap {
+  scroll-snap-type: none !important;    
+} */
+ #page-wrapper.free-scroll {
   scroll-snap-type: none !important;
-  /* padding-top: 2%; */
+}
+
+#home {
+  scroll-snap-align: none !important;   /* crucial line */
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  scroll-snap-align: start;
+  /* scroll-snap-align: start;
   scroll-snap-stop: always;
   scroll-behavior: smooth;
-  contain: layout style;
+  contain: layout style; */
   will-change: transform;
 }
 
 /* Projects snap to PERFECT CENTER */
 .project {
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  min-height: 100svh;
+  height: 100svh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  scroll-snap-align: center;
-  scroll-snap-stop: always;  
   transform: scale(0.6);
   opacity: 0.5;
   filter: blur(30px);
@@ -120,20 +91,6 @@ header, nav {
   filter: blur(0);
   z-index: 2;
 }
-
-/* #home-text {
-  position: fixed;
-  top: 52.5%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-  text-align: center;
-  font-size: 1rem;
-  line-height: 1.4;
-  color: #838383;
-  opacity: 1;
-  transition: opacity 0.1s linear;
-} */
 
 #home-text {
   position: absolute;

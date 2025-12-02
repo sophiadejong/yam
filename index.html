@@ -14,12 +14,10 @@
 
 <body>
 <script>
-  // 1. Desactivamos la restauración automática del scroll
   if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
   }
 
-  // 2. Forzamos scroll a 0 en TODOS los momentos posibles
   const forceScrollToTop = () => {
     window.scrollTo(0, 0);
     document.documentElement.scrollTop = 0;
@@ -28,14 +26,12 @@
     if (wrapper) wrapper.scrollTop = 0;
   };
 
-  // Ejecutamos en todos los eventos que existen
   window.addEventListener('load', forceScrollToTop);
   document.addEventListener('DOMContentLoaded', forceScrollToTop);
   window.addEventListener('pageshow', (e) => {
     if (e.persisted) forceScrollToTop(); // crucial para Safari/iOS
   });
 
-  // Y una última patada después de que todo haya pintado
   window.addEventListener('load', () => {
     setTimeout(forceScrollToTop, 0);
     setTimeout(forceScrollToTop, 50);
@@ -49,16 +45,10 @@
         <a id="yam" href="index.html">YAM</a>
         <a id="about" href="about.html">About</a>
         <a id="contact" href="contact.html">Contact</a>
-
-        <!-- the moving lime highlight -->
         <div class="lime"></div>
       </nav>
     </div>
   </header>
-
-<!-- <div class="snap-break"></div> -->
-
-  <!-- WRAPPER ADDED SO HEADER NEVER FREEZES -->
   <div id="page-wrapper">
 
     <main class="page-content start-hidden">

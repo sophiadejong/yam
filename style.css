@@ -3,6 +3,10 @@
   font-family: "SuisseIntl";
   src: url("fonts/SuisseIntl-Regular.otf") format("opentype");
   font-weight: 400;
+  font-display: swap;           /* ← esta línea */
+  font-feature-settings: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 /* @font-face {
   font-family: "SuisseIntlMedium";

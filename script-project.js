@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const showCursor = () => cursor.style.opacity = "1";
   const hideCursor = () => cursor.style.opacity = "0";
 
+  // ==================== INTERSECTION ====================
   const projectObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach(entry => {
@@ -51,13 +52,14 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     {
       root: wrapper,
-      rootMargin: "-30% 0px -20% 0px",  
+      rootMargin: "-10% 0px -20% 0px",
       threshold: 0
     }
   );
 
   projects.forEach(p => projectObserver.observe(p));
 
+  // ==================== SLIDERS ====================
   projects.forEach(project => {
     const slider = project.querySelector(".slider");
     if (!slider) return;
@@ -68,6 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const dots = document.createElement("div");
     dots.className = "carousel-dots";
+
     slides.forEach((_, i) => {
       const dot = document.createElement("span");
       dot.className = "dot" + (i === currentIndex ? " active" : "");
@@ -78,6 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
       dots.appendChild(dot);
     });
+
     slider.after(dots);
 
     function updateSlide() {
@@ -111,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateSlide();
     }
 
-    // Desktop click navigation
+    // ==================== DESKTOP ====================
     project.addEventListener("click", (e) => {
       if (e.target.closest(".carousel-dots") || project.classList.contains("show-info")) return;
 
@@ -122,25 +126,27 @@ document.addEventListener("DOMContentLoaded", () => {
       else nextSlide();
     });
 
-    // Desktop cursor
     slider.addEventListener("mouseenter", (e) => {
       if (!project.classList.contains("show-info")) {
         updateCursorPos(e);
         showCursor();
       }
     });
+
     slider.addEventListener("mousemove", (e) => {
       if (project.classList.contains("show-info")) { hideCursor(); return; }
-      updateCursorPos(e);
 
+      updateCursorPos(e);
       const rect = slider.getBoundingClientRect();
       const x = e.clientX - rect.left;
+
       cursor.classList.toggle("left", x <= rect.width / 2);
       cursor.classList.toggle("right", x > rect.width / 2);
     });
+
     slider.addEventListener("mouseleave", hideCursor);
 
-    // ==================== MOBILE: Horizontal swipe for slides, Vertical for projects ====================
+    // ==================== MOBILE (FIXED) ====================
     let touchStartX = 0;
     let touchStartY = 0;
     let isHorizontalSwipe = false;
@@ -159,16 +165,22 @@ document.addEventListener("DOMContentLoaded", () => {
       const currentX = e.changedTouches[0].screenX;
       const currentY = e.changedTouches[0].screenY;
 
-      const diffX = Math.abs(currentX - touchStartX);
-      const diffY = Math.abs(currentY - touchStartY);
+      const diffX = currentX - touchStartX;
+      const diffY = currentY - touchStartY;
 
-      // Decide direction once movement is significant
-      if (diffX > 20 || diffY > 20) {
-        if (diffX > diffY * 1.5) {
+      // Detect horizontal ONLY if very clear
+      if (!isHorizontalSwipe) {
+        if (Math.abs(diffX) > 30 && Math.abs(diffX) > Math.abs(diffY) * 2) {
           isHorizontalSwipe = true;
-          e.preventDefault();           // ← Lock horizontal swipe
+        } else {
+          return; // allow vertical scroll
         }
       }
+
+      if (isHorizontalSwipe) {
+        e.preventDefault();
+      }
+
     }, { passive: false });
 
     slider.addEventListener("touchend", (e) => {
@@ -178,19 +190,15 @@ document.addEventListener("DOMContentLoaded", () => {
       const diffX = touchStartX - touchEndX;
 
       if (isHorizontalSwipe && Math.abs(diffX) > 50) {
-        if (diffX > 0) {
-          nextSlide();
-        } else {
-          prevSlide();
-        }
+        if (diffX > 0) nextSlide();
+        else prevSlide();
       }
-      // If not horizontal → do nothing, let natural vertical scroll happen
     }, { passive: true });
 
     updateSlide();
   });
 
-  // ==================== INFO TOGGLE ====================
+  // ==================== INFO ====================
   let lockedScrollY = 0;
   const isTouch = matchMedia("(pointer: coarse)").matches;
 
@@ -226,9 +234,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // ==================== HOME FADE ====================
   const homeText = document.getElementById("home-text");
   if (homeText) {
     const fadeHeight = window.innerHeight * 0.3;
+
     wrapper.addEventListener("scroll", () => {
       const y = wrapper.scrollTop;
       let opacity = 1 - y / fadeHeight;

@@ -421,8 +421,6 @@
 
       if (!wrapper || !home) return;
 
-      let isScrollingDown = true;
-
       const check = () => {
         const scrollTop = wrapper.scrollTop;
         const homeHeight = home.offsetHeight;
@@ -430,10 +428,11 @@
         const scrollingDown = scrollTop > (wrapper.lastScrollTop || 0);
         wrapper.lastScrollTop = scrollTop;
 
-        if (!scrollingDown && scrollTop < homeHeight * 0.8) {
+        if (!scrollingDown && scrollTop < homeHeight * 1.5) {
+          // Scrolling up and still within reach of home — free the snap
           wrapper.classList.add("free-scroll");
-        }
-        else if (scrollingDown && scrollTop > homeHeight * 0.3) {
+        } else if (scrollingDown && scrollTop > homeHeight * 0.3) {
+          // Scrolling down past home — re-enable snap for projects
           wrapper.classList.remove("free-scroll");
         }
       };

@@ -90,6 +90,8 @@ nav {
   transition: transform .8s, opacity .8s, filter .8s;
 }
 
+
+
 .project.in-view {
   transform: scale(1);
   opacity: 1;
@@ -650,7 +652,7 @@ nav.contact a:nth-child(2):hover~.lime {
     touch-action: pan-y;
   }
 
-  .slide {
-    touch-action: none;
-  }
+.slide {
+  touch-action: auto;
+}
 }

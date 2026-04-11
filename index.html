@@ -8,40 +8,54 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="style-home.css">
   <link rel="preload" href="fonts/SuisseIntl-Regular.otf" as="font" type="font/otf" crossorigin>
-<link rel="preload" href="fonts/SuisseIntl-Medium.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="fonts/SuisseIntl-Regular.woff" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="fonts/SuisseIntl-Regular.woff2" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="fonts/SuisseIntl-Regular.ttf" as="font" type="font/otf" crossorigin>
+
   <title>YAM STUDIO</title>
 </head>
 
 <body>
-<script>
-  if ('scrollRestoration' in history) {
-    history.scrollRestoration = 'manual';
-  }
+  <script>
+    window.addEventListener("load", () => {
+      requestAnimationFrame(() => {
+        document.querySelector("nav").style.transition =
+          "transform 0.65s cubic-bezier(0.22,1,0.36,1), background 0.65s";
+        document.querySelectorAll("nav a").forEach(a => {
+          a.style.transition = "opacity 0.75s cubic-bezier(0.22,1,0.36,1)";
+        });
+      });
+    });
 
-  const forceScrollToTop = () => {
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-    const wrapper = document.getElementById('page-wrapper');
-    if (wrapper) wrapper.scrollTop = 0;
-  };
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
 
-  window.addEventListener('load', forceScrollToTop);
-  document.addEventListener('DOMContentLoaded', forceScrollToTop);
-  window.addEventListener('pageshow', (e) => {
-    if (e.persisted) forceScrollToTop(); // crucial para Safari/iOS
-  });
+    const forceScrollToTop = () => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      const wrapper = document.getElementById('page-wrapper');
+      if (wrapper) wrapper.scrollTop = 0;
+    };
 
-  window.addEventListener('load', () => {
-    setTimeout(forceScrollToTop, 0);
-    setTimeout(forceScrollToTop, 50);
-    setTimeout(forceScrollToTop, 100);
-    setTimeout(forceScrollToTop, 300);
-  });
-</script>
+    window.addEventListener('load', forceScrollToTop);
+    document.addEventListener('DOMContentLoaded', forceScrollToTop);
+    window.addEventListener('pageshow', (e) => {
+      if (e.persisted) forceScrollToTop();
+    });
+
+    window.addEventListener('load', () => {
+      setTimeout(forceScrollToTop, 0);
+      setTimeout(forceScrollToTop, 50);
+      setTimeout(forceScrollToTop, 100);
+      setTimeout(forceScrollToTop, 300);
+    });
+  </script>
+
   <header>
     <div class="header-div">
-      <nav>
+      <nav class="home">
         <a id="yam" href="index.html">YAM</a>
         <a id="about" href="about.html">About</a>
         <a id="contact" href="contact.html">Contact</a>
@@ -49,6 +63,7 @@
       </nav>
     </div>
   </header>
+
   <div id="page-wrapper">
 
     <main class="page-content start-hidden">
@@ -58,6 +73,7 @@
         in culture and commerce.
       </h2>
 
+      
       <section id="home">
         <div class="oval-container">
           <img src="images/home/1.png" alt="1">
@@ -79,7 +95,8 @@
         </div>
       </section>
 
-      <!-- <div class="snap-zone-start"></div> -->
+      <!-- PROJECTS SECTION -->
+
       <section id="projects">
         <div class="projects-wrapper">
 
@@ -87,26 +104,26 @@
           <div class="project" id="project1">
             <div class="slider">
               <div class="slider-inner">
-                <video src="projects/animario/ANIM_01_Mupi.mp4" class="slide ctive" playsinline muted loop
+                <img src="images/projects/animario/ANIM_04_Post.jpg" alt="" class="slide active">
+                <video src="images/projects/animario/ANIM_01_Mupi.mp4" class="slide" playsinline muted loop
                   preload="auto"></video>
-                <video src="projects/animario/ANIM_02_Process.mp4" class="slide" playsinline muted loop
+                <video src="images/projects/animario/ANIM_02_Process.mp4" class="slide" playsinline muted loop
                   preload="auto"></video>
-                <video src="projects/animario/ANIM_03_Research.mp4" class="slide" playsinline muted loop
+                <video src="images/projects/animario/ANIM_03_Research.mp4" class="slide" playsinline muted loop
                   preload="auto"></video>
-                <img src="projects/animario/ANIM_04_Post.png" alt="" class="slide">
-                <video src="projects/animario/ANIM_05_Process.mp4" class="slide" playsinline muted loop
+                <video src="images/projects/animario/ANIM_05_Process.mp4" class="slide" playsinline muted loop
                   preload="auto"></video>
-                <video src="projects/animario/ANIM_06_Capitol.mp4" class="slide" playsinline muted loop
+                <video src="images/projects/animario/ANIM_06_Capitol.mp4" class="slide" playsinline muted loop
                   preload="auto"></video>
-                <video src="projects/animario/ANIM_07_Post.mp4" class="slide" playsinline muted loop
+                <video src="images/projects/animario/ANIM_07_Post.mp4" class="slide" playsinline muted loop
                   preload="auto"></video>
-                <img src="projects/animario/ANIM_08_Post.png" alt="" class="slide">
-                <video src="projects/animario/ANIM_09_Azcona.mp4" class="slide" playsinline muted loop
+                <img src="images/projects/animario/ANIM_08_Post.jpg" alt="" class="slide">
+                <video src="images/projects/animario/ANIM_09_Azcona.mp4" class="slide" playsinline muted loop
                   preload="auto"></video>
-                <img src="projects/animario/ANIM_10_Post.png" alt="" class="slide">
-                <video src="projects/animario/ANIM_11_Details.mp4" class="slide" playsinline muted loop
+                <img src="images/projects/animario/ANIM_10_Post.jpg" alt="" class="slide">
+                <video src="images/projects/animario/ANIM_11_Details.mp4" class="slide" playsinline muted loop
                   preload="auto"></video>
-                <img src="projects/animario/ANIM_12_Post.png" alt="" class="slide">
+                <img src="images/projects/animario/ANIM_12_Post.jpg" alt="" class="slide">
               </div>
             </div>
             <div class="project-info">
@@ -148,451 +165,287 @@
           <div class="project" id="project2">
             <div class="slider">
               <div class="slider-inner">
-                <img src="projects/at.par/A4 - 28.jpg" alt="" class="slide active">
-                <img src="projects/at.par/A4 - 32.jpg" alt="" class="slide">
-                <img src="projects/at.par/A4 - 34.jpg" alt="" class="slide">
-                <img src="projects/at.par/A4 - 35.jpg" alt="" class="slide">
-                <img src="projects/at.par/A4 - 37.jpg" alt="" class="slide">
-                <img src="projects/at.par/A4 - 38.jpg" alt="" class="slide">
-                <img src="projects/at.par/A4 - 39.jpg" alt="" class="slide">
-                <img src="projects/at.par/A4 - 40.jpg" alt="" class="slide">
-                <img src="projects/at.par/A4 - 41.jpg" alt="" class="slide">
-                <img src="projects/at.par/A4 - 42.jpg" alt="" class="slide">
-                <img src="projects/at.par/A4 - 43.jpg" alt="" class="slide">
-                <img src="projects/at.par/A4 - 44.jpg" alt="" class="slide">
-                <img src="projects/at.par/A4 - 45.jpg" alt="" class="slide">
-                <img src="projects/at.par/A4 - 46.jpg" alt="" class="slide">
-                <img src="projects/at.par/A4 - 48.jpg" alt="" class="slide">
-                <img src="projects/at.par/A4 - 49.jpg" alt="" class="slide">
+                <img src="images/projects/at.par/A4 - 28.jpg" alt="" class="slide active">
+                <img src="images/projects/at.par/A4 - 32.jpg" alt="" class="slide">
+                <img src="images/projects/at.par/A4 - 34.jpg" alt="" class="slide">
+                <img src="images/projects/at.par/A4 - 35.jpg" alt="" class="slide">
+                <img src="images/projects/at.par/A4 - 37.jpg" alt="" class="slide">
+                <img src="images/projects/at.par/A4 - 38.jpg" alt="" class="slide">
+                <img src="images/projects/at.par/A4 - 39.jpg" alt="" class="slide">
+                <img src="images/projects/at.par/A4 - 40.jpg" alt="" class="slide">
+                <img src="images/projects/at.par/A4 - 41.jpg" alt="" class="slide">
+                <img src="images/projects/at.par/A4 - 42.jpg" alt="" class="slide">
+                <img src="images/projects/at.par/A4 - 43.jpg" alt="" class="slide">
+                <img src="images/projects/at.par/A4 - 44.jpg" alt="" class="slide">
+                <img src="images/projects/at.par/A4 - 45.jpg" alt="" class="slide">
+                <img src="images/projects/at.par/A4 - 46.jpg" alt="" class="slide">
+                <img src="images/projects/at.par/A4 - 48.jpg" alt="" class="slide">
+                <img src="images/projects/at.par/A4 - 49.jpg" alt="" class="slide">
               </div>
             </div>
 
-          <div class="project-info">
-            <p>
-              At.Par
-            </p>
-          </div>
-        </div>
-
-
-        <!-- PROJECT 3 -->
-        <div class="project" id="project3">
-          <div class="slider">
-            <div class="slider-inner">
-              <img src="projects/creaxures/A4 - 57.jpg" alt="" class="slide active">
-              <img src="projects/creaxures/A4 - 59.jpg" alt="" class="slide">
-              <img src="projects/creaxures/A4 - 62.jpg" alt="" class="slide">
-              <img src="projects/creaxures/A4 - 63.jpg" alt="" class="slide">
-              <img src="projects/creaxures/A4 - 64.jpg" alt="" class="slide">
-              <img src="projects/creaxures/A4 - 77.jpg" alt="" class="slide">
-              <img src="projects/creaxures/A4 - 78.jpg" alt="" class="slide">
-              <img src="projects/creaxures/A4 - 79.jpg" alt="" class="slide">
-              <img src="projects/creaxures/A4 - 80.jpg" alt="" class="slide">
-              <img src="projects/creaxures/A4 - 81.jpg" alt="" class="slide">
-              <img src="projects/creaxures/A4 - 84.jpg" alt="" class="slide">
-              <img src="projects/creaxures/A4 - 85.jpg" alt="" class="slide">
-              <img src="projects/creaxures/A4 - 87.jpg" alt="" class="slide">
-              <img src="projects/creaxures/A4 - 89.jpg" alt="" class="slide">
-              <img src="projects/creaxures/A4 - 90.jpg" alt="" class="slide">
-              <img src="projects/creaxures/A4 - 91.jpg" alt="" class="slide">
-              <img src="projects/creaxures/A4 - 93.jpg" alt="" class="slide">
-              <img src="projects/creaxures/A4 - 96.jpg" alt="" class="slide">
-              <img src="projects/creaxures/A4 - 97.jpg" alt="" class="slide">
-              <img src="projects/creaxures/A4 - 98.jpg" alt="" class="slide">
-              <img src="projects/creaxures/A4 - 99.jpg" alt="" class="slide">
-              <img src="projects/creaxures/A4 - 100.jpg" alt="" class="slide">            
+            <div class="project-info">
+              <p>
+                At.Par
+              </p>
             </div>
           </div>
-          <div class="project-info">
-            <p>
-              Creaxures
-            </p>
+
+          <!-- PROJECT 3 -->
+          <div class="project" id="project3">
+            <div class="slider">
+              <div class="slider-inner">
+                <img src="images/projects/creaxures/A4 - 57.jpg" alt="" class="slide active">
+                <img src="images/projects/creaxures/A4 - 59.jpg" alt="" class="slide">
+                <img src="images/projects/creaxures/A4 - 62.jpg" alt="" class="slide">
+                <img src="images/projects/creaxures/A4 - 63.jpg" alt="" class="slide">
+                <img src="images/projects/creaxures/A4 - 148.jpg" alt="" class="slide">
+                <img src="images/projects/creaxures/A4 - 64.jpg" alt="" class="slide">
+                <img src="images/projects/creaxures/A4 - 77.jpg" alt="" class="slide">
+                <img src="images/projects/creaxures/A4 - 78.jpg" alt="" class="slide">
+                <img src="images/projects/creaxures/A4 - 79.jpg" alt="" class="slide">
+                <img src="images/projects/creaxures/A4 - 80.jpg" alt="" class="slide">
+                <img src="images/projects/creaxures/A4 - 81.jpg" alt="" class="slide">
+                <img src="images/projects/creaxures/A4 - 84.jpg" alt="" class="slide">
+                <img src="images/projects/creaxures/A4 - 85.jpg" alt="" class="slide">
+                <img src="images/projects/creaxures/A4 - 87.jpg" alt="" class="slide">
+                <img src="images/projects/creaxures/A4 - 89.jpg" alt="" class="slide">
+                <img src="images/projects/creaxures/A4 - 90.jpg" alt="" class="slide">
+                <img src="images/projects/creaxures/A4 - 91.jpg" alt="" class="slide">
+                <img src="images/projects/creaxures/A4 - 93.jpg" alt="" class="slide">
+                <img src="images/projects/creaxures/A4 - 96.jpg" alt="" class="slide">
+                <img src="images/projects/creaxures/A4 - 97.jpg" alt="" class="slide">
+                <img src="images/projects/creaxures/A4 - 98.jpg" alt="" class="slide">
+                <img src="images/projects/creaxures/A4 - 99.jpg" alt="" class="slide">
+                <img src="images/projects/creaxures/A4 - 100.jpg" alt="" class="slide">
+              </div>
+            </div>
+            <div class="project-info">
+              <p>
+                Creaxures
+              </p>
+            </div>
           </div>
-        </div>
           <!-- PROJECT 4 -->
-        <div class="project" id="project4">
-          <div class="slider">
-            <div class="slider-inner">
-              <img src="projects/higher/A4 - 120.jpg" alt="" class="slide active">
-              <img src="projects/higher/A4 - 122.jpg" alt="" class="slide">
-              <img src="projects/higher/A4 - 140.jpg" alt="" class="slide">
-              <img src="projects/higher/A4 - 141.jpg" alt="" class="slide">
-              <img src="projects/higher/A4 - 144.jpg" alt="" class="slide">
-              <img src="projects/higher/A4 - 145.jpg" alt="" class="slide">
-              <img src="projects/higher/A4 - 146.jpg" alt="" class="slide">
-              <img src="projects/higher/A4 - 147.jpg" alt="" class="slide">
-              <img src="projects/higher/A4 - 148.jpg" alt="" class="slide">
-              <img src="projects/higher/A4 - 149.jpg" alt="" class="slide">
-              <img src="projects/higher/A4 - 150.jpg" alt="" class="slide">
-              <img src="projects/higher/A4 - 151.jpg" alt="" class="slide">
-              <img src="projects/higher/A4 - 152.jpg" alt="" class="slide">
-              <img src="projects/higher/A4 - 153.jpg" alt="" class="slide">
-              <img src="projects/higher/A4 - 155.jpg" alt="" class="slide">
-              <img src="projects/higher/A4 - 156.jpg" alt="" class="slide">
-              <img src="projects/higher/A4 - 159.jpg" alt="" class="slide">            
+          <div class="project" id="project4">
+            <div class="slider">
+              <div class="slider-inner">
+                <img src="images/projects/higher/A4 - 120.jpg" alt="" class="slide active">
+                <img src="images/projects/higher/A4 - 122.jpg" alt="" class="slide">
+                <img src="images/projects/higher/A4 - 140.jpg" alt="" class="slide">
+                <img src="images/projects/higher/A4 - 141.jpg" alt="" class="slide">
+                <img src="images/projects/higher/A4 - 144.jpg" alt="" class="slide">
+                <img src="images/projects/higher/A4 - 145.jpg" alt="" class="slide">
+                <img src="images/projects/higher/A4 - 146.jpg" alt="" class="slide">
+                <img src="images/projects/higher/A4 - 147.jpg" alt="" class="slide">
+                <img src="images/projects/higher/A4 - 148.jpg" alt="" class="slide">
+                <img src="images/projects/higher/A4 - 149.jpg" alt="" class="slide">
+                <img src="images/projects/higher/A4 - 150.jpg" alt="" class="slide">
+                <img src="images/projects/higher/A4 - 151.jpg" alt="" class="slide">
+                <img src="images/projects/higher/A4 - 152.jpg" alt="" class="slide">
+                <img src="images/projects/higher/A4 - 153.jpg" alt="" class="slide">
+                <img src="images/projects/higher/A4 - 155.jpg" alt="" class="slide">
+                <img src="images/projects/higher/A4 - 156.jpg" alt="" class="slide">
+                <img src="images/projects/higher/A4 - 159.jpg" alt="" class="slide">
+              </div>
+            </div>
+            <div class="project-info">
+              <p>
+                Higher
+              </p>
             </div>
           </div>
-          <div class="project-info">
-            <p>
-              Higher
-            </p>
-          </div>
-        </div>
 
-        <!-- PROJECT 5 -->
-        <div class="project" id="project5">
-          <div class="slider">
-            <div class="slider-inner">
-              <img src="projects/monaileona/A4 - 64.jpg" alt="" class="slide active">
-              <img src="projects/monaileona/A4 - 72.jpg" alt="" class="slide">
-              <img src="projects/monaileona/A4 - 73.jpg" alt="" class="slide">
-              <img src="projects/monaileona/A4 - 74.jpg" alt="" class="slide">
-              <img src="projects/monaileona/A4 - 80.jpg" alt="" class="slide">
-              <img src="projects/monaileona/A4 - 82.jpg" alt="" class="slide">
-              <img src="projects/monaileona/A4 - 93.jpg" alt="" class="slide">
-              <img src="projects/monaileona/A4 - 95.jpg" alt="" class="slide">
-              <img src="projects/monaileona/A4 - 96.jpg" alt="" class="slide">
-              <img src="projects/monaileona/A4 - 98.jpg" alt="" class="slide">
-              <img src="projects/monaileona/A4 - 101.jpg" alt="" class="slide">
-              <img src="projects/monaileona/A4 - 102.jpg" alt="" class="slide">
-              <img src="projects/monaileona/A4 - 106.jpg" alt="" class="slide">    
-              <img src="projects/monaileona/A4 - 108.jpg" alt="" class="slide">
-              <img src="projects/monaileona/A4 - 117.jpg" alt="" class="slide">
-              <img src="projects/monaileona/A4 - 120.jpg" alt="" class="slide">
-              <img src="projects/monaileona/A4 - 123.jpg" alt="" class="slide">
-              <img src="projects/monaileona/A4 - 125.jpg" alt="" class="slide">                                         
+          <!-- PROJECT 5 -->
+          <div class="project" id="project5">
+            <div class="slider">
+              <div class="slider-inner">
+                <img src="images/projects/monaileona/A4 - 64.jpg" alt="" class="slide active">
+                <img src="images/projects/monaileona/A4 - 72.jpg" alt="" class="slide">
+                <img src="images/projects/monaileona/A4 - 73.jpg" alt="" class="slide">
+                <img src="images/projects/monaileona/A4 - 74.jpg" alt="" class="slide">
+                <img src="images/projects/monaileona/A4 - 80.jpg" alt="" class="slide">
+                <img src="images/projects/monaileona/A4 - 82.jpg" alt="" class="slide">
+                <img src="images/projects/monaileona/A4 - 93.jpg" alt="" class="slide">
+                <img src="images/projects/monaileona/A4 - 95.jpg" alt="" class="slide">
+                <img src="images/projects/monaileona/A4 - 96.jpg" alt="" class="slide">
+                <img src="images/projects/monaileona/A4 - 98.jpg" alt="" class="slide">
+                <img src="images/projects/monaileona/A4 - 101.jpg" alt="" class="slide">
+                <img src="images/projects/monaileona/A4 - 102.jpg" alt="" class="slide">
+                <img src="images/projects/monaileona/A4 - 106.jpg" alt="" class="slide">
+                <img src="images/projects/monaileona/A4 - 108.jpg" alt="" class="slide">
+                <img src="images/projects/monaileona/A4 - 117.jpg" alt="" class="slide">
+                <img src="images/projects/monaileona/A4 - 120.jpg" alt="" class="slide">
+                <img src="images/projects/monaileona/A4 - 123.jpg" alt="" class="slide">
+                <img src="images/projects/monaileona/A4 - 125.jpg" alt="" class="slide">
+              </div>
+            </div>
+            <div class="project-info">
+              <p>
+                Monaileona
+              </p>
             </div>
           </div>
-          <div class="project-info">
-            <p>
-              Monaileona
-            </p>
-          </div>
-        </div>
 
           <!-- PROJECT 6 -->
-        <div class="project" id="project6">
-          <div class="slider">
-            <div class="slider-inner">
-              <img src="projects/musa/Frame 2.jpg" alt="" class="slide active">
-              <img src="projects/musa/A4 - 24.jpg" alt="" class="slide">
-              <img src="projects/musa/A4 - 25.jpg" alt="" class="slide">
-              <img src="projects/musa/A4 - 26.jpg" alt="" class="slide">
-              <img src="projects/musa/A4 - 27.jpg" alt="" class="slide">
-              <img src="projects/musa/A4 - 28.jpg" alt="" class="slide">
-              <img src="projects/musa/A4 - 29.jpg" alt="" class="slide">
-              <img src="projects/musa/A4 - 30.jpg" alt="" class="slide">
-              <img src="projects/musa/A4 - 31.jpg" alt="" class="slide">
-              <img src="projects/musa/A4 - 32.jpg" alt="" class="slide">
-              <img src="projects/musa/A4 - 33.jpg" alt="" class="slide">
-              <img src="projects/musa/A4 - 34.jpg" alt="" class="slide">
-              <img src="projects/musa/A4 - 35.jpg" alt="" class="slide">
-              <img src="projects/musa/A4 - 36.jpg" alt="" class="slide">
+          <div class="project" id="project6">
+            <div class="slider">
+              <div class="slider-inner">
+                <img src="images/projects/musa/Frame 2.jpg" alt="" class="slide active">
+                <img src="images/projects/musa/A4 - 24.jpg" alt="" class="slide">
+                <img src="images/projects/musa/A4 - 25.jpg" alt="" class="slide">
+                <img src="images/projects/musa/A4 - 26.jpg" alt="" class="slide">
+                <img src="images/projects/musa/A4 - 27.jpg" alt="" class="slide">
+                <img src="images/projects/musa/A4 - 28.jpg" alt="" class="slide">
+                <img src="images/projects/musa/A4 - 29.jpg" alt="" class="slide">
+                <img src="images/projects/musa/A4 - 30.jpg" alt="" class="slide">
+                <img src="images/projects/musa/A4 - 31.jpg" alt="" class="slide">
+                <img src="images/projects/musa/A4 - 32.jpg" alt="" class="slide">
+                <img src="images/projects/musa/A4 - 33.jpg" alt="" class="slide">
+                <img src="images/projects/musa/A4 - 34.jpg" alt="" class="slide">
+                <img src="images/projects/musa/A4 - 35.jpg" alt="" class="slide">
+                <img src="images/projects/musa/A4 - 36.jpg" alt="" class="slide">
+              </div>
+            </div>
+            <div class="project-info">
+              <p>
+                Musa
+              </p>
             </div>
           </div>
-          <div class="project-info">
-            <p>
-              Musa
-            </p>
-          </div>
-        </div>
           <!-- PROJECT 7 -->
-        <div class="project" id="project7">
-          <div class="slider">
-            <div class="slider-inner">
-              <img src="projects/smol-studios/A4 - 27.jpg" alt="" class="slide active">
-              <img src="projects/smol-studios/A4 - 28.jpg" alt="" class="slide">
-              <img src="projects/smol-studios/A4 - 29.jpg" alt="" class="slide">
-              <img src="projects/smol-studios/A4 - 30.jpg" alt="" class="slide">
-              <img src="projects/smol-studios/A4 - 31.jpg" alt="" class="slide">
-              <img src="projects/smol-studios/A4 - 32.jpg" alt="" class="slide">
-              <img src="projects/smol-studios/A4 - 33.jpg" alt="" class="slide">
+          <div class="project" id="project7">
+            <div class="slider">
+              <div class="slider-inner">
+                <img src="images/projects/smol-studios/A4 - 27.jpg" alt="" class="slide active">
+                <img src="images/projects/smol-studios/A4 - 28.jpg" alt="" class="slide">
+                <img src="images/projects/smol-studios/A4 - 29.jpg" alt="" class="slide">
+                <img src="images/projects/smol-studios/A4 - 30.jpg" alt="" class="slide">
+                <img src="images/projects/smol-studios/A4 - 31.jpg" alt="" class="slide">
+                <img src="images/projects/smol-studios/A4 - 32.jpg" alt="" class="slide">
+                <img src="images/projects/smol-studios/A4 - 33.jpg" alt="" class="slide">
+              </div>
+            </div>
+            <div class="project-info">
+              <p>
+                Smol Studios
+              </p>
             </div>
           </div>
-          <div class="project-info">
-            <p>
-              Smol Studios
-            </p>
-          </div>
-        </div>
+
           <!-- PROJECT 8 -->
-        <div class="project" id="project8">
-          <div class="slider">
-            <div class="slider-inner">
-              <img src="projects/split-hazard/A4 - 27.jpg" alt="" class="slide active">
-              <img src="projects/split-hazard/A4 - 28.jpg" alt="" class="slide">
-              <img src="projects/split-hazard/A4 - 31.jpg" alt="" class="slide">
-              <img src="projects/split-hazard/A4 - 32.jpg" alt="" class="slide">
-              <img src="projects/split-hazard/A4 - 33.jpg" alt="" class="slide">
-              <img src="projects/split-hazard/A4 - 35.jpg" alt="" class="slide">
-              <img src="projects/split-hazard/A4 - 36.jpg" alt="" class="slide">
-              <img src="projects/split-hazard/A4 - 37.jpg" alt="" class="slide">
-              <img src="projects/split-hazard/A4 - 39.jpg" alt="" class="slide">
-              <img src="projects/split-hazard/A4 - 40.jpg" alt="" class="slide">
-              <img src="projects/split-hazard/A4 - 42.jpg" alt="" class="slide">
-              <img src="projects/split-hazard/A4 - 43.jpg" alt="" class="slide">
-              <img src="projects/split-hazard/A4 - 45.jpg" alt="" class="slide">
+          <div class="project" id="project8">
+            <div class="slider">
+              <div class="slider-inner">
+                <img src="images/projects/split-hazard/A4 - 27.jpg" alt="" class="slide active">
+                <img src="images/projects/split-hazard/A4 - 28.jpg" alt="" class="slide">
+                <img src="images/projects/split-hazard/A4 - 31.jpg" alt="" class="slide">
+                <img src="images/projects/split-hazard/A4 - 32.jpg" alt="" class="slide">
+                <img src="images/projects/split-hazard/A4 - 33.jpg" alt="" class="slide">
+                <img src="images/projects/split-hazard/A4 - 35.jpg" alt="" class="slide">
+                <img src="images/projects/split-hazard/A4 - 36.jpg" alt="" class="slide">
+                <img src="images/projects/split-hazard/A4 - 37.jpg" alt="" class="slide">
+                <img src="images/projects/split-hazard/A4 - 39.jpg" alt="" class="slide">
+                <img src="images/projects/split-hazard/A4 - 40.jpg" alt="" class="slide">
+                <img src="images/projects/split-hazard/A4 - 42.jpg" alt="" class="slide">
+                <img src="images/projects/split-hazard/A4 - 43.jpg" alt="" class="slide">
+                <img src="images/projects/split-hazard/A4 - 45.jpg" alt="" class="slide">
+              </div>
+            </div>
+            <div class="project-info">
+              <p>
+                Split Hazard
+              </p>
             </div>
           </div>
-          <div class="project-info">
-            <p>
-              Split Hazard
-            </p>
-          </div>
+
+        <!-- PROJECT 9 -->
+          <!-- <div class="project" id="project9">
+            <div class="slider">
+              <div class="slider-inner">
+                <img src="images/projects/sophia/A4 - 158.jpg" alt="" class="slide active">
+                <img src="images/projects/sophia/A4 - 159.jpg" alt="" class="slide">
+                <img src="images/projects/sophia/A4 - 161.jpg" alt="" class="slide">
+
+              </div>
+            </div>
+            <div class="project-info">
+              <p>
+                Music score by the wizard
+                  <a href="https://instagram.com/pb___sr" target="_blank" rel="noopener">@pb___sr</a><br><br>
+
+                  Special thanks
+                  <a href="https://instagram.com/mario__cano__" target="_blank" rel="noopener">@mario__cano__</a>
+              </p>
+            </div>
+          </div>  -->
+        
+          <!-- PROJECT 10 -->
+          <!-- <div class="project" id="project10">
+            <div class="slider">
+              <div class="slider-inner">
+                <img src="images/projects/split-hazard/A4 - 27.jpg" alt="" class="slide active">
+                <img src="images/projects/split-hazard/A4 - 28.jpg" alt="" class="slide">
+
+              </div>
+            </div>
+            <div class="project-info">
+              <p>
+                PROJECT 10 INFO
+              </p>
+            </div>
+          </div>  -->
+
         </div>
-  </div>
-  </section>
+      </section>
 
-  </main>
-
-  </div><!-- END WRAPPER -->
-
-  <!-- Fixed project name + toggle -->
-  <div class="info-container">
-    <div id="info-name" class="info-name">
-      <div class="info-fill"></div>
-      <span class="info-text">Animario</span>
-    </div>
-    <button id="info-toggle" class="info-toggle">
-      <span class="plus">+</span>
-    </button>
+      <div class="info-container">
+        <div id="info-name" class="info-name">
+          <div class="info-fill"></div>
+          <span class="info-text">Animario</span>
+        </div>
+        <button id="info-toggle" class="info-toggle">
+          <span class="plus">+</span>
+        </button>
+      </div>
+    </main>
   </div>
 
-  
   <script src="script.js" defer></script>
+  <script src="script-project.js"></script>
 
   <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const wrapper = document.getElementById("page-wrapper");
-  const home = document.getElementById("home");
+    document.addEventListener("DOMContentLoaded", () => {
+      const wrapper = document.getElementById("page-wrapper");
+      const home = document.getElementById("home");
 
-  if (!wrapper || !home) return;
+      if (!wrapper || !home) return;
 
-  let isScrollingDown = true;
+      let isScrollingDown = true;
 
-  const check = () => {
-    const scrollTop = wrapper.scrollTop;
-    const homeHeight = home.offsetHeight;
+      const check = () => {
+        const scrollTop = wrapper.scrollTop;
+        const homeHeight = home.offsetHeight;
 
-    // Detect scroll direction (very important for smoothness)
-    const scrollingDown = scrollTop > (wrapper.lastScrollTop || 0);
-    wrapper.lastScrollTop = scrollTop;
+        const scrollingDown = scrollTop > (wrapper.lastScrollTop || 0);
+        wrapper.lastScrollTop = scrollTop;
 
-    // When scrolling UP and we're in the top 40% of home → disable snapping instantly
-    if (!scrollingDown && scrollTop < homeHeight * 0.8) {
-      wrapper.classList.add("free-scroll");
-    }
-    // When scrolling DOWN and past 30% of home → enable snapping
-    else if (scrollingDown && scrollTop > homeHeight * 0.3) {
-      wrapper.classList.remove("free-scroll");
-    }
-    // If we're in the middle zone, keep the current state (prevents flickering)
-    // → this is what makes it feel buttery
-  };
+        if (!scrollingDown && scrollTop < homeHeight * 0.8) {
+          wrapper.classList.add("free-scroll");
+        }
+        else if (scrollingDown && scrollTop > homeHeight * 0.3) {
+          wrapper.classList.remove("free-scroll");
+        }
+      };
 
-  wrapper.addEventListener("scroll", () => {
-    requestAnimationFrame(check);
-  });
+      wrapper.addEventListener("scroll", () => {
+        requestAnimationFrame(check);
+      });
 
-  // Initial check
-  check();
-});
-</script>
-
-
-  <!-- <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const wrapper = document.getElementById("page-wrapper");
-  const home = document.getElementById("home");
-
-  if (!wrapper || !home) return;
-
-  const check = () => {
-    if (wrapper.scrollTop < home.offsetHeight * 0.6) {
-      wrapper.classList.add("no-snap");
-    } else {
-      wrapper.classList.remove("no-snap");
-    }
-  };
-
-  wrapper.addEventListener("scroll", check);
-  check(); // run on load
-});
-</script> -->
-<script>
-// FINAL VERSION — does exactly what you want: home = free scroll, projects = perfect center snap
-
-// document.addEventListener("DOMContentLoaded", () => {
-//   const wrapper = document.getElementById("page-wrapper");
-//   const home = document.getElementById("home");
-//   const firstProject = document.querySelector(".project");
-
-//   if (!wrapper || !home || !firstProject) return;
-
-//   let allowDisable = true;  // prevents flickering
-
-//   const observer = new IntersectionObserver((entries) => {
-//     const homeEntry = entries.find(e => e.target === home);
-
-//     // As soon as home is less than 30% visible → enable project snapping
-//     if (homeEntry && homeEntry.intersectionRatio < 0.7) {
-//       wrapper.classList.add("snap-enabled");
-//       allowDisable = true;
-//     } 
-//     // When scrolling back up and home becomes mostly visible again → disable snapping
-//     else if (homeEntry && homeEntry.intersectionRatio > 0.8 && allowDisable) {
-//       wrapper.classList.remove("snap-enabled");
-//       allowDisable = false;  // prevent re-triggering until we go down again
-//     }
-//   }, {
-//     root: wrapper,
-//     threshold: [0, 0.1, 0.3, 0.5, 0.7, 0.8, 0.9, 1.0]
-//   });
-
-//   observer.observe(home);
-
-//   // If page loads already in projects → enable snap
-//   if (wrapper.scrollTop > home.offsetHeight * 0.5) {
-//     wrapper.classList.add("snap-enabled");
-//   }
-
-//   // Optional: re-enable disable permission when scrolling down again
-//   wrapper.addEventListener("scroll", () => {
-//     if (wrapper.scrollTop > home.offsetHeight * 0.8) {
-//       allowDisable = true;
-//     }
-//   });
-// });
-
-//   document.addEventListener("DOMContentLoaded", () => {
-//   const wrapper = document.getElementById("page-wrapper");
-//   const projectsWrapper = document.querySelector(".projects-wrapper");
-//   if (!wrapper || !projectsWrapper) return;
-
-//   let disableTimer = null;
-//   const DISABLE_DELAY = 300; // ms of hysteresis before turning snapping off
-
-//   // helper to safely add/remove class while avoiding jumps
-//   function enableSnap() {
-//     clearTimeout(disableTimer);
-//     // If already enabled, do nothing
-//     if (wrapper.classList.contains("snap-enabled")) return;
-
-//     // Temporarily disable smooth behavior to avoid an automatic animated jump
-//     const prev = wrapper.style.scrollBehavior;
-//     wrapper.style.scrollBehavior = "auto";
-
-//     // Add class
-//     wrapper.classList.add("snap-enabled");
-
-//     // restore smooth behavior on next frame (so snap can animate normally afterwards)
-//     requestAnimationFrame(() => {
-//       wrapper.style.scrollBehavior = prev || "";
-//     });
-//   }
-
-//   function scheduleDisableSnap() {
-//     // If already scheduled, reset timer
-//     clearTimeout(disableTimer);
-//     disableTimer = setTimeout(() => {
-//       // If page is frozen (info open) do not disable
-//       if (wrapper.classList.contains("freeze") || document.body.classList.contains("no-scroll")) {
-//         return;
-//       }
-//       // Avoid toggling if user is currently interacting (pointer down)
-//       if (pointerDown) return;
-//       wrapper.classList.remove("snap-enabled");
-//     }, DISABLE_DELAY);
-//   }
-
-//   // Track pointer down (user actively interacting) to avoid toggling mid-drag
-//   let pointerDown = false;
-//   wrapper.addEventListener("pointerdown", () => (pointerDown = true));
-//   window.addEventListener("pointerup", () => { pointerDown = false; });
-
-//   // Use IntersectionObserver with wrapper as the root so visibility is relative to the scrolling area
-//   const io = new IntersectionObserver(
-//     (entries) => {
-//       entries.forEach(entry => {
-//         if (entry.isIntersecting) {
-//           enableSnap();
-//         } else {
-//           // schedule disable (hysteresis to avoid flicker)
-//           scheduleDisableSnap();
-//         }
-//       });
-//     },
-//     {
-//       root: wrapper,
-//       rootMargin: "-45% 0px -45% 0px", // trigger when projects-wrapper enters central area
-//       threshold: 0
-//     }
-//   );
-
-//   io.observe(projectsWrapper);
-
-//   // If info-panel locks scrolling we should ensure snap is off (or leave it on?) — keep snap enabled while frozen
-//   const observerForFreeze = new MutationObserver(() => {
-//     // if freeze or no-scroll is set, keep snapping enabled so the page doesn't change underneath user
-//     if (wrapper.classList.contains("freeze") || document.body.classList.contains("no-scroll")) {
-//       enableSnap();
-//       clearTimeout(disableTimer);
-//     }
-//   });
-//   observerForFreeze.observe(document.body, { attributes: true, attributeFilter: ["class"] });
-//   observerForFreeze.observe(wrapper, { attributes: true, attributeFilter: ["class"] });
-
-//   // Optional: If the page is already scrolled into projects on load, enable snap
-//   const rect = projectsWrapper.getBoundingClientRect();
-//   const wrapperRect = wrapper.getBoundingClientRect();
-//   const isInsideOnLoad = rect.top < wrapperRect.bottom - wrapperRect.height * 0.25 && rect.bottom > wrapperRect.top + wrapperRect.height * 0.25;
-//   if (isInsideOnLoad) enableSnap();
-// });
-
-// document.addEventListener("DOMContentLoaded", () => {
-//   const wrapper = document.getElementById("page-wrapper");
-//   const projectsWrapper = document.querySelector(".projects-wrapper");
-//   if (!wrapper || !projectsWrapper) return;
-
-//   // Start with snapping disabled
-//   wrapper.classList.remove("snap-enabled");
-
-//   const enableSnap = () => wrapper.classList.add("snap-enabled");
-//   const disableSnap = () => wrapper.classList.remove("snap-enabled");
-
-//   // Use IntersectionObserver to enable snapping only inside projects
-//   const io = new IntersectionObserver(
-//     entries => {
-//       entries.forEach(entry => {
-//         if (entry.isIntersecting) {
-//           enableSnap(); // snap enabled when projects-wrapper is visible
-//         } else {
-//           disableSnap(); // snap disabled when projects-wrapper is not visible
-//         }
-//       });
-//     },
-//     {
-//       root: wrapper,
-//       rootMargin: "-20% 0px -20% 0px", // trigger slightly before it enters center
-//       threshold: 0
-//     }
-//   );
-
-//   io.observe(projectsWrapper);
-
-//   // Optional: prevent any jump behavior
-//   wrapper.addEventListener("scroll", () => {
-//     if (!wrapper.classList.contains("snap-enabled")) {
-//       wrapper.style.scrollBehavior = "auto"; // free scroll for home
-//     } else {
-//       wrapper.style.scrollBehavior = "smooth"; // smooth scroll in projects
-//     }
-//   });
-// });
-
-
-
+      check();
+    });
   </script>
+
 </body>
 
 </html>

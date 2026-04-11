@@ -1,26 +1,30 @@
-/* ==================== FONTS ==================== */
 @font-face {
   font-family: "SuisseIntl";
   src: url("fonts/SuisseIntl-Regular.otf") format("opentype");
+  src: url("fonts/SuisseIntl-Regular.ttf") format("truetype");
+  src: url("fonts/SuisseIntl-Regular.woff") format("woff");
+  src: url("fonts/SuisseIntl-Regular.woff2") format("woff2");
   font-weight: 400;
-  font-display: swap;           /* ← esta línea */
+  font-display: swap;
+  /* ← esta línea */
   font-feature-settings: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-/* @font-face {
-  font-family: "SuisseIntlMedium";
-  src: url("fonts/SuisseIntl-Medium.otf") format("opentype");
-  font-weight: 600;
-} */
 
-/* Prevent flash on load */
 .page-content {
   opacity: 0;
 }
 
+html, body {
+  overflow-x: hidden;
+}
+
+#page-wrapper {
+  overflow-x: hidden;
+}
+
 html {
-  /* REMOVE scroll-snap-type */
   scroll-behavior: smooth;
   overflow-y: scroll;
   background-color: #E0E0E0;
@@ -37,10 +41,10 @@ body {
   margin: 0;
   padding: 0;
   overflow-y: visible;
-  
 }
 
-header, nav {
+header,
+nav {
   overflow-anchor: none;
 }
 
@@ -49,35 +53,27 @@ header, nav {
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;   
+  scroll-snap-type: y mandatory;
 }
 
-/* #page-wrapper.no-snap {
-  scroll-snap-type: none !important;    
-} */
- #page-wrapper.free-scroll {
+#page-wrapper.free-scroll {
   scroll-snap-type: none !important;
 }
 
 #home {
-  scroll-snap-align: none !important;   /* crucial line */
+  scroll-snap-align: none !important;
   min-height: 100svh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* scroll-snap-align: start;
-  scroll-snap-stop: always;
-  scroll-behavior: smooth;
-  contain: layout style; */
   will-change: transform;
 }
 
 #home {
-  padding-bottom: 30dvh !important;  /* fuerza espacio extra */
+  padding-bottom: 30dvh !important;
 }
 
-/* Projects snap to PERFECT CENTER */
 .project {
   scroll-snap-align: center;
   scroll-snap-stop: always;
@@ -101,53 +97,36 @@ header, nav {
 }
 
 #home-text {
-  position: fixed;           /* ← FIXED, no absolute → así NO afecta al flujo ni a la altura */
+  font-family: "SuisseIntl", sans-serif;
+  position: fixed;
+  font-weight: 400; /* match Regular */
   top: 53%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 0;              /* ← muy arriba, encima de todo */
+  z-index: 0;
   text-align: center;
   font-size: 1rem;
   line-height: 1.4;
   color: #838383;
   opacity: 1;
   transition: opacity 0.18s linear;
-  pointer-events: none;      /* ← no interfiere con scroll ni clicks */
+  pointer-events: none;
   width: 90%;
   max-width: 900px;
   padding: 0 5%;
   box-sizing: border-box;
 }
 
-/* #home-text {
-  position: absolute;
-  top: 52.5%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  font-size: 1rem;
-  line-height: 1.4;
-  color: #838383;
-  opacity: 1 !important;
-  transition: opacity 0.1s linear;
-  pointer-events: none;
-  z-index: 0;  
-} */
-
-
-/* Hide the fixed home text when info panel is open */
-.info-open ~ #home-text,
+.info-open~#home-text,
 body.info-open #home-text {
   opacity: 0 !important;
   pointer-events: none;
 }
 
-/* ==================== NAVIGATION — FIXED ON MOBILE ==================== */
 header {
   position: fixed;
   width: 100%;
   z-index: 10000;
-  /* REQUIRED FIXES FOR MOBILE HEADER SHIFT */
   transform: translateZ(0);
   will-change: transform;
   backface-visibility: hidden;
@@ -163,20 +142,25 @@ header {
   align-items: center;
 }
 
-#yam     { padding: 5px 10px 5px 7px; }
-#about   { padding: 5px 10px; }
-#contact { padding: 5px 7px 5px 10px; }
+#yam {
+  padding: 5px 10px 5px 7px;
+}
+
+#about {
+  padding: 5px 10px;
+}
+
+#contact {
+  padding: 5px 7px 5px 10px;
+}
 
 nav {
   display: flex;
   justify-content: center;
   position: relative;
   overflow: hidden;
-
-  /* blur breaks mobile unless header becomes its own layer (now fixed) */
   backdrop-filter: blur(7px);
-  background: rgba(255,255,255,0.70);
-
+  background: rgba(255, 255, 255, 0.70);
   border-radius: 2px;
   box-sizing: border-box;
 }
@@ -191,52 +175,82 @@ nav a {
   transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Active page always 100% opacity */
-nav.home    a#yam,
-nav.about   a#about,
+nav.home a#yam,
+nav.about a#about,
 nav.contact a#contact {
   opacity: 1 !important;
 }
 
-nav.home    a#yam:hover,
-nav.about   a#about:hover,
+nav.home a#yam:hover,
+nav.about a#about:hover,
 nav.contact a#contact:hover {
   opacity: 1 !important;
 }
 
-nav.home    a:nth-child(1),
-nav.about   a:nth-child(2),
+nav.home a:nth-child(1),
+nav.about a:nth-child(2),
 nav.contact a:nth-child(3),
 nav a.sticky-hover,
 nav a:hover {
   opacity: 1 !important;
 }
 
-nav.instant a { transition: none !important; }
-nav.instant .lime { transition: none !important; }
+nav.instant a {
+  transition: none !important;
+}
+
+nav.instant .lime {
+  transition: none !important;
+}
 
 nav .lime {
   position: absolute;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   width: 33.333333%;
   height: 100%;
   pointer-events: none;
   opacity: 1 !important;
-  transition: transform 0.65s cubic-bezier(0.22,1,0.36,1);
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* ACTIVE PAGE GRADIENTS */
-nav.home    .lime { background: linear-gradient(90deg, #CEFF2D 0%, #CEFF2D 90%, transparent 100%); }
-nav.about   .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 90%, transparent 100%); }
-nav.contact .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 100%); }
+nav.home .lime {
+  background: linear-gradient(90deg, #CEFF2D 0%, #CEFF2D 90%, transparent 100%);
+}
+
+nav.about .lime {
+  background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 90%, transparent 100%);
+}
+
+nav.contact .lime {
+  background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 100%);
+}
 
 /* HOVER PREVIEW LOGIC */
-nav.home    a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 90%, transparent 100%); }
-nav.home    a:nth-child(3):hover ~ .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 100%); }
-nav.about   a:nth-child(1):hover ~ .lime { background: linear-gradient(90deg, #CEFF2D 0%, #CEFF2D 90%, transparent 100%); }
-nav.about   a:nth-child(3):hover ~ .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 100%); }
-nav.contact a:nth-child(1):hover ~ .lime { background: linear-gradient(90deg, #CEFF2D 0%, #CEFF2D 90%, transparent 100%); }
-nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 90%, transparent 100%); }
+nav.home a:nth-child(2):hover~.lime {
+  background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 90%, transparent 100%);
+}
+
+nav.home a:nth-child(3):hover~.lime {
+  background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 100%);
+}
+
+nav.about a:nth-child(1):hover~.lime {
+  background: linear-gradient(90deg, #CEFF2D 0%, #CEFF2D 90%, transparent 100%);
+}
+
+nav.about a:nth-child(3):hover~.lime {
+  background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 100%);
+}
+
+nav.contact a:nth-child(1):hover~.lime {
+  background: linear-gradient(90deg, #CEFF2D 0%, #CEFF2D 90%, transparent 100%);
+}
+
+nav.contact a:nth-child(2):hover~.lime {
+  background: linear-gradient(90deg, transparent 0%, #CEFF2D 10%, #CEFF2D 90%, transparent 100%);
+}
 
 /* ==================== SLIDER ==================== */
 .slider {
@@ -271,25 +285,14 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
   pointer-events: all;
 }
 
-/* .project.in-view .slide.active {
-  animation: gentleZoom 12s infinite ease-in-out;
-}
-
-@keyframes gentleZoom {
-  0%,100% { transform: scale(1); }
-  50%     { transform: scale(1.04); }
-} */
-
-/* --- FADE ANIMATION FOR DOTS --- */
 .carousel-dots .dot {
   opacity: 0.2;
-  transition: opacity 0.6s ease; /* match your slide fade duration */
+  transition: opacity 0.6s ease;
 }
 
 .carousel-dots .dot.active {
   opacity: 1;
 }
-
 
 .carousel-dots {
   display: flex;
@@ -308,9 +311,10 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
   transition: .3s;
 }
 
-.dot.active { opacity: 1; }
+.dot.active {
+  opacity: 1;
+}
 
-/* ==================== PROJECT INFO OVERLAY ==================== */
 .project-info {
   position: absolute;
   inset: 0;
@@ -343,13 +347,28 @@ nav.contact a:nth-child(2):hover ~ .lime { background: linear-gradient(90deg, tr
 }
 
 .project-info p {
-padding: 0 30%;
+  padding: 0 30%;
 }
 
-.project.show-info .project-info { opacity: 1; pointer-events: all; }
-.project.show-info .slider { filter: blur(20px); transition: filter .6s ease; }
-.project.closing-info .project-info { opacity: 0; transition: opacity .6s ease; }
-.project.closing-info .slider { filter: blur(0); transition: filter .6s ease; }
+.project.show-info .project-info {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.project.show-info .slider {
+  filter: blur(20px);
+  transition: filter .6s ease;
+}
+
+.project.closing-info .project-info {
+  opacity: 0;
+  transition: opacity .6s ease;
+}
+
+.project.closing-info .slider {
+  filter: blur(0);
+  transition: filter .6s ease;
+}
 
 /* ==================== INFO ICON ==================== */
 .info-container {
@@ -384,7 +403,8 @@ padding: 0 30%;
 
 .info-fill {
   position: absolute;
-  top: 0; left: -100%;
+  top: 0;
+  left: -100%;
   width: 100%;
   height: 100%;
   background: #CEFF2D;
@@ -401,10 +421,14 @@ padding: 0 30%;
 }
 
 .info-name.hovered .info-fill,
-.info-name.open .info-fill { left: 0; }
+.info-name.open .info-fill {
+  left: 0;
+}
 
-.info-name.hovered .info-text,
-.info-name.open .info-text { color: #000; }
+/* .info-name.hovered .info-text,
+.info-name.open .info-text {
+  color: #000;
+} */
 
 #info-toggle {
   background: #ffffffa6;
@@ -420,7 +444,10 @@ padding: 0 30%;
   backdrop-filter: blur(7px);
 }
 
-#info-toggle.hide-mode { background-color: #CEFF2D; backdrop-filter: blur(6px); }
+#info-toggle.hide-mode {
+  background-color: #CEFF2D;
+  backdrop-filter: blur(6px);
+}
 
 #info-toggle .plus {
   display: inline-block;
@@ -428,19 +455,30 @@ padding: 0 30%;
   transition: transform 0.3s ease;
 }
 
-#info-toggle.hide-mode .plus { transform: rotate(45deg); }
-#info-toggle:hover .plus { transform: scale(1.4); }
+#info-toggle.hide-mode .plus {
+  transform: rotate(45deg);
+}
+
+#info-toggle:hover .plus {
+  transform: scale(1.4);
+}
+
 #info-toggle.hide-mode:hover .plus {
   transform: rotate(45deg) scale(1.4);
 }
 
 #info-toggle,
 #info-toggle .plus {
-  color: #3C3C3C !important; 
+  color: #3C3C3C !important;
 }
 
-#info-toggle::-moz-focus-inner { border: 0; }
-#info-toggle:focus { outline: none; }
+#info-toggle::-moz-focus-inner {
+  border: 0;
+}
+
+#info-toggle:focus {
+  outline: none;
+}
 
 /* ==================== CUSTOM ARROW CURSOR ==================== */
 .custom-arrow-cursor {
@@ -460,8 +498,13 @@ padding: 0 30%;
   object-fit: contain;
 }
 
-.custom-arrow-cursor.left .cursor-arrow { transform: scaleX(-1); }
-.custom-arrow-cursor.right .cursor-arrow { transform: scaleX(1); }
+.custom-arrow-cursor.left .cursor-arrow {
+  transform: scaleX(-1);
+}
+
+.custom-arrow-cursor.right .cursor-arrow {
+  transform: scaleX(1);
+}
 
 .slider,
 .custom-arrow-cursor {
@@ -471,26 +514,22 @@ padding: 0 30%;
 .page-content {
   opacity: 1;
   visibility: visible;
-  position: relative;          /* ← vuelve al flujo normal */
-  transition: opacity 1.2s cubic-bezier(0.65,0,0.35,1);
+  position: relative;
+  transition: opacity 1.2s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 .page-content.start-hidden {
   opacity: 0;
-  visibility: hidden;          /* ← evita que mida altura 0 */
-  position: absolute;          /* ← lo saca del flujo mientras está hidden */
-  top: 0; left: 0; width: 100%;
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
 .page-content.fade-out {
   opacity: 0 !important;
 }
-
-/* .page-content {
-  opacity: 0;
-  transition: opacity 1.2s cubic-bezier(0.65, 0, 0.35, 1);
-  will-change: opacity;
-} */
 
 .page-content.fade-in {
   opacity: 1 !important;
@@ -500,101 +539,114 @@ padding: 0 30%;
   opacity: 0 !important;
 }
 
-/* ==================== NO-SCROLL LOCK CLASS ==================== */
-/* Prevent body from scrolling */
 .no-scroll {
   overflow: hidden !important;
   height: 100svh;
 }
 
-/* Prevent wrapper from moving */
 #page-wrapper.freeze {
   overflow: hidden !important;
   pointer-events: none;
 }
 
-/* Prevent wrapper from moving */
 #page-wrapper.freeze {
   overflow: hidden !important;
   pointer-events: none;
 }
 
-
-/* ==================== RESPONSIVE ==================== */
-@media (max-width: 860px) { }
-
+@media (max-width: 860px) {}
 
 @media (max-width: 480px) {
 
-  #yam     { padding: 5px 7px 5px 7px; }
-#about   { padding: 5px 10px; }
-#contact { padding: 5px 7px 5px 7px; }
-
-  header{
-    padding: 50px 0 0 0;
+  #yam {
+    padding: 5px 7px 5px 7px;
   }
+
+  #about {
+    padding: 5px 10px;
+  }
+
+  #contact {
+    padding: 5px 7px 5px 7px;
+  }
+
+  header {
+    padding: 50px 0 0 0;
+    overflow-x: hidden !important;
+    width: 100%;
+    max-width: 100vw;
+  }
+
   .custom-arrow-cursor {
     display: none;
   }
+
   .slider {
     width: 90vmin;
     margin-top: 3vh;
   }
+
   .info-container {
-    bottom: 5%;  
+    bottom: 5%;
   }
 
   .info-name {
-    padding: 7px 20px; /* ensure consistency */
+    padding: 7px 20px;
   }
 
-
   #info-toggle {
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-#info-toggle .plus {
-  display: block;
-  width: 100%;
-  text-align: center;
-  line-height: 1;
-  transform-origin: center;
-  margin-top: 0;  /* remove -2px adjustment */
-}
-.project-info p {
+  #info-toggle .plus {
+    display: block;
+    width: 100%;
+    text-align: center;
+    line-height: 1;
+    transform-origin: center;
+    margin-top: 0;
+  }
+
+  .project-info p {
     padding: 0 0;
     font-size: 0.8rem;
   }
-
- /* #info-toggle {
-    padding: 3px 9px;
-    font-size: 1rem;   /* keep same as text */
-  /* } */
-  /* .plus {
-    margin-top: -2px;
-  } */ 
 }
 
 @media (pointer: coarse) {
   .info-name.hovered .info-fill {
-    left: -100% !important; /* prevent fill animation on mobile hover */
+    left: -100% !important;
   }
+
   #info-toggle .plus {
-    /* This transition makes the closing animation buttery smooth */
     transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
     transform-origin: center;
   }
 
-  /* Optional: slightly bigger × on mobile for better tap target */
   #info-toggle.hide-mode .plus {
     transform: rotate(45deg) scale(1.4);
   }
 
   #info-toggle:not(.hide-mode) .plus {
     transform: rotate(0deg) scale(1);
+  }
+}
+
+/* ==================== TOUCH SWIPE IMPROVEMENTS ==================== */
+.slider {
+  touch-action: pan-y;           /* Allows vertical page scroll, horizontal swipe handled by JS */
+}
+
+@media (pointer: coarse) {
+  .slider {
+    touch-action: pan-y;
+  }
+  
+  .slide {
+    touch-action: none;          /* Prevents unwanted browser zoom/drag on images/videos */
   }
 }

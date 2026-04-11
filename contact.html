@@ -10,7 +10,9 @@
   <link rel="stylesheet" href="style-about.css">
   <link rel="stylesheet" href="style-contact.css">
   <link rel="preload" href="fonts/SuisseIntl-Regular.otf" as="font" type="font/otf" crossorigin>
-<link rel="preload" href="fonts/SuisseIntl-Medium.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="fonts/SuisseIntl-Regular.woff" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="fonts/SuisseIntl-Regular.woff2" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="fonts/SuisseIntl-Regular.ttf" as="font" type="font/otf" crossorigin>
   <script src="script.js" defer></script>
   <title>YAM STUDIO - Contact</title>
 </head>
@@ -18,27 +20,25 @@
 <body>
   <script>
     window.addEventListener("load", () => {
-    requestAnimationFrame(() => {
-      document.querySelector("nav").style.transition = 
-        "transform 0.65s cubic-bezier(0.22,1,0.36,1), background 0.65s";
-      document.querySelectorAll("nav a").forEach(a => {
-        a.style.transition = "opacity 0.75s cubic-bezier(0.22,1,0.36,1)";
+      requestAnimationFrame(() => {
+        document.querySelector("nav").style.transition =
+          "transform 0.65s cubic-bezier(0.22,1,0.36,1), background 0.65s";
+        document.querySelectorAll("nav a").forEach(a => {
+          a.style.transition = "opacity 0.75s cubic-bezier(0.22,1,0.36,1)";
+        });
       });
     });
-  });
-    // Kill the browser's scroll restoration (the #1 cause of "jump on navigation")
+
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual';
     }
   </script>
   <header>
     <div class="header-div">
-      <nav>
+      <nav class="contact">
         <a id="yam" href="index.html">YAM</a>
         <a id="about" href="about.html">About</a>
         <a id="contact" href="contact.html">Contact</a>
-
-        <!-- the moving lime highlight -->
         <div class="lime"></div>
       </nav>
     </div>
@@ -47,20 +47,17 @@
     <main class="page-content start-hidden">
       <section id="contact-section">
         <h4>Say hi!</h4>
-        <!-- Email with data attribute for reliability -->
+
         <h1 id="email" data-email="hello@yamstudio.xyz">hello@yamstudio.xyz</h1>
 
-        <!-- Social links -->
         <div class="social-links">
 
-          <!-- INSTAGRAM -->
           <a href="https://www.instagram.com/yamstudio.xyz/" target="_blank" class="social-item instagram">
             <img src="images/Insta.png" alt="Instagram icon">
             <span>Instagram</span>
           </a>
           <img src="images/line.png" alt="vertical line" class="divider">
 
-          <!-- ARE.NA -->
           <a href="https://www.are.na/yam-studio/channels" target="_blank" class="social-item arena">
             <img src="images/Are.na.png" alt="Arena icon">
             <span>Are.na</span>
@@ -68,7 +65,6 @@
 
           <img src="images/line.png" alt="vertical line" class="divider">
 
-          <!-- LINKEDIN -->
           <a href="https://es.linkedin.com/in/alfonso-yordi-82762a106" target="_blank" class="social-item linkedin">
             <img src="images/Linkedin.png" alt="Linked In icon">
             <span>LinkedIn</span>
@@ -91,7 +87,7 @@
       </footer>
     </main>
   </div>
-  <!-- Email copy script (inline for contact page only) -->
+
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const emailElement = document.getElementById("email");
@@ -104,25 +100,20 @@
         try {
           await navigator.clipboard.writeText(originalEmail);
 
-          // 1. Fade out current text
           emailElement.classList.add("fade-out");
 
-          // 2. After fade-out → show "Copied!"
           setTimeout(() => {
             emailElement.textContent = "Copied!";
             emailElement.classList.remove("fade-out");
             emailElement.classList.add("copied");
-            // Trigger reflow to restart animation
             void emailElement.offsetWidth;
             emailElement.classList.add("fade-in");
           }, 300);
 
-          // 3. After 1.5s total → fade out "Copied!"
           setTimeout(() => {
             emailElement.classList.remove("fade-in");
             emailElement.classList.add("fade-out");
 
-            // 4. After fade-out → restore email
             setTimeout(() => {
               emailElement.textContent = originalEmail;
               emailElement.classList.remove("fade-out", "copied");

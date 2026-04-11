@@ -16,18 +16,13 @@ hr {
   margin: 0 2% 0.75%;
 }
 
-/* =========================================================
-   ALFONSO YORDI – PERFECT VERTICAL CENTER (desktop + mobile)
-   ========================================================= */
 #alfonso-yordi {
   min-height: 100vh;
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* vertical center */
   align-items: center;
-  /* horizontal center */
   padding: 12vh 0 12vh;
   box-sizing: border-box;
   text-align: center;
@@ -35,7 +30,6 @@ hr {
 
 .alfonso-container {
   color: #838383;
-  /* max-width: 90%; */
 }
 
 .alfonso-photo {
@@ -43,7 +37,6 @@ hr {
   max-width: 88vw;
   height: auto;
   object-fit: contain;
-  /* margin-bottom: 2.5rem; */
 }
 
 .alfonso-text {
@@ -81,19 +74,15 @@ hr {
 }
 
 .social-item-alfonso img {
-    width: 40px; /* or whatever looks right */
-    height: auto;
+  width: 40px;
+  height: auto;
 }
 
-/* Remove all link underlines */
 .social-links-alfonso a {
   text-decoration: none;
   color: inherit;
 }
 
-/* =========================================================
-   SERVICES
-   ========================================================= */
 #services {
   display: flex;
   flex-direction: column;
@@ -134,9 +123,6 @@ hr {
   text-align: left;
 }
 
-/* =========================================================
-   CLIENTS MARQUEE
-   ========================================================= */
 #clients {
   padding: 8vh 0;
   overflow: hidden;
@@ -183,18 +169,13 @@ hr {
   opacity: 1;
 }
 
-/* =========================================================
-   OUR OFFICE – PERFECT VERTICAL CENTER
-   ========================================================= */
 #our-office {
   min-height: 100vh;
-  min-height: 100dvh;
+  min-height: 98dvh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* vertical center */
   align-items: center;
-  /* horizontal center */
   padding: 12vh 0 0;
   box-sizing: border-box;
   text-align: center;
@@ -206,10 +187,15 @@ hr {
 }
 
 .office-photo {
+  display: block;
   width: 45vh;
   max-width: 88vw;
   height: auto;
   object-fit: contain;
+}
+
+.office-photo-mobile {
+  display: none;
 }
 
 .office-text {
@@ -225,11 +211,7 @@ hr {
   font-size: 1rem !important
 }
 
-/* =========================================================
-   MOBILE STYLES – CLEAN & BULLETPROOF
-   ========================================================= */
-@media (max-width: 860px) {
-
+@media (max-width: 480px) {
   .separate {
     margin: 8% 0 4% 0;
   }
@@ -239,7 +221,6 @@ hr {
     margin: 0 5% 1rem;
   }
 
-  /* Alfonso & Office – tighter but still perfectly centered */
   #alfonso-yordi {
     padding: 0
   }
@@ -248,20 +229,24 @@ hr {
     padding: 0
   }
 
-  .alfonso-photo,
   .office-photo {
+    display: none;
+  }
+
+  .alfonso-photo,
+  .office-photo-mobile {
     width: 88vw;
-    /* or 92vw if you want them a bit bigger */
-    /* max-width: 460px; */
     height: auto;
     object-fit: contain;
     display: block;
-    /* ← forces centering */
     margin-left: auto !important;
-    /* ← kills the right offset */
     margin-right: auto !important;
-    /* ← kills the right offset */
     margin-bottom: 2rem;
+  }
+
+  .office-photo-mobile {
+
+    margin-top: 2rem;
   }
 
   .alfonso-text,
@@ -270,7 +255,6 @@ hr {
     line-height: 1.5;
   }
 
-  /* Services – 2 columns, no overflow ever */
   .services-grid {
     grid-template-columns: 1fr 1fr;
     width: 100%;
@@ -289,7 +273,6 @@ hr {
     line-height: 1.48;
   }
 
-  /* Clients marquee mobile */
   #clients {
     height: 44vh;
   }
@@ -302,20 +285,15 @@ hr {
   .marquee-single .track img {
     height: 48px;
   }
-}
 
-@media (max-width: 480px) {
+
+
   header {
     padding-top: 50px;
   }
 
   .alfonso-photo {
     width: 90%;
-    max-width: none;
-  }
-
-  .office-photo {
-    width: 100%;
     max-width: none;
   }
 
@@ -371,14 +349,14 @@ hr {
 
   .service img {
     margin-bottom: 0;
-}
+  }
 
   .marquee-single .track img {
-    height: 40px;
+    height: 100px;
   }
 
   .marquee-single {
-    --gap: 70px;
+    --gap: 4px;
     height: 80px;
     min-height: 140px;
   }
@@ -400,10 +378,11 @@ hr {
   .alfonso-text {
     text-align: left;
   }
+
   #yam-footer {
-  color: #838383;
-  padding: 0 0 2% 2%;
-  font-size: 1rem !important;
-  text-decoration: none !important;
-}
+    color: #838383;
+    padding: 0 0 2% 4%;
+    font-size: 1rem !important;
+    text-decoration: none !important;
+  }
 }

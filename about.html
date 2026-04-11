@@ -10,7 +10,9 @@
   <link rel="stylesheet" href="style-about.css">
   <link rel="stylesheet" href="style-contact.css">
   <link rel="preload" href="fonts/SuisseIntl-Regular.otf" as="font" type="font/otf" crossorigin>
-  <link rel="preload" href="fonts/SuisseIntl-Medium.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="fonts/SuisseIntl-Regular.woff" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="fonts/SuisseIntl-Regular.woff2" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="fonts/SuisseIntl-Regular.ttf" as="font" type="font/otf" crossorigin>
   <script src="script.js" defer></script>
   <title>YAM STUDIO - About</title>
 </head>
@@ -28,19 +30,17 @@
           });
         });
       });
-      // Kill the browser's scroll restoration (the #1 cause of "jump on navigation")
+
       if ('scrollRestoration' in history) {
         history.scrollRestoration = 'manual';
       }
     </script>
 
     <div class="header-div">
-      <nav>
+      <nav class="about">
         <a id="yam" href="index.html">YAM</a>
         <a id="about" href="about.html">About</a>
         <a id="contact" href="contact.html">Contact</a>
-
-        <!-- the moving lime highlight -->
         <div class="lime"></div>
       </nav>
     </div>
@@ -49,39 +49,19 @@
   <div id="page-wrapper">
     <main class="page-content start-hidden">
 
-      <!-- INTRO SECTION -->
-      <!-- <section id="about-section">
-      <img id="yam-logo" src="services/yam.png" alt="YAM Studio Logo">
-      <h1 style="position:relative; z-index:1;">
-        YAM Studio creates visual identities and experiences <br>
-        that are bold, crafted️, and culturally tuned. <br><br>
-        Inspired by heritage, everyday graphics, and the unexpected, <br>
-        each project blends research and hands-on exploration <br>
-        to produce work that stands out.
-      </h1>
-    </section>
-
-    <div class="separate">
-    <p class="div-text">Alfonso Yordi</p>
-    <hr>
-    </div> -->
-
-      <!-- ALFONSO YORDI SECTION -->
-
       <section id="alfonso-yordi">
         <div class="alfonso-container">
-          <img src="images/alfonso.png" alt="Alfonso Yordi" class="alfonso-photo">
+          <img src="images/about/alfonso.png" alt="Alfonso Yordi" class="alfonso-photo">
 
           <div class="social-links-alfonso">
 
-            <!-- INSTAGRAM -->
             <a href="https://www.instagram.com/yamstudio.xyz/" target="_blank" class="social-item-alfonso instagram">
               <img src="images/Insta.png" alt="Instagram icon">
               <span>Instagram</span>
             </a>
 
             <img src="images/line.png" alt="vertical line" class="divider">
-            <!-- ARE.NA -->
+
             <a href="https://www.are.na/yam-studio/channels" target="_blank" class="social-item-alfonso arena">
               <img src="images/Are.na.png" alt="Arena icon">
               <span>Are.na</span>
@@ -89,7 +69,6 @@
 
             <img src="images/line.png" alt="vertical line" class="divider">
 
-            <!-- LINKEDIN -->
             <a href="https://es.linkedin.com/in/alfonso-yordi-82762a106" target="_blank"
               class="social-item-alfonso linkedin">
               <img src="images/Linkedin.png" alt="Linked In icon">
@@ -117,8 +96,6 @@
         </div>
       </section>
 
-      <!-- SERVICES SECTION -->
-
       <div class="separate">
         <p class="div-text">Services</p>
         <hr>
@@ -128,57 +105,55 @@
         <div class="services-grid">
           <div class="service">
             <h3>Branding</h3>
-            <img src="services/branding.png" alt="Branding">
+            <img src="images/about/services/branding.png" alt="Branding">
             <p>Visual identities that balance clarity with edge — structured systems infused with cultural attitude and
               contemporary relevance.</p>
           </div>
           <div class="service">
             <h3>Campaigns</h3>
-            <img src="services/campaigns.png" alt="Campaigns">
+            <img src="images/about/services/campaigns.png" alt="Campaigns">
             <p>Design languages built to travel: shapes, colors, and visuals that speak fluently across borders and
               audiences.</p>
           </div>
           <div class="service">
             <h3>Art direction</h3>
-            <img src="services/art-direction.png" alt="Art Direction">
+            <img src="images/about/services/art-direction.png" alt="Art Direction">
             <p>From concept to image, curating the mood and coherence that makes every project sharp, rich, and
               unmistakable.</p>
           </div>
           <div class="service">
             <h3>Typography</h3>
-            <img src="services/typography.png" alt="Typography">
+            <img src="images/about/services/typography.png" alt="Typography">
             <p>Custom systems, expressive lettering, and typographic play that transform words into vibrant and
               functional
               design.</p>
           </div>
           <div class="service">
             <h3>Poster</h3>
-            <img src="services/poster.png" alt="Poster">
+            <img src="images/about/services/poster.png" alt="Poster">
             <p>A canvas for experimentation — striking compositions created to catch eyes, spark dialogue, and provoke
               curiosity.</p>
           </div>
           <div class="service">
             <h3>Logo</h3>
-            <img src="services/logo.png" alt="Logo">
+            <img src="images/about/services/logo.png" alt="Logo">
             <p>Marks reduced to their essence: simple, sharp, and instantly recognizable across platforms, scales, and
               cultures.</p>
           </div>
           <div class="service">
             <h3>Editorial</h3>
-            <img src="services/editorial.png" alt="Editorial">
+            <img src="images/about/services/editorial.png" alt="Editorial">
             <p>Layouts as narratives: rhythm, sequence, and texture that turn printed pages into crafted visual
               experiences.</p>
           </div>
           <div class="service">
             <h3>Motion</h3>
-            <img src="services/motion.png" alt="Motion Design">
+            <img src="images/about/services/motion.png" alt="Motion Design">
             <p>Visual identities that balance clarity with edge — structured systems infused with cultural attitude and
               contemporary relevance.</p>
           </div>
         </div>
       </section>
-
-      <!-- CLIENTS SECTION -->
 
       <div class="separate">
         <p class="div-text clients">Clients</p>
@@ -188,24 +163,22 @@
       <section id="clients">
         <div class="marquee marquee-single">
           <div class="track">
-            <!-- All 12 logos in one single row -->
-            <img src="images/logos/Frame 265.svg" alt="BASE">
-            <img src="images/logos/Frame 266.svg" alt="BNR">
-            <img src="images/logos/Frame 267.svg" alt="Cademy">
-            <img src="images/logos/Frame 268.svg" alt="COCOTA">
-            <img src="images/logos/Frame 269.svg" alt="GREYGOOSE">
-            <img src="images/logos/Frame 270.svg" alt="Infinity Pools">
-            <img src="images/logos/Frame 271.svg" alt="Kabila">
-            <img src="images/logos/Frame 272.svg" alt="Matadero">
-            <img src="images/logos/Frame 273.svg" alt="Signature">
-            <img src="images/logos/Frame 274.svg" alt="Solana">
-            <img src="images/logos/Frame 275.svg" alt="UNCOMMON">
-            <img src="images/logos/Frame 276.svg" alt="Waka">
+            <img src="images/logos/Frame 265.svg" alt="Base">
+            <img src="images/logos/Frame 266.svg" alt="Solana">
+            <img src="images/logos/Frame 267.svg" alt="Matadero">
+            <img src="images/logos/Frame 268.svg" alt="GreyGoose">
+            <img src="images/logos/Frame 269.svg" alt="UnderArmour">
+            <img src="images/logos/Frame 270.svg" alt="Uncommon">
+            <img src="images/logos/Frame 271.svg" alt="Signature">
+            <img src="images/logos/Frame 272.svg" alt="BNR">
+            <img src="images/logos/Frame 273.svg" alt="Kabila">
+            <img src="images/logos/Frame 274.svg" alt="InfinityPools">
+            <img src="images/logos/Frame 275.svg" alt="Cademy">
+            <img src="images/logos/Frame 276.svg" alt="Cocota">
+            <img src="images/logos/Frame 277.svg" alt="Waka">
           </div>
         </div>
       </section>
-
-      <!-- OUR OFFICE SECTION -->
 
       <div class="separate">
         <p class="div-text">Our Office</p>
@@ -216,19 +189,19 @@
         <div class="office-container">
           <h2>Come visit us at <br>Chapa Espacio in Madrid!</h2>
           <img src="images/chapa-studio.png" alt="Our Office" class="office-photo">
+          <img src="images/Foto_Chapa_Mobile.jpg" alt="Our Office" class="office-photo-mobile">
           <p class="office-text">
             Chapa Espacio <br> C/ Sebastian Gomez 5, Local B1
           </p>
         </div>
       </section>
 
-
-
-    <footer>
-      <p id="yam-footer">YAM©<span class="faded-year">2025</span></p>
-    </footer>
-        </main>
-  </div><!-- END WRAPPER -->
+      <footer>
+        <p id="yam-footer">YAM©<span class="faded-year">2025</span></p>
+      </footer>
+      
+    </main>
+  </div>
 
 </body>
 

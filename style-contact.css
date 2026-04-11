@@ -1,28 +1,27 @@
-
 #contact-section {
-    font-family: "SuisseIntl";
-    height: 92.75vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #838383;
-    text-align: center;
-    margin: 0;
+  font-family: "SuisseIntl";
+  height: 92.75vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #838383;
+  text-align: center;
+  margin: 0;
 }
 
 #contact-section h1 {
-    font-size: 2.4rem;
+  font-size: 2.4rem;
 }
 
 #contact-section h4 {
-    font-size: 1rem;
-    line-height: 1.4;
-    margin-bottom: 10px;
+  font-size: 1rem;
+  line-height: 1.4;
+  margin-bottom: 10px;
 }
 
 #h4-text {
-    margin-top: 3%;
+  margin-top: 3%;
 }
 
 #email {
@@ -50,7 +49,7 @@
 
 #email:hover {
   color: #CEFF2D;
-    opacity: 1;
+  opacity: 1;
 }
 
 .social-links {
@@ -76,8 +75,8 @@
 }
 
 .social-item img {
-    width: 40px; /* or whatever looks right */
-    height: auto;
+  width: 40px;
+  height: auto;
 }
 
 .arena {
@@ -95,26 +94,21 @@
 }
 
 #yam-footer-contact {
-    margin-left: 1%;
-    color: #838383;
-    /* bottom: 0; */
-    position: absolute;
+  margin-left: 1%;
+  color: #838383;
+  position: absolute;
 }
 
 .faded-year {
-    opacity: 0.4;
-    font-size: 1rem;
+  opacity: 0.4;
+  font-size: 1rem;
 }
 
-  #h4-text-mobile {
-    display: none;
-  }
+#h4-text-mobile {
+  display: none;
+}
 
-/* =========================================================
-   TABLET (max-width: 1024px)
-   ========================================================= */
 @media (max-width: 1024px) {
-
   #contact-section h1 {
     font-size: 2rem;
   }
@@ -137,7 +131,8 @@
   }
 
   .social-item img {
-    height: 18px;
+    width: 30px;
+    height: auto;
   }
 
   #yam-footer-contact {
@@ -147,10 +142,7 @@
 
 }
 
-/* =========================================================
-   MOBILE (max-width: 600px)
-   ========================================================= */
-@media (max-width: 600px) {
+@media (max-width: 480px) {
 
   #contact-section h1 {
     font-size: 1.65rem;
@@ -163,12 +155,15 @@
   #h4-text-mobile {
     margin-top: 8%;
   }
-  #yam-footer, #yam-footer-contact {
-  text-decoration: none !important;
-}
-#email {
-  text-decoration: none !important;
-  border: none !important;
-  outline: none !important;
-}
+
+  #yam-footer,
+  #yam-footer-contact {
+    text-decoration: none !important;
+  }
+
+  #email {
+    text-decoration: none !important;
+    border: none !important;
+    outline: none !important;
+  }
 }

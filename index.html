@@ -428,8 +428,10 @@
         const scrollingDown = scrollTop > (wrapper.lastScrollTop || 0);
         wrapper.lastScrollTop = scrollTop;
 
-        if (!scrollingDown && scrollTop < homeHeight * 1.5) {
-          // Scrolling up and still within reach of home — free the snap
+        const viewportH = window.innerHeight;
+
+        if (!scrollingDown && scrollTop < homeHeight + viewportH * 0.3) {
+          // Scrolling up and within ~30% of a viewport past home — free the snap
           wrapper.classList.add("free-scroll");
         } else if (scrollingDown && scrollTop > homeHeight * 0.3) {
           // Scrolling down past home — re-enable snap for projects

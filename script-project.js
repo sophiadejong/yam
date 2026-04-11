@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateSlide();
     }
 
-    // Desktop click navigation (left / right half)
+    // Desktop click navigation
     project.addEventListener("click", (e) => {
       if (e.target.closest(".carousel-dots") || project.classList.contains("show-info")) return;
 
@@ -140,27 +140,51 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     slider.addEventListener("mouseleave", hideCursor);
 
-    // ==================== SIMPLE MOBILE SWIPE (Safe for Desktop) ====================
+    // ==================== MOBILE: Horizontal swipe for slides, Vertical for projects ====================
     let touchStartX = 0;
+    let touchStartY = 0;
+    let isHorizontalSwipe = false;
 
     slider.addEventListener("touchstart", (e) => {
       if (project.classList.contains("show-info")) return;
+
       touchStartX = e.changedTouches[0].screenX;
+      touchStartY = e.changedTouches[0].screenY;
+      isHorizontalSwipe = false;
     }, { passive: true });
+
+    slider.addEventListener("touchmove", (e) => {
+      if (project.classList.contains("show-info")) return;
+
+      const currentX = e.changedTouches[0].screenX;
+      const currentY = e.changedTouches[0].screenY;
+
+      const diffX = Math.abs(currentX - touchStartX);
+      const diffY = Math.abs(currentY - touchStartY);
+
+      // Decide direction once movement is significant
+      if (diffX > 20 || diffY > 20) {
+        if (diffX > diffY * 1.5) {
+          isHorizontalSwipe = true;
+          e.preventDefault();           // ← Lock horizontal swipe
+        }
+      }
+    }, { passive: false });
 
     slider.addEventListener("touchend", (e) => {
       if (project.classList.contains("show-info")) return;
 
       const touchEndX = e.changedTouches[0].screenX;
-      const diff = touchStartX - touchEndX;
+      const diffX = touchStartX - touchEndX;
 
-      if (Math.abs(diff) < 50) return; // ignore small taps
-
-      if (diff > 0) {
-        nextSlide();   // swipe left → next
-      } else {
-        prevSlide();   // swipe right → previous
+      if (isHorizontalSwipe && Math.abs(diffX) > 50) {
+        if (diffX > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
       }
+      // If not horizontal → do nothing, let natural vertical scroll happen
     }, { passive: true });
 
     updateSlide();

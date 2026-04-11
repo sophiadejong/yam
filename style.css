@@ -16,7 +16,8 @@
   opacity: 0;
 }
 
-html, body {
+html,
+body {
   overflow-x: hidden;
 }
 
@@ -99,7 +100,8 @@ nav {
 #home-text {
   font-family: "SuisseIntl", sans-serif;
   position: fixed;
-  font-weight: 400; /* match Regular */
+  font-weight: 400;
+  /* match Regular */
   top: 53%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -637,15 +639,17 @@ nav.contact a:nth-child(2):hover~.lime {
 }
 
 /* ==================== MOBILE SWIPE SUPPORT ==================== */
+
 .slider {
-  touch-action: pan-y;           /* Allows vertical scroll, horizontal swipe handled by JS */
+  touch-action: pan-y;
+  /* Default = allow vertical scroll */
 }
 
 @media (pointer: coarse) {
   .slider {
     touch-action: pan-y;
   }
-  
+
   .slide {
     touch-action: none;
   }

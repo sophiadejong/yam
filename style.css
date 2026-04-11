@@ -636,9 +636,9 @@ nav.contact a:nth-child(2):hover~.lime {
   }
 }
 
-/* ==================== TOUCH SWIPE IMPROVEMENTS ==================== */
+/* ==================== MOBILE SWIPE SUPPORT ==================== */
 .slider {
-  touch-action: pan-y;           /* Allows vertical page scroll, horizontal swipe handled by JS */
+  touch-action: pan-y;           /* Allows vertical scroll, horizontal swipe handled by JS */
 }
 
 @media (pointer: coarse) {
@@ -647,6 +647,6 @@ nav.contact a:nth-child(2):hover~.lime {
   }
   
   .slide {
-    touch-action: none;          /* Prevents unwanted browser zoom/drag on images/videos */
+    touch-action: none;
   }
 }

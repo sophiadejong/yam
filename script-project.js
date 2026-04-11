@@ -58,7 +58,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   projects.forEach(p => projectObserver.observe(p));
 
-  // ==================== PROJECT SLIDERS ====================
   projects.forEach(project => {
     const slider = project.querySelector(".slider");
     if (!slider) return;
@@ -112,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateSlide();
     }
 
-    // Click navigation (desktop)
+    // Desktop click navigation (left / right half)
     project.addEventListener("click", (e) => {
       if (e.target.closest(".carousel-dots") || project.classList.contains("show-info")) return;
 
@@ -123,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
       else nextSlide();
     });
 
-    // Mouse cursor for desktop
+    // Desktop cursor
     slider.addEventListener("mouseenter", (e) => {
       if (!project.classList.contains("show-info")) {
         updateCursorPos(e);
@@ -141,34 +140,28 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     slider.addEventListener("mouseleave", hideCursor);
 
-    // ==================== TOUCH SWIPE SUPPORT (MOBILE) ====================
+    // ==================== SIMPLE MOBILE SWIPE (Safe for Desktop) ====================
     let touchStartX = 0;
-    let isSwiping = false;
 
-    function handleTouchStart(e) {
+    slider.addEventListener("touchstart", (e) => {
       if (project.classList.contains("show-info")) return;
       touchStartX = e.changedTouches[0].screenX;
-      isSwiping = true;
-    }
+    }, { passive: true });
 
-    function handleTouchEnd(e) {
-      if (!isSwiping) return;
-      isSwiping = false;
+    slider.addEventListener("touchend", (e) => {
+      if (project.classList.contains("show-info")) return;
 
       const touchEndX = e.changedTouches[0].screenX;
       const diff = touchStartX - touchEndX;
 
-      if (Math.abs(diff) < 40) return; // ignore small movements / taps
+      if (Math.abs(diff) < 50) return; // ignore small taps
 
       if (diff > 0) {
         nextSlide();   // swipe left → next
       } else {
         prevSlide();   // swipe right → previous
       }
-    }
-
-    slider.addEventListener("touchstart", handleTouchStart, { passive: true });
-    slider.addEventListener("touchend", handleTouchEnd, { passive: true });
+    }, { passive: true });
 
     updateSlide();
   });
@@ -209,7 +202,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Home text fade
   const homeText = document.getElementById("home-text");
   if (homeText) {
     const fadeHeight = window.innerHeight * 0.3;

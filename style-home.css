@@ -135,6 +135,17 @@
   scroll-snap-type: none !important;
 }
 
+.oval-container img {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* Zoom in to 1.2x on hover */
+.oval-container img:hover {
+  transform: translate(-50%, -50%) scale(1.1) !important;
+}
+
 
 @media (max-width: 480px) {
 
